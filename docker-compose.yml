@@ -1,0 +1,24 @@
+web:
+  image: tutorial/nginx
+  ports:
+    - "8080:80"
+  volumes:
+    - ./src/public:/var/www/public
+    - ./src/vhost.conf:/etc/nginx/sites-enabled/vhost.conf
+  links:
+    - php
+
+php:
+  image: nmcteam/php56
+  volumes:
+    - ./src/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
+    - ./src/public:/var/www/public
+  links:
+    - db
+
+db:
+  image: sameersbn/mysql
+  environment:
+   - DB_NAME=phpservermon
+   - DB_USER=phpservermon
+   - DB_PASS=phpservermon
