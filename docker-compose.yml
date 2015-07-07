@@ -19,6 +19,8 @@ php:
 
 db:
   image: sameersbn/mysql
+  volumes:
+   - ./mysql-db:/var/lib/mysql
   environment:
    - DB_NAME=phpservermon
    - DB_USER=phpservermon
