@@ -13,6 +13,7 @@ php:
   volumes:
     - ./src/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
     - ./src/public:/var/www/public
+    - ./etc-cron.d-tab-for-phpfpm.txt:/etc/cron.d/phpservermon
   links:
     - db
 
