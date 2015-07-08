@@ -1,3 +1,3 @@
 #!/bin/bash
 # build the nginx image
-docker build -t tutorial/nginx .
+docker build -t addiscent/nginx .

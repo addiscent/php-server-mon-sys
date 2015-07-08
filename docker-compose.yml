@@ -1,5 +1,5 @@
 web:
-  image: tutorial/nginx
+  image: addiscent/nginx
   ports:
     - "8080:80"
   volumes:
@@ -15,13 +15,14 @@ php:
     - ./src/public:/var/www/public
     - ./etc-cron.d-tab-for-phpfpm.txt:/etc/cron.d/phpservermon
   links:
-    - db
+    - db:mysql
 
 db:
-  image: sameersbn/mysql
+  image: mysql
   volumes:
    - ./mysql-db:/var/lib/mysql
   environment:
-   - DB_NAME=phpservermon
-   - DB_USER=phpservermon
-   - DB_PASS=phpservermon
+   - MYSQL_ROOT_PASSWORD=mysecretpassword
+   - MYSQL_DATABASE=phpservermon
+   - MYSQL_USER=phpservermon
+   - MYSQL_PASSWORD=phpservermon
