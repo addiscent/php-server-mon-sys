@@ -37,7 +37,7 @@ Installation of _Php-Server-Mon-Sys_ requires:
 
 3. $ docker-compose up -d  # wait one minute for mysql to finish initializing database
 
-### PHP Server Monitor Initialization
+### _PHP Server Monitor_ Initialization
 - Use a web browser, visit:
 
     * http://localhost:8080/phpservermon/
@@ -81,11 +81,10 @@ Installation of _Php-Server-Mon-Sys_ requires:
 
         - https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
-## Managing Php-Server-Mon-Sys
+## Managing _Php-Server-Mon-Sys_
 The _PHP Server Monitor_ application code, along with numerous _Php-Server-Mon-Sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _Php-Server-Mon-Sys_ project is unzipped and from which its _run-me-first.sh_ installation script is executed is its installation "home" directory.  All sub-directories described below are relative to the _Php-Server-Mon-Sys_ home directory.
 
-#### Manage _Php-Server-Mon-Sys_ By Using Docker Commands And Editing Configuration files
-##### Docker Commands
+#### Docker Commands
 The _Php-Server-Mon-Sys_ system is managed using _docker-compose_ commands:
 
     * docker-compose up -d  # loads and starts, or restarts, Docker containers
@@ -99,7 +98,7 @@ See the Docker web site for related documentation:
 
   - https://docs.docker.com/
 
-##### About The _PHP Server Monitor_ Database
+#### About The _PHP Server Monitor_ Database
 The _PHP Server Monitor_ database "persists" on the host file system, it is not _ephemeral_ as are the _Php-Server-Mon-Sys_ Docker service containers.
 
 The _Php-Server-Mon-Sys_ system, (technically, its Docker service containers), may be started, stopped, restarted, destroyed, and recreated without danger to the _PHP Server Monitor_ database, with one _important caveat_:
@@ -118,7 +117,7 @@ After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ syst
 
     $ docker-compose up -d
 
-#####  _PHP Server Monitor_ Server Data Is Updated At Intervals, By Using A Cron Job
+##### _PHP Server Monitor_ Server Data Update Intervals: Cron
 A cron job is started automatically when the system is started, (_docker-compose up -d_).  The interval of the cron job determines how often the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval by changing the crontab file, _etc-cron.d-tab-for-phpfpm.txt_, located in the home _./src/_ sub-directory.  This cron job is run on the PHP-FPM container, but is exposed on the host file system so it may be conveniently edited.  Note that this file requires strict permissions, e.g., mode 600, and owner:group must be root:root.  Otherwise, the cron job will not run.
 
 After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
@@ -144,30 +143,30 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
 
       $ docker ps -a  #  shows a list of running containers.  Choose an ID...
 
-          CONTAINER ID        IMAGE        ... etc
+        CONTAINER ID        IMAGE        ... etc
 
-          7587be7d4eed        nginx:1.9.2  ... etc
+        7587be7d4eed        nginx:1.9.2  ... etc
 
       $ ./dbash.sh  7587be7d4eed
 
-      root@7587be7d4eed:/#
+        root@7587be7d4eed:/#
 
-      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running Docker container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
+        Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running Docker container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
 
-## Uninstallation Of _Php-Server-Mon-Sys_ System
-To completely remove the installed _Php-Server-Mon-Sys_ system, delete the _Php-Server-Mon-Sys_ system home directory.  Before doing so, you should remove the running Docker containers:
+## Uninstallation Of _Php-Server-Mon-Sys_
+To completely remove the installed _Php-Server-Mon-Sys_ system, delete the _Php-Server-Mon-Sys_ home directory.  Before doing so, you should remove the running Docker containers:
 
     $ docker-compose stop
 
     $ docker-compose rm
 
-If you inadvertently uninstall the _Php-Server-Mon-Sys_ system without first using the _docker-compose rm_ command, you may manually "clean up" the orphaned Docker containers by using Docker commands.  See the Docker documentation for details; in a nutshell:
+If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _docker-compose rm_ command, you may manually "clean up" the orphaned Docker containers by using other Docker commands.  See the Docker documentation for details; in a nutshell:
 
-  - Discover the orphaned Docker containers by using the command _docker ps -a_, and note the _<CONTAINER ID>_
+  - Discover the orphaned Docker containers by using the command _docker ps -a_, and note the _CONTAINER ID_
 
-  - Remove the docker containers by using the command _docker rm -f <CONTAINER ID>_
+  - Remove the docker containers by using the command _docker rm -f CONTAINER ID_
 
-
+#### Etc
 Licensed under Apache 2.0 License.
 
 Copyright &copy; 2015 Rex Addiscentis, raddiscentis@addiscent.com
