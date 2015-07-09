@@ -1,9 +1,9 @@
 # Php-Server-Mon-Sys
 #### Why _Php-Server-Mon-Sys_?
-_Php-Server-Mon-Sys_ solves a problem.  The problem is, depending on the services already installed, (or not), on a host computer, installing an application named _PHP Server Monitor_ can be very complicated and time consuming.  _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
+_Php-Server-Mon-Sys_ solves a problem.  The problem is, installing an application, in this case _PHP Server Monitor_, can be very complicated and time consuming.  _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
 
-#### Well, then, what is _PHP Server Monitor_?
-_PHP Server Monitor_ is a basic but very useful Open Source server monitoring application.  Anyone who is responsible for a web site, or providing other services over the Internet or private networks, needs to know that server is in-service, and needs to be notified in a timely manner when it goes out-of-service unexpectedly.  _PHP Server Monitor_ can "watch" those servers and notify the administrator that a service has become unavailable.  Among other features, it also keeps an "uptime" history for each service monitored.
+#### Um, Why _PHP Server Monitor_?
+_PHP Server Monitor_ is a basic but very useful _Open Source_ server monitoring application.  Anyone who is responsible for a web site (or other) server, needs to know their server is in-service.  Or, they need to be notified in a timely manner if it goes out-of-service unexpectedly.  _PHP Server Monitor_ can "watch" those servers and notify the administrator that a service has become unavailable.  Among other features, it also keeps an _uptime_ and _latency_ history for each service monitored, and allows that history to be viewed as charts.
 
   - http://hpservermonitor.org/
 
@@ -13,7 +13,7 @@ _PHP Server Monitor_ is a basic but very useful Open Source server monitoring ap
 _PHP Server Monitor_ installation itself is not terribly complicated, but it is dependent on several other services for its operation, including an HTTP server, a MySQL server, and a PHP-FPM server.  In order to run _PHP Server Monitor_, those services must be installed on the _PHP Server Monitor's_ host system.  However, on many computers, those services are not already installed.  Unless installation is performed by a qualified system administrator, installing those services is error-prone and time consuming.
 
 #### _Php-Server-Mon-Sys_ Is A _Turnkey_ System
-_Php-Server-Mon-Sys_ relieves most of the complexity of the _PHP Server Monitor_ installation process.  In addition to installing _PHP Server Monitor_, _Php-Server-Mon-Sys_ also installs NGINX, MySQL, and PHP-FPM, as "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  The services are deployed using Docker containers, which means the new services may be very easily installed and un-installed along with _PHP Server Monitor_.
+_Php-Server-Mon-Sys_ relieves most of the complexity of the _PHP Server Monitor_ installation process on host computers which do not already have the required support services installed.  In addition to installing _PHP Server Monitor_, _Php-Server-Mon-Sys_ also installs NGINX, MySQL, and PHP-FPM, as "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  The services are deployed using Docker containers, which means the new services may be very easily installed and un-installed along with _PHP Server Monitor_.
 
 By using Docker containers and a straightforward isolated sub-directory tree implementation, the services and application do not become "entangled" in the native operating system.  If you no longer need the _PHP Server Monitor_ software in your system, you may very easily remove it.  When it is removed, _PHP Server Monitor's_ supporting services are removed as well.  There is no need to remove each of the other unnecessary services individually.
 
@@ -24,9 +24,9 @@ Installation of _Php-Server-Mon-Sys_ requires:
 
   - 500MB available memory
   - 1.25GB available storage
-  - Internet connection
-  - Docker Engine 1.7
-  - Docker Compose 1.3.1
+  - Internet connection/service
+  - Docker Engine 1.7, pre-installed
+  - Docker Compose 1.3.1, pre-installed
 
 ### _Php-Server-Mon-Sys_ Installation Instructions
 1. Download project zip file into a convenient storage location. Unzip, (keep dir structure).
@@ -64,7 +64,7 @@ Installation of _Php-Server-Mon-Sys_ requires:
 
 - Choose _GO TO YOUR MONITOR_
 
-### Guide To _PHP Server Monitor_ Operation
+### Quick-start Guide To _PHP Server Monitor_ Operation
 - Enter your user credentials and choose _LOGIN_.  The home page shows _STATUS_.
 
 - Enter a server to monitor:
@@ -103,7 +103,7 @@ The _PHP Server Monitor_ database "persists" on the host file system, it is not 
 
 The _Php-Server-Mon-Sys_ system, (technically, its Docker service containers), may be started, stopped, restarted, destroyed, and recreated without danger to the _PHP Server Monitor_ database, with one _important caveat_:
 
-  - In order to prevent risk to the _PHP Server Monitor_ database, the _Php-Server-Mon-Sys_ Docker service containers must created/stopped/destroyed using Docker commands, (_docker-compose stop_, _docker stop_..., etc).
+  - In order to prevent risk to the _PHP Server Monitor_ database, the _Php-Server-Mon-Sys_ Docker service containers must be created/stopped/destroyed using Docker commands, (_docker-compose stop_, _docker stop_..., etc).
 
 It is possible that database corruption could occur if a container is hard-killed during mid-operation, e.g., if the OS shuts down during a _PHP Server Monitor_ database write.  To prevent database risk, don't shutdown the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using _docker-compose stop_.  After re-booting the OS, restart the _Php-Server-Mon-Sys_ system by making the _Php-Server-Mon-Sys_ home directory the present working directory, then enter the command _docker-compose up -d_.  After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
 
@@ -154,11 +154,25 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
         Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running Docker container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
 
 ## Uninstallation Of _Php-Server-Mon-Sys_
-To completely remove the installed _Php-Server-Mon-Sys_ system, delete the _Php-Server-Mon-Sys_ home directory.  Before doing so, you should remove the running Docker containers:
+To completely remove the installed _Php-Server-Mon-Sys_:
 
-    $ docker-compose stop
+  - Delete the _Php-Server-Mon-Sys_ home directory.  Before doing so, you should remove the running Docker containers:
 
-    $ docker-compose rm
+      $ docker-compose stop
+
+      $ docker-compose rm
+
+  - After deleting the home directory, remove the unnecessary Docker images from the local Docker image repository:
+
+    - Discover the Docker images using the command:
+
+      $ docker images
+
+      Their names are _mysql_, _nginx_, and _nmcteam/php56_.  Note their _IMAGE IDs_.
+
+    - One by one, remove the images from the Docker image repository using the command:
+
+      $ docker rmi IMAGE ID.
 
 If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _docker-compose rm_ command, you may manually "clean up" the orphaned Docker containers by using other Docker commands.  See the Docker documentation for details; in a nutshell:
 
@@ -166,7 +180,7 @@ If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _doc
 
   - Remove the docker containers by using the command _docker rm -f CONTAINER ID_
 
-#### Etc
+## Etc
 Licensed under Apache 2.0 License.
 
 Copyright &copy; 2015 Rex Addiscentis, raddiscentis@addiscent.com
