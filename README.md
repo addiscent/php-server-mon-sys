@@ -28,7 +28,7 @@ Installation of _Php-Server-Mon-Sys_ requires:
   - Docker Engine 1.7
   - Docker Compose 1.3.1
 
-### Installation Instructions
+### _Php-Server-Mon-Sys_ Installation Instructions
 1. Download project zip file into a convenient storage location. Unzip, (keep dir structure).
 
   - _http://github.com/addiscent/Php-Server-Mon-Sys_
@@ -37,7 +37,7 @@ Installation of _Php-Server-Mon-Sys_ requires:
 
 3. $ docker-compose up -d  # wait one minute for mysql to finish initializing database
 
-### PHP Server Monitor Initialization Steps, (necessary only once)
+### PHP Server Monitor Initialization
 - Use a web browser, visit:
 
     * http://localhost:8080/phpservermon/
@@ -64,7 +64,7 @@ Installation of _Php-Server-Mon-Sys_ requires:
 
 - Choose _GO TO YOUR MONITOR_
 
-### Guide To Operation
+### Guide To _PHP Server Monitor_ Operation
 - Enter your user credentials and choose _LOGIN_.  The home page shows _STATUS_.
 
 - Enter a server to monitor:
@@ -81,7 +81,7 @@ Installation of _Php-Server-Mon-Sys_ requires:
 
         - https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
-## Using Php-Server-Mon-Sys
+## Managing Php-Server-Mon-Sys
 The _PHP Server Monitor_ application code, along with numerous _Php-Server-Mon-Sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _Php-Server-Mon-Sys_ project is unzipped and from which its _run-me-first.sh_ installation script is executed is its installation "home" directory.  All sub-directories described below are relative to the _Php-Server-Mon-Sys_ home directory.
 
 #### Manage _Php-Server-Mon-Sys_ By Using Docker Commands And Editing Configuration files
