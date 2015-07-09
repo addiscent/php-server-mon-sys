@@ -1,24 +1,25 @@
 web:
-  image: addiscent/nginx
-  ports:
-    - "8080:80"
-  volumes:
-    - ./src/public:/var/www/public
-    - ./src/vhost.conf:/etc/nginx/sites-enabled/vhost.conf
-  links:
-    - php
+    image: nginx:1.9.2
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src/public:/var/www/public
+      - ./src/vhost.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php
 
 php:
-  image: nmcteam/php56
+  image: nmcteam/php56:1.0
   volumes:
     - ./src/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
+    - ./src/php.ini:/etc/php5/fpm/php.ini
     - ./src/public:/var/www/public
-    - ./etc-cron.d-tab-for-phpfpm.txt:/etc/cron.d/phpservermon
+    - ./src/etc-cron.d-tab-for-phpfpm.txt:/etc/cron.d/phpservermon
   links:
-    - db:mysql
+    - db:mysqlpsm
 
 db:
-  image: mysql
+  image: mysql:5.7.7
   volumes:
    - ./mysql-db:/var/lib/mysql
   environment:
