@@ -108,17 +108,17 @@ The _Php-Server-Mon-Sys_ system, (technically, its Docker service containers), m
 
 It is possible that database corruption could occur if a container is hard-killed during mid-operation, e.g., if the OS shuts down during a _PHP Server Monitor_ database write.  To prevent database risk, don't shutdown the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using _docker-compose stop_.  After re-booting the OS, restart the _Php-Server-Mon-Sys_ system by making the _Php-Server-Mon-Sys_ home directory the present working directory, then enter the command _docker-compose up -d_.  After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
 
-##### _Php-Server-Mon-Sys_ Configuration Changes
-###### The _PHP Server Monitor_ Time Zone
+#### _Php-Server-Mon-Sys_ Configuration Changes
+##### The _PHP Server Monitor_ Time Zone
 The default _PHP Server Monitor_ time zone is UTC.  You may change the time zone by editing the _php.ini_ file, located in the _./src/_ sub-directory.  To do so, search the _php.ini_ file for the term _date.timezone_.  Change the default value, _UTC_, to your time zone.  For valid time zones, see:
 
-      http://www.php.net/manual/en/timezones.php
+  - http://www.php.net/manual/en/timezones.php
 
-  After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ system, for any configuration file changes to take effect:
+After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ system, for any configuration file changes to take effect:
 
-          $ docker-compose up -d
+    $ docker-compose up -d
 
-######  _PHP Server Monitor_ Server Data Is Updated At Intervals, By Using A Cron Job
+#####  _PHP Server Monitor_ Server Data Is Updated At Intervals, By Using A Cron Job
 A cron job is started automatically when the system is started, (_docker-compose up -d_).  The interval of the cron job determines how often the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval by changing the crontab file, _etc-cron.d-tab-for-phpfpm.txt_, located in the home _./src/_ sub-directory.  This cron job is run on the PHP-FPM container, but is exposed on the host file system so it may be conveniently edited.  Note that this file requires strict permissions, e.g., mode 600, and owner:group must be root:root.  Otherwise, the cron job will not run.
 
 After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
@@ -127,10 +127,10 @@ For more information on Cron, see:
 
   - https://en.wikipedia.org/wiki/Cron
 
-###### NGINX Server Configuration
+##### NGINX Server Configuration
 Though unlikely to be necessary, you may make changes to the NGINX server configuration by editing the _vhost.conf_ file, located in the home _./src/_ sub-directory.  After editing this file, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
 
-###### PHP-FPM Server Configuration
+##### PHP-FPM Server Configuration
 Though unlikely to be necessary, you may make changes to the PHP-FPM server configuration by editing the _php-fpm.conf_ and _php.ini_ files, located in the home _./src/_ sub-directory.  After editing these files, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
 
 ##### Miscellaneous Utility Scripts
@@ -150,9 +150,9 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
 
       $ ./dbash.sh  7587be7d4eed
 
-          root@7587be7d4eed:/#
+      root@7587be7d4eed:/#
 
-          Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running Docker container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
+      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running Docker container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
 
 ## Uninstallation Of _Php-Server-Mon-Sys_ System
 To completely remove the installed _Php-Server-Mon-Sys_ system, delete the _Php-Server-Mon-Sys_ system home directory.  Before doing so, you should remove the running Docker containers:
@@ -161,7 +161,7 @@ To completely remove the installed _Php-Server-Mon-Sys_ system, delete the _Php-
 
     $ docker-compose rm
 
-If you inadvertently uninstall the _Php-Server-Mon-Sys_ system without first using the _docker-compose rm_ command, you may "clean up" the orphaned Docker containers by using Docker commands.  See the Docker documentation for details; in a nutshell:
+If you inadvertently uninstall the _Php-Server-Mon-Sys_ system without first using the _docker-compose rm_ command, you may manually "clean up" the orphaned Docker containers by using Docker commands.  See the Docker documentation for details; in a nutshell:
 
   - Discover the orphaned Docker containers by using the command _docker ps -a_, and note the _<CONTAINER ID>_
 
