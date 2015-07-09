@@ -7,6 +7,6 @@
 
 # This script must be executed from the directory where it lives.
 
-mv -f src/public/phpservermon/config.php src/public/phpservermon/config-php.backup \
-&& touch src/public/phpservermon/config.php \
-&& chmod 766 src/public/phpservermon/config.php
+mv -f ./src/public/phpservermon/config.php ./src/public/phpservermon/config-php.backup \
+&& touch ./src/public/phpservermon/config.php \
+&& chmod 766 ./src/public/phpservermon/config.php
