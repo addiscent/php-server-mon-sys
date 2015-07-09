@@ -2,7 +2,7 @@
 #### Why _Php-Server-Mon-Sys_?
 _Php-Server-Mon-Sys_ solves a problem.  The problem is, installing an application, in this case _PHP Server Monitor_, can be very complicated and time consuming.  _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
 
-#### Um, Why _PHP Server Monitor_?
+#### Why _PHP Server Monitor_?
 _PHP Server Monitor_ is a basic but very useful _Open Source_ server monitoring application.  Anyone who is responsible for a web site (or other) server, needs to know their server is in-service.  Or, they need to be notified in a timely manner if it goes out-of-service unexpectedly.  _PHP Server Monitor_ can "watch" those servers and notify the administrator that a service has become unavailable.  Among other features, it also keeps an _uptime_ and _latency_ history for each service monitored, and allows that history to be viewed as charts.
 
   - http://hpservermonitor.org/
@@ -133,7 +133,7 @@ Though unlikely to be necessary, you may make changes to the NGINX server config
 Though unlikely to be necessary, you may make changes to the PHP-FPM server configuration by editing the _php-fpm.conf_ and _php.ini_ files, located in the home _./src/_ sub-directory.  After editing these files, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
 
 ##### Miscellaneous Utility Scripts
-Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./reset-config-php.sh_, (note the leading "./").  The scripts are safe to use only from within the _Php-Server-Mon-Sys_ home directory; when using them, be sure the present working directory is the _Php-Server-Mon-Sys_ home sub-directory. If they are invoked outside this sub-directory, they will at best fail, or at worst possibly produe unintended side effects.
+Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./reset-config-php.sh_, (note the leading "./").  The scripts are safe to use only from within the _Php-Server-Mon-Sys_ home directory; when using them, be sure the present working directory is the _Php-Server-Mon-Sys_ home sub-directory. If they are invoked outside this sub-directory, they will at best fail, or at worst possibly produce unintended side effects.
 
   - _delete-database.sh_ - Deletes the MySQL database.  Before deleting the database, stop the _Php-Server-Mon-Sys_ system first by using _docker-compose stop_.
 
