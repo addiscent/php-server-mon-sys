@@ -15,7 +15,8 @@ Installation of _*php-server-mon-sys*_ requires:
   - 500MB available memory
   - 1GB available storage
   - Internet connection
-  - Docker 1.7 or greater, (docker and docker-compose)
+  - Docker Engine 1.7 or greater
+  - Docker Compose 1.3.1 or greater
 
 ### Installation Instructions
 1. Download project zip file into a convenient storage location. Unzip, (keep dir structure).
@@ -29,25 +30,25 @@ Installation of _*php-server-mon-sys*_ requires:
 ### PHP Server Monitor Startup Steps, (necessary only once)
 - Use a web browser, visit:
 
-    http://localhost:8080/phpservermon/
+    * http://localhost:8080/phpservermon/
 
 - Read and follow the prompts.
 
-    Database host must be: mysqlpsm
+* Database host must be: _mysqlpsm_
 
-    Database name must be: phpservermon
+* Database name must be: _phpservermon_
 
-    Database user must be: phpservermon
+* Database user must be: _phpservermon_
 
-    Database password must be: phpservermon
+* Database password must be: _phpservermon_
 
-    Table prefix should be kept: psm_
+* Table prefix should be kept: psm_
 
-    Choose _SAVE CONFIGURATION_
+* Choose _SAVE CONFIGURATION_
 
 - Set your user, password, and email to whatever you wish.
 
-    Choose _INSTALL_
+* Choose _INSTALL_
 
 - Choose _GO TO YOUR MONITOR_
 
@@ -56,15 +57,15 @@ Installation of _*php-server-mon-sys*_ requires:
 
 - Enter a server to monitor:
 
-    Choose _Servers_ from the top menu. The next page shows _Servers_ page.
+* Choose _Servers_ from the top menu. The next page shows _Servers_ page.
 
-    Choose the green _Add new_ button.  Enter the appropriate data into the fields.  See the _PHP Server Monitor_ website and GitHub repository for documentation:
+* Choose the green _Add new_ button.  Enter the appropriate data into the fields.  See the _PHP Server Monitor_ website and GitHub repository for documentation:
 
       http://www.phpservermonitor.org/
 
       https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
-## Notes Specific to Php-server-mon-sys
+## Notes Specific To Php-server-mon-sys
 The sub-directory where you unzipped the _php-server-mon-sys_ project is its "home" directory.  All sub-directories described below are relative to the _php-server-mon-sys_ home directory.
 
 -  The _php-server-mon-sys_ system is managed using _docker-compose_ commands:
@@ -95,6 +96,7 @@ The sub-directory where you unzipped the _php-server-mon-sys_ project is its "ho
 -  To completely remove the installed _php-server-mon-sys_ system, simply delete the _php-server-mon-sys_ system home directory.  Before doing so, you should remove the running Docker containers:
 
     $ docker-compose stop
+    
     $ docker-compose rm
 
 -  Several handy utilities are available in the home sub-directory.  When using them, ensure they are invoked as bash shell scripts typically are, e.g., _./reset-config-php.sh_, (note leading ./).  Also, they are only safe to use from within the _php-server-mon-sys_ home directory; when using them, be sure the present working directory is the _php-server-mon-sys_ home sub-directory.
@@ -121,4 +123,4 @@ The sub-directory where you unzipped the _php-server-mon-sys_ project is its "ho
 
 Licensed under Apache 2.0 License.
 
-Copyright &copy; 2000 Rex Addiscentis, raddiscentis@addiscent.com
+Copyright &copy; 2015 Rex Addiscentis, raddiscentis@addiscent.com
