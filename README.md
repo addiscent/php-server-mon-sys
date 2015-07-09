@@ -99,29 +99,29 @@ The sub-directory where the _php-server-mon-sys_ project is unzipped is its "hom
 
 -  To completely remove the installed _php-server-mon-sys_ system, simply delete the _php-server-mon-sys_ system home directory.  Before doing so, you should remove the running Docker containers:
 
-    $ docker-compose stop
+      $ docker-compose stop
 
-    $ docker-compose rm
+      $ docker-compose rm
 
 -  Several handy utilities are available in the home sub-directory.  When using them, ensure they are invoked as bash shell scripts typically are, e.g., _./reset-config-php.sh_, (note leading ./).  Also, they are only safe to use from within the _php-server-mon-sys_ home directory; when using them, be sure the present working directory is the _php-server-mon-sys_ home sub-directory.
 
-    * _delete-database.sh_ - Simply deletes the MySQL database.  Before deleting the database, stop the _php-server-mon-sys_ system first by using _docker-compose stop_.
+    * _delete-database.sh_ - Deletes the MySQL database.  Before deleting the database, stop the _php-server-mon-sys_ system first by using _docker-compose stop_.
 
-    * _reset-config-php.sh_ - modifies the _PHP Server Monitor_ configuration file, (_config.php_).  It is modified in a manner which will cause the installation procedure to run again the next time the _PHP Server Monitor_ home page is visited in the browser.
+    * _reset-config-php.sh_ - Modifies the _PHP Server Monitor_ configuration file, (_config.php_).  It is modified in a manner which will cause the installation procedure to run again the next time the _PHP Server Monitor_ home page is visited in the browser.
 
     * _dbash.sh_ - Executes a bash shell on a running Docker container. To use it:
 
-        $ docker ps -a  #  shows a list of running containers.  Choose an ID...
+          $ docker ps -a  #  shows a list of running containers.  Choose an ID...
 
-        CONTAINER ID        IMAGE        ... etc
+              CONTAINER ID        IMAGE        ... etc
 
-        7587be7d4eed        nginx:1.9.2  ... etc
+              7587be7d4eed        nginx:1.9.2  ... etc
 
-        $ ./dbash.sh  7587be7d4eed
+          $ ./dbash.sh  7587be7d4eed
 
-        root@7587be7d4eed:/#
+              root@7587be7d4eed:/#
 
-        Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running Docker container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
+              Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running Docker container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
 
 
 
