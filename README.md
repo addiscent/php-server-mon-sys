@@ -23,7 +23,7 @@ Installation of _*php-server-mon-sys*_ requires:
 
     _http://github.com/addiscent/php-server-mon-sys_
 
-2. $ sudo ./run-me-first  # sudo on debian, or superuser permissions on whatever
+2. $ sudo ./run-me-first.sh  # sudo on debian, or superuser permissions on whatever
 
 3. $ docker-compose up -d  # wait one minute for mysql to finish initializing database
 
@@ -34,39 +34,43 @@ Installation of _*php-server-mon-sys*_ requires:
 
 - Read and follow the prompts.
 
-* Database host must be: _mysqlpsm_
+    * _Database host_ must be: _mysqlpsm_
 
-* Database name must be: _phpservermon_
+    * _Database name_ must be: _phpservermon_
 
-* Database user must be: _phpservermon_
+    * _Database user_ must be: _phpservermon_
 
-* Database password must be: _phpservermon_
+    * _Database password_ must be: _phpservermon_
 
-* Table prefix should be kept: psm_
+    * _Table prefix_ should be kept: psm_
 
-* Choose _SAVE CONFIGURATION_
+    * Choose _SAVE CONFIGURATION_
 
 - Set your user, password, and email to whatever you wish.
 
-* Choose _INSTALL_
+    * Choose _INSTALL_
 
 - Choose _GO TO YOUR MONITOR_
 
 ### Guide To Operation
-- Enter your user credentials and log in.  The home page shows _STATUS_.
+- Enter your user credentials and choose _LOGIN_.  The home page shows _STATUS_.
 
 - Enter a server to monitor:
 
-* Choose _Servers_ from the top menu. The next page shows _Servers_ page.
+    * Choose _Servers_ from the top menu. The next page shows _Servers_ page.
 
-* Choose the green _Add new_ button.  Enter the appropriate data into the fields.  See the _PHP Server Monitor_ website and GitHub repository for documentation:
+    * Choose the green _ADD NEW_ button.  Enter the appropriate data into the fields, then choos _SAVE_.    * Choose _Status_ from the top menu. Click on the box containing your server's name for a chart of response time history.  The server's access history chart is updated with a new data point every three minutes.
 
-      http://www.phpservermonitor.org/
+    * Choose _Config_ from the top menu.  Enter a time of 60 seconds into the _Auto-refresh_ field, and choose _Save_.  Choose _Status_ from the top menu.  The _Status_ page is self-refreshed every 60 seconds.
 
-      https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
+    * See the _PHP Server Monitor_ website and GitHub repository for documentation:
+
+        http://www.phpservermonitor.org/
+
+        https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
 ## Notes Specific To Php-server-mon-sys
-The sub-directory where you unzipped the _php-server-mon-sys_ project is its "home" directory.  All sub-directories described below are relative to the _php-server-mon-sys_ home directory.
+The sub-directory where the _php-server-mon-sys_ project is unzipped is its "home" directory.  All sub-directories described below are relative to the _php-server-mon-sys_ home directory.
 
 -  The _php-server-mon-sys_ system is managed using _docker-compose_ commands:
 
@@ -96,7 +100,7 @@ The sub-directory where you unzipped the _php-server-mon-sys_ project is its "ho
 -  To completely remove the installed _php-server-mon-sys_ system, simply delete the _php-server-mon-sys_ system home directory.  Before doing so, you should remove the running Docker containers:
 
     $ docker-compose stop
-    
+
     $ docker-compose rm
 
 -  Several handy utilities are available in the home sub-directory.  When using them, ensure they are invoked as bash shell scripts typically are, e.g., _./reset-config-php.sh_, (note leading ./).  Also, they are only safe to use from within the _php-server-mon-sys_ home directory; when using them, be sure the present working directory is the _php-server-mon-sys_ home sub-directory.
