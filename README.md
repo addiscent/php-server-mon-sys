@@ -1,6 +1,6 @@
-# php-server-mon-sys
-### Why _php-server-mon-sys_?
-_Php-server-mon-sys_ solves a problem.  The problem is, depending on the services already installed, (or not), on a host computer, installing an application named _PHP Server Monitor_ can be very complicated and time consuming.  _Php-server-mon-sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
+# Php-Server-Mon-Sys
+#### Why _Php-Server-Mon-Sys_?
+_Php-Server-Mon-Sys_ solves a problem.  The problem is, depending on the services already installed, (or not), on a host computer, installing an application named _PHP Server Monitor_ can be very complicated and time consuming.  _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
 
 #### Well, then, what is _PHP Server Monitor_?
 _PHP Server Monitor_ is a basic but very useful Open Source server monitoring application.  Anyone who is responsible for a web site, or providing other services over the Internet or private networks, needs to know that server is in-service, and needs to be notified in a timely manner when it goes out-of-service unexpectedly.  _PHP Server Monitor_ can "watch" those servers and notify the administrator that a service has become unavailable.  Among other features, it also keeps an "uptime" history for each service monitored.
@@ -12,15 +12,15 @@ _PHP Server Monitor_ is a basic but very useful Open Source server monitoring ap
 #### What is complicated about _PHP Server Monitor_ installation?
 _PHP Server Monitor_ installation itself is not terribly complicated, but it is dependent on several other services for its operation, including an HTTP server, a MySQL server, and a PHP-FPM server.  In order to run _PHP Server Monitor_, those services must be installed on the _PHP Server Monitor's_ host system.  However, on many computers, those services are not already installed.  Unless installation is performed by a qualified system administrator, installing those services is error-prone and time consuming.
 
-#### _Php-server-mon-sys_ Is A _Turnkey_ System
-_Php-server-mon-sys_ relieves most of the complexity of the _PHP Server Monitor_ installation process.  In addition to installing _PHP Server Monitor_, _php-server-mon-sys_ also installs NGINX, MySQL, and PHP-FPM, as "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  The services are deployed using Docker containers, which means the new services may be very easily installed and un-installed along with _PHP Server Monitor_.
+#### _Php-Server-Mon-Sys_ Is A _Turnkey_ System
+_Php-Server-Mon-Sys_ relieves most of the complexity of the _PHP Server Monitor_ installation process.  In addition to installing _PHP Server Monitor_, _Php-Server-Mon-Sys_ also installs NGINX, MySQL, and PHP-FPM, as "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  The services are deployed using Docker containers, which means the new services may be very easily installed and un-installed along with _PHP Server Monitor_.
 
 By using Docker containers and a straightforward isolated sub-directory tree implementation, the services and application do not become "entangled" in the native operating system.  If you no longer need the _PHP Server Monitor_ software in your system, you may very easily remove it.  When it is removed, _PHP Server Monitor's_ supporting services are removed as well.  There is no need to remove each of the other unnecessary services individually.
 
-Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by _php-server-mon-sys_ are available only to _PHP Server Monitor_; they are not intended to be available to other application software on the host system.  The services are _ephemeral_; they come and go along with the installation and un-installation of _php-server-mon-sys_.
+Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by _Php-Server-Mon-Sys_ are available only to _PHP Server Monitor_; they are not intended to be available to other application software on the host system.  The services are _ephemeral_; they come and go along with the installation and un-installation of _Php-Server-Mon-Sys_.
 
 ### System Requirements
-Installation of _php-server-mon-sys_ requires:
+Installation of _Php-Server-Mon-Sys_ requires:
 
   - 500MB available memory
   - 1.25GB available storage
@@ -31,7 +31,7 @@ Installation of _php-server-mon-sys_ requires:
 ### Installation Instructions
 1. Download project zip file into a convenient storage location. Unzip, (keep dir structure).
 
-    _http://github.com/addiscent/php-server-mon-sys_
+  - _http://github.com/addiscent/Php-Server-Mon-Sys_
 
 2. $ sudo ./run-me-first.sh  # sudo on debian, or superuser permissions on whatever
 
@@ -44,7 +44,7 @@ Installation of _php-server-mon-sys_ requires:
 
 - Read and follow the directions on the first page, then choose _LET'S GO_.
 
-- As required for each field, enter these values:
+- For each field, enter these values:
 
     * _Database host_ : _mysqlpsm_
 
@@ -77,91 +77,96 @@ Installation of _php-server-mon-sys_ requires:
 
     * See the _PHP Server Monitor_ website and GitHub repository for documentation:
 
-        http://www.phpservermonitor.org/
+        - http://www.phpservermonitor.org/
 
-        https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
+        - https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
-## Notes Specific To Php-server-mon-sys
-The _PHP Server Monitor_ application code, along with numerous _php-server-mon-sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _php-server-mon-sys_ project is unzipped is its installation "home" directory.  All sub-directories described below are relative to the _php-server-mon-sys_ home directory.
+## Using Php-Server-Mon-Sys
+The _PHP Server Monitor_ application code, along with numerous _Php-Server-Mon-Sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _Php-Server-Mon-Sys_ project is unzipped and from which its _run-me-first.sh_ installation script is executed is its installation "home" directory.  All sub-directories described below are relative to the _Php-Server-Mon-Sys_ home directory.
 
-### Manage _php-server-mon-sys_ By Using Docker Commands And Editing Configuration files
-#### Docker Commands
-The _php-server-mon-sys_ system is managed using _docker-compose_ commands:
+#### Manage _Php-Server-Mon-Sys_ By Using Docker Commands And Editing Configuration files
+##### Docker Commands
+The _Php-Server-Mon-Sys_ system is managed using _docker-compose_ commands:
 
     * docker-compose up -d  # loads and starts, or restarts, Docker containers
     * docker-compose stop   # suspends container Operation
     * docker-compose rm     # destroys loaded containers
     * docker-compose logs   # shows a composite log generated by operating containers
 
-    The present working directory must be the _php-server-mon-sys_ home directory when entering these commands.  Using these commands while the PWD is any other directory will show errors and the commands will fail.
+The present working directory must be the _Php-Server-Mon-Sys_ home directory when entering these commands.  Using these commands while the PWD is any other directory will show errors and the command scripts will fail.
 
-    See the Docker web site for related documentation:
+See the Docker web site for related documentation:
 
-      https://docs.docker.com/
+  - https://docs.docker.com/
 
-#### About The _PHP Server Monitor_ Database
-The _PHP Server Monitor_ database "persists" on the host file system, it is not _ephemeral_ as are the _php-server-mon-sys_ Docker service containers.
+##### About The _PHP Server Monitor_ Database
+The _PHP Server Monitor_ database "persists" on the host file system, it is not _ephemeral_ as are the _Php-Server-Mon-Sys_ Docker service containers.
 
-The _php-server-mon-sys_ system, (technically, its Docker service containers), may be started, stopped, restarted, destroyed, and recreated without danger to the _PHP Server Monitor_ database, with one _important caveat_; the _php-server-mon-sys_ Docker service containers must created/stopped/destroyed using Docker commands, (_docker-compose stop_, _docker stop_..., etc).
+The _Php-Server-Mon-Sys_ system, (technically, its Docker service containers), may be started, stopped, restarted, destroyed, and recreated without danger to the _PHP Server Monitor_ database, with one _important caveat_:
 
-It is possible that database corruption could occur if a container is hard-killed during mid-operation, e.g., if the OS shuts down during a _PHP Server Monitor_ database write.  To prevent database risk, don't shutdown the host OS without first gracefully shutting down the _php-server-mon-sys_ system, using _docker-compose stop_.  After re-booting the OS, restart the _php-server-mon-sys_ system by making the _php-server-mon-sys_ home directory the present working directory, then enter the command _docker-compose up -d_.  After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
+  - In order to prevent risk to the _PHP Server Monitor_ database, the _Php-Server-Mon-Sys_ Docker service containers must created/stopped/destroyed using Docker commands, (_docker-compose stop_, _docker stop_..., etc).
 
-#### _php-server-mon-sys_ Configuration Changes
-##### The _PHP Server Monitor_ Time Zone
+It is possible that database corruption could occur if a container is hard-killed during mid-operation, e.g., if the OS shuts down during a _PHP Server Monitor_ database write.  To prevent database risk, don't shutdown the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using _docker-compose stop_.  After re-booting the OS, restart the _Php-Server-Mon-Sys_ system by making the _Php-Server-Mon-Sys_ home directory the present working directory, then enter the command _docker-compose up -d_.  After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
+
+##### _Php-Server-Mon-Sys_ Configuration Changes
+###### The _PHP Server Monitor_ Time Zone
 The default _PHP Server Monitor_ time zone is UTC.  You may change the time zone by editing the _php.ini_ file, located in the _./src/_ sub-directory.  To do so, search the _php.ini_ file for the term _date.timezone_.  Change the default value, _UTC_, to your time zone.  For valid time zones, see:
 
       http://www.php.net/manual/en/timezones.php
 
-  After editing the _php.ini_ file, you must restart the _php-server-mon-sys_ system, for any configuration file changes to take effect:
+  After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ system, for any configuration file changes to take effect:
 
           $ docker-compose up -d
 
-#####  _PHP Server Monitor_ Server Data Is Updated At Intervals, By Using A Cron Job
-A cron job is started automatically when the system is started, (_docker-compose up -d_).  The interval of the cron job determines how often the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval by changing the crontab file, _etc-cron.d-tab-for-phpfpm.txt_, located in the home _./src/ sub-directory_.  This cron job is run on the PHP-FPM container, but is exposed on the host file system so it may be conveniently edited.  Note that this file requires strict permissions, e.g., mode 600, and owner:group must be root:root.  Otherwise, the cron job will not run.
+######  _PHP Server Monitor_ Server Data Is Updated At Intervals, By Using A Cron Job
+A cron job is started automatically when the system is started, (_docker-compose up -d_).  The interval of the cron job determines how often the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval by changing the crontab file, _etc-cron.d-tab-for-phpfpm.txt_, located in the home _./src/_ sub-directory.  This cron job is run on the PHP-FPM container, but is exposed on the host file system so it may be conveniently edited.  Note that this file requires strict permissions, e.g., mode 600, and owner:group must be root:root.  Otherwise, the cron job will not run.
 
-    https://en.wikipedia.org/wiki/Cron
+After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
 
-    After editing the _php.ini_ file, you must restart the _php-server-mon-sys_ system, as described above, for any changes to take effect.
+For more information on Cron, see:
 
-##### NGINX Server Configuration
-Though unlikely to be necessary, you may make changes to the NGINX server configuration by editing the _vhost.conf_ file, located in the home _./src/_ sub-directory.  After editing this file, you must restart the _php-server-mon-sys_ system, as described above, for any changes to take effect.
+  - https://en.wikipedia.org/wiki/Cron
 
-##### PHP-FPM Server Configuration
-Though unlikely to be necessary, you may make changes to the PHP-FPM server configuration by editing the _php-fpm.conf_ and _php.ini_ files, located in the home _./src/_ sub-directory.  After editing these files, you must restart the _php-server-mon-sys_ system, as described above, for any changes to take effect.
+###### NGINX Server Configuration
+Though unlikely to be necessary, you may make changes to the NGINX server configuration by editing the _vhost.conf_ file, located in the home _./src/_ sub-directory.  After editing this file, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
 
-##### Uninstallation Of _php-server-mon-sys_ System
-To completely remove the installed _php-server-mon-sys_ system, delete the _php-server-mon-sys_ system home directory.  Before doing so, you should remove the running Docker containers:
-
-        $ docker-compose stop
-
-        $ docker-compose rm
-
-If you inadvertently uninstall the _php-server-mon-sys_ system without first using the _docker-compose rm_ command, you may "clean up" the orphaned Docker containers by using Docker commands.  See the Docker documentation for details; in a nutshell:
-
-  - Discover the orphaned Docker containers by using the command _docker ps -a_, and note the _CONTAINER ID_
-
-  - Remove the docker containers by using the command _docker rm -f CONTAINER ID_
+###### PHP-FPM Server Configuration
+Though unlikely to be necessary, you may make changes to the PHP-FPM server configuration by editing the _php-fpm.conf_ and _php.ini_ files, located in the home _./src/_ sub-directory.  After editing these files, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
 
 ##### Miscellaneous Utility Scripts
-Several simple utility BASH script are available in the _php-server-mon-sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./reset-config-php.sh_, (note the leading "./").  Also, the scripts are safe to use only from within the _php-server-mon-sys_ home directory; when using them, be sure the present working directory is the _php-server-mon-sys_ home sub-directory. If they are used outside this sub-directory, they will at best fail, or at worst possibly produce unintended side effects.
+Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./reset-config-php.sh_, (note the leading "./").  The scripts are safe to use only from within the _Php-Server-Mon-Sys_ home directory; when using them, be sure the present working directory is the _Php-Server-Mon-Sys_ home sub-directory. If they are invoked outside this sub-directory, they will at best fail, or at worst possibly produe unintended side effects.
 
-    * _delete-database.sh_ - Deletes the MySQL database.  Before deleting the database, stop the _php-server-mon-sys_ system first by using _docker-compose stop_.
+  - _delete-database.sh_ - Deletes the MySQL database.  Before deleting the database, stop the _Php-Server-Mon-Sys_ system first by using _docker-compose stop_.
 
-    * _reset-config-php.sh_ - Modifies the _PHP Server Monitor_ configuration file, (_config.php_).  It is modified in a manner which will cause the installation procedure to run again the next time the _PHP Server Monitor_ home page is visited in the browser.
+  - _reset-config-php.sh_ - Modifies the _PHP Server Monitor_ configuration file, (_config.php_).  It is modified in a manner which will cause the installation procedure to run again the next time the _PHP Server Monitor_ home page is visited in the browser.
 
-    * _dbash.sh_ - Executes a bash shell on a running Docker container. To use it:
+  - _dbash.sh_ - Executes a BASH shell on a running Docker container. To use it:
 
-          $ docker ps -a  #  shows a list of running containers.  Choose an ID...
+      $ docker ps -a  #  shows a list of running containers.  Choose an ID...
 
-              CONTAINER ID        IMAGE        ... etc
+          CONTAINER ID        IMAGE        ... etc
 
-              7587be7d4eed        nginx:1.9.2  ... etc
+          7587be7d4eed        nginx:1.9.2  ... etc
 
-          $ ./dbash.sh  7587be7d4eed
+      $ ./dbash.sh  7587be7d4eed
 
-              root@7587be7d4eed:/#
+          root@7587be7d4eed:/#
 
-              Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running Docker container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
+          Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running Docker container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
+
+## Uninstallation Of _Php-Server-Mon-Sys_ System
+To completely remove the installed _Php-Server-Mon-Sys_ system, delete the _Php-Server-Mon-Sys_ system home directory.  Before doing so, you should remove the running Docker containers:
+
+    $ docker-compose stop
+
+    $ docker-compose rm
+
+If you inadvertently uninstall the _Php-Server-Mon-Sys_ system without first using the _docker-compose rm_ command, you may "clean up" the orphaned Docker containers by using Docker commands.  See the Docker documentation for details; in a nutshell:
+
+  - Discover the orphaned Docker containers by using the command _docker ps -a_, and note the _<CONTAINER ID>_
+
+  - Remove the docker containers by using the command _docker rm -f <CONTAINER ID>_
+
 
 Licensed under Apache 2.0 License.
 
