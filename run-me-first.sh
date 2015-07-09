@@ -15,7 +15,7 @@ docker pull mysql:5.7.7 && \
 tar -zxvf phpservermon-3.1.1.tar.gz -C ./src/public/ && \
 
 echo && \
-echo "Working, almost done..." && \
+echo "Still working, almost done..." && \
 
 mv ./src/public/phpservermon-3.1.1 ./src/public/phpservermon && \
 chmod -R 755 ./src/public && \
