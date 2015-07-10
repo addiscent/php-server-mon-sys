@@ -70,7 +70,7 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 ### Quick-start Guide To _PHP Server Monitor_ Operation
 - Enter your user credentials and choose _LOGIN_.  A page shows _STATUS_.  The page is currently blank, because no servers have been chosen for monitoring.
 
-- Enter a server to monitor, as described here:
+- Enter a server to monitor, and watch it, as described here:
 
     * Choose _Servers_ from the menu at the top of the page. The next page shows _Servers_ page.
 
@@ -97,7 +97,10 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
     - https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
 ## Managing _Php-Server-Mon-Sys_
-The _PHP Server Monitor_ application code, along with numerous _Php-Server-Mon-Sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _Php-Server-Mon-Sys_ project is unzipped and from which its _run-me-first.sh_ installation script is executed is its installation "home" directory.  All sub-directories described below are relative to the _Php-Server-Mon-Sys_ home directory.
+#### The _Php-Server-Mon-Sys_ Home Directory
+The _PHP Server Monitor_ application code, along with numerous _Php-Server-Mon-Sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _Php-Server-Mon-Sys_ project is unzipped and from which its _run-me-first.sh_ installation script is executed is its installation "Home" directory.  All sub-directories described below are relative to the _Php-Server-Mon-Sys_ home directory.
+
+Except in situations where you are exploring and doing typical, well understood GNU-utils commands, (ls, cd, etc), _Php-Server-Mon-Sys_ specific management commands, such as the _.sh_ BASH scripts, and "docker-compose...", _should always be executed with the _Php-Server-Mon-Sys Home directory as the present working directory, (pwd).
 
 #### _Docker_ Commands
 The _Php-Server-Mon-Sys_ system is managed using _docker-compose_ commands:
