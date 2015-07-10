@@ -20,7 +20,7 @@ Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by 
 
 The version of _PHP Server Monitor_ incorporated into this release of _Php-Server-Mon-Sys_ is _PHP Server Monitor v3.1.1_.
 
-This version of _Php-Server-Mon-Sys_, _v0.0.2_ has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, _Php-Server-Mon-Sys_ should work on any host which fully supports _Docker_ tools, but that has not been proven firsthand.
+This version of _Php-Server-Mon-Sys_, _v0.0.2_, has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, _Php-Server-Mon-Sys_ should work on any host which fully supports _Docker_ tools, but that has not been proven firsthand.
 
 ### System Requirements
 Installation and operation of _Php-Server-Mon-Sys_ requires:
@@ -61,28 +61,40 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
     * Choose _SAVE CONFIGURATION_
 
-- Set your user, password, and email to whatever you wish.
+    * Choose _SAVE CONFIGURATION_, (a second time, for confirmation)
 
-    * Choose _INSTALL_
+- Set your user, password, and email to whatever you wish, then choose _INSTALL_.
 
-- Choose _GO TO YOUR MONITOR_
+- Read the page, follow the instructions, then choose _GO TO YOUR MONITOR_
 
 ### Quick-start Guide To _PHP Server Monitor_ Operation
-- Enter your user credentials and choose _LOGIN_.  The home page shows _STATUS_.
+- Enter your user credentials and choose _LOGIN_.  A page shows _STATUS_.  The page is currently blank, because no servers have been chosen for monitoring.
 
-- Enter a server to monitor:
+- Enter a server to monitor, as described here:
 
-    * Choose _Servers_ from the top menu. The next page shows _Servers_ page.
+    * Choose _Servers_ from the menu at the top of the page. The next page shows _Servers_ page.
 
-    * Choose the green _ADD NEW_ button.  Enter the appropriate data into the fields, then choos _SAVE_.    * Choose _Status_ from the top menu. Click on the box containing your server's name for a chart of response time history.  The server's access history chart is updated with a new data point every three minutes.
+    * Choose the green _ADD NEW_ button.  Enter the appropriate data into the fields, for a server you wish to monitor, then choose _SAVE_.
 
-    * Choose _Config_ from the top menu.  Enter a time of 60 seconds into the _Auto-refresh_ field, and choose _Save_.  Choose _Status_ from the top menu.  The _Status_ page is self-refreshed every 60 seconds.
+    * The _Servers_ page refreshes, and now the server you entered on the previous page is in the list of servers to be monitored.  Choose _Status_ from the menu at the top of the page.
 
-    * See the _PHP Server Monitor_ website and GitHub repository for documentation:
+    * Notice a green box containing the name of the server you have chosen to be monitored.  This page has several means of being refreshed to show the current status of the server.  Let's use the _manual update_ method now.  Choose _Update_ from the menu at the top of the page.
 
-        - http://www.phpservermonitor.org/
+    * The contents of the green named-server box changes to _"Last online: a second ago"_. Now, let's see a chart of the server's uptime history.  Mouse-click on the green box containing your server's name.
 
-        - https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
+    * A page titled _Servers_ shows your server's profile information, and charts containing the access history of the chosen server.  At this time, there is only one or a few points on the graph.  Each point reflects the server's status at that time.  The server's access history is updated _in the database_, a data point every three minutes, (default).  However, the chart on this page does not automatically update, it must be refreshed manually, (using browser page refresh).
+
+    * Let's change the configuration of _PHP Server Monitor_ so that the main home page, _Status_, is automatically refreshed periodically, so you don't have to do it manually.  Choose _Config_ from the menu at the top of the page.  A page titled _Config_ is shown.   In the field titled _Auto-refresh_, enter a time of 60 seconds, and choose _Save_.  Now, choose _Status_ from the menu at the top of the page.
+
+    * Wait and watch for it, and notice that the contents of the green named-server box on the _Status_ page is now auto-refreshed every 60 seconds.  The _Last online_ status should not show a value larger than 3 minutes unless the server is actually down, or whatever interval has been set for the server's update.
+
+    * After ten or fifteen minutes have passed, mouse-click on the green box containing your server's name, and notice the chart now contains at least several data points of access history for your server, at the appropriate time interval.
+
+- See the _PHP Server Monitor_ website and GitHub repository for documentation:
+
+    - http://www.phpservermonitor.org/
+
+    - https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
 ## Managing _Php-Server-Mon-Sys_
 The _PHP Server Monitor_ application code, along with numerous _Php-Server-Mon-Sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _Php-Server-Mon-Sys_ project is unzipped and from which its _run-me-first.sh_ installation script is executed is its installation "home" directory.  All sub-directories described below are relative to the _Php-Server-Mon-Sys_ home directory.

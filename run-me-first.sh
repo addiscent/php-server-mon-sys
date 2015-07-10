@@ -33,3 +33,6 @@ if [ ! -d "mysql-db" ]
 then
   mkdir ./mysql-db
 fi
+
+echo "Installation complete"
+echo
