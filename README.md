@@ -19,8 +19,12 @@ By using Docker containers and a straightforward isolated sub-directory tree imp
 
 Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by _Php-Server-Mon-Sys_ are available only to _PHP Server Monitor_; they are not intended to be available to other application software on the host system.  The services are _ephemeral_; they come and go along with the installation and un-installation of _Php-Server-Mon-Sys_.
 
+The version of _PHP Server Monitor_ incorporated into this release of _Php-Server-Mon-Sys_ is _PHP Server Monitor v3.1.1_.
+
+This version of _Php-Server-Mon-Sys_, _v0.0.2_ has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, it should work on any host which fully supports Docker tools, but that has not been proven firsthand.
+
 ### System Requirements
-Installation of _Php-Server-Mon-Sys_ requires:
+Installation and operation of _Php-Server-Mon-Sys_ requires:
 
   - 500MB available memory
   - 1.25GB available storage
@@ -29,7 +33,7 @@ Installation of _Php-Server-Mon-Sys_ requires:
   - Docker Compose 1.3.1, pre-installed
 
 ### _Php-Server-Mon-Sys_ Installation Instructions
-1. Download project zip file into a convenient storage location. Unzip, (keep dir structure).
+1. Download this project ZIP file into a convenient storage location. Unzip, (keep dir structure).
 
   - _http://github.com/addiscent/Php-Server-Mon-Sys_
 
