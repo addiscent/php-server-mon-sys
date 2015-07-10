@@ -1,27 +1,26 @@
 # Php-Server-Mon-Sys
 #### Why _Php-Server-Mon-Sys_?
-_Php-Server-Mon-Sys_ solves a problem.  The problem is, installing an application, in this case _PHP Server Monitor_, can be very complicated and time consuming.  _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
+Let's say you manage some websites or other network servers, and you wish to monitor them.  You decide it's time for you install and operate a _Server Monitor_.  There are quite a number of _server monitors_ available, and at this time _PHP Server Monitor_ is your choice.
 
-#### Why _PHP Server Monitor_?
-_PHP Server Monitor_ is a basic but very useful _Open Source_ server monitoring application.  Anyone who is responsible for a web site (or other) server, needs to know their server is in-service.  Or, they need to be notified in a timely manner if it goes out-of-service unexpectedly.  _PHP Server Monitor_ can "watch" those servers and notify the administrator that a service has become unavailable.  Among other features, it also keeps an _uptime_ and _latency_ history for each service monitored, and allows that history to be viewed as charts.
+- http://hpservermonitor.org/
 
-  - http://hpservermonitor.org/
+- https://github.com/phpservermon/phpservermon
 
-  - https://github.com/phpservermon/phpservermon
+However, there is a problem, common to many _server monitors_.  The problem is, installing _PHP Server Monitor_ can be very complicated and time consuming.  _Php-Server-Mon-Sys_ solves this problem.  _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
 
 #### What is complicated about _PHP Server Monitor_ installation?
-_PHP Server Monitor_ installation itself is not terribly complicated, but it is dependent on several other services for its operation, including an HTTP server, a MySQL server, and a PHP-FPM server.  In order to run _PHP Server Monitor_, those services must be installed on the _PHP Server Monitor's_ host system.  However, on many computers, those services are not already installed.  Unless installation is performed by a qualified system administrator, installing those services is error-prone and time consuming.
+_PHP Server Monitor_ installation itself is not terribly complicated.  But, _PHP Server Monitor_ is dependent on several other services for its operation, including an HTTP server, a MySQL server, and a PHP-FPM server.  In order to run _PHP Server Monitor_, those services must be installed on the _PHP Server Monitor's_ host system.  However, on many computers, those services are not already installed.  Unless installation is performed by a qualified system administrator, installing those services is error-prone and time consuming.
 
 #### _Php-Server-Mon-Sys_ Is A _Turnkey_ System
-_Php-Server-Mon-Sys_ relieves most of the complexity of the _PHP Server Monitor_ installation process on host computers which do not already have the required support services installed.  In addition to installing _PHP Server Monitor_, _Php-Server-Mon-Sys_ also installs NGINX, MySQL, and PHP-FPM, as "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  The services are deployed using Docker containers, which means the new services may be very easily installed and un-installed along with _PHP Server Monitor_.
+_Php-Server-Mon-Sys_ relieves most of the complexity of the _PHP Server Monitor_ installation process on host computers which do not already have the required support services installed.  In addition to installing _PHP Server Monitor_, _Php-Server-Mon-Sys_ also installs NGINX, MySQL, and PHP-FPM, as "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  The services are deployed using Docker containers, which means the new services may be very easily installed and un-installed along with the _PHP Server Monitor_ application software.
 
-By using Docker containers and a straightforward isolated sub-directory tree implementation, the services and application do not become "entangled" in the native operating system.  If you no longer need the _PHP Server Monitor_ software in your system, you may very easily remove it.  When it is removed, _PHP Server Monitor's_ supporting services are removed as well.  There is no need to remove each of the other unnecessary services individually.
+By using Docker containers and a straightforward isolated sub-directory tree implementation, the services and application do not become "entangled" in the native operating system, nor yet another cause of conflict with other application software installed on the host.  If you no longer need the _PHP Server Monitor_ software in your system, you may very easily remove it.  When it is removed, _PHP Server Monitor's_ supporting services are removed as well.  There is no need to individually remove each of the other services no longer needed.
 
-Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by _Php-Server-Mon-Sys_ are available only to _PHP Server Monitor_; they are not intended to be available to other application software on the host system.  The services are _ephemeral_; they come and go along with the installation and un-installation of _Php-Server-Mon-Sys_.
+Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by _Php-Server-Mon-Sys_ are available only to _PHP Server Monitor_; they are not intended to be available to other application software on the host system.  The services are _ephemeral_; they come and go along with the installation, operation, and un-installation of _Php-Server-Mon-Sys_.
 
 The version of _PHP Server Monitor_ incorporated into this release of _Php-Server-Mon-Sys_ is _PHP Server Monitor v3.1.1_.
 
-This version of _Php-Server-Mon-Sys_, _v0.0.2_ has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, it should work on any host which fully supports Docker tools, but that has not been proven firsthand.
+This version of _Php-Server-Mon-Sys_, _v0.0.2_ has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, _Php-Server-Mon-Sys_ should work on any host which fully supports Docker tools, but that has not been proven firsthand.
 
 ### System Requirements
 Installation and operation of _Php-Server-Mon-Sys_ requires:
