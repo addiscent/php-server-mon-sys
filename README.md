@@ -1,15 +1,15 @@
 # Php-Server-Mon-Sys
 #### Why _Php-Server-Mon-Sys_?
-Let's say you manage some websites or other network servers, and you wish to monitor them.  You decide it's time for you install and operate a _Server Monitor_.  There are quite a number of _server monitors_ available, and at this time _PHP Server Monitor_ is your choice.
+Let's say you manage some websites or other network servers, and you wish to monitor them.  You decide it's time to install and operate a _Server Monitor_ to help with this task.  There are quite a number of _server monitors_ available from which to choose.  At this time you choose a server monitor named _PHP Server Monitor_.
 
 - http://hpservermonitor.org/
 
 - https://github.com/phpservermon/phpservermon
 
-However, there is a problem, common to many _server monitors_.  The problem is, _PHP Server Monitor_ installation may be very complicated and time consuming.  _Php-Server-Mon-Sys_ solves this problem.  _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
+However, you _may_ now have a significant problem, a problem common to many _server monitors_.  The problem is, _PHP Server Monitor_ installation may be very complicated and time consuming.  _Php-Server-Mon-Sys_ solves this problem.  In many cases, _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
 
 #### What is complicated about _PHP Server Monitor_ installation?
-_PHP Server Monitor_ installation itself is not terribly complicated.  But, _PHP Server Monitor_ is dependent on several other services for its operation, including an HTTP server, a MySQL server, and a PHP-FPM server.  In order to run _PHP Server Monitor_, those services must be installed on the _PHP Server Monitor's_ host system.  However, on many computers, those services are not already installed.  Unless installation is performed by a qualified system administrator, installing those services is error-prone and time consuming.
+_PHP Server Monitor_ installation itself is not terribly complicated.  But, _PHP Server Monitor_ is dependent on several other services for its operation, including an HTTP server, a MySQL server, and a PHP-FPM server.  In order to operate _PHP Server Monitor_, those services must be installed on the _PHP Server Monitor's_ host system.  However, on many OS installations, those services are not already installed.  Unless installation of _PHP Server Monitor_ is performed by a qualified system administrator, installing those services is error-prone and time consuming.
 
 #### _Php-Server-Mon-Sys_ Is A _Turnkey_ System
 _Php-Server-Mon-Sys_ significantly reduces the complexity of _PHP Server Monitor_ installation, on host computers which do not already have the required support services installed.  In addition to installing _PHP Server Monitor_, _Php-Server-Mon-Sys_ also installs NGINX, MySQL, and PHP-FPM, as "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  The services are deployed using _Docker_ containers, which means the new services may be very easily installed and un-installed along with the _PHP Server Monitor_ application software.
