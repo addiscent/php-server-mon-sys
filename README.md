@@ -100,7 +100,7 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 #### The _Php-Server-Mon-Sys_ Home Directory
 The _PHP Server Monitor_ application code, along with numerous _Php-Server-Mon-Sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _Php-Server-Mon-Sys_ project is unzipped and from which its _run-me-first.sh_ installation script is executed is its installation "Home" directory.  All sub-directories described below are relative to the _Php-Server-Mon-Sys_ home directory.
 
-Except in situations where you are exploring and doing typical, well understood GNU-utils commands, (ls, cd, etc), _Php-Server-Mon-Sys_ specific management commands, such as the _.sh_ BASH scripts, and "docker-compose...", _should always be executed with the _Php-Server-Mon-Sys Home directory as the present working directory, (pwd).
+Except in situations where you are exploring and doing typical, well understood GNU-utils commands, (ls, cd, etc), _Php-Server-Mon-Sys_ specific management commands, such as the _.sh_ BASH scripts, and "docker-compose...", _should always be executed with the Php-Server-Mon-Sys Home directory as the present working directory, (pwd)_.
 
 #### _Docker_ Commands
 The _Php-Server-Mon-Sys_ system is managed using _docker-compose_ commands:
@@ -171,7 +171,7 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
 
         Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
 
-## Uninstallation Of _Php-Server-Mon-Sys_
+## How To Uninstall _Php-Server-Mon-Sys_
 To completely remove the installed _Php-Server-Mon-Sys_:
 
   - Delete the _Php-Server-Mon-Sys_ home directory.  Before doing so, you should remove the running _Docker_ containers:
