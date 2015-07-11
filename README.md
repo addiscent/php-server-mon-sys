@@ -148,11 +148,11 @@ The interval at which monitored server histories are updated is determined by a 
 
 In _Php-Server-Mon-Sys_, a _cron job_ which updates server histories data is run on-board the _PHP-FPM_ container.  This _cron job_ is started automatically when the _Php-Server-Mon-Sys_ system is started, (_docker-compose up -d_).  The _crontab_ file which contains the job descriptor needed by _Cron_ is named _etc-cron.d-tab-for-phpfpm.txt_, (located in the home _./src/_ sub-directory).
 
-The interval specified in the _crontab_ file determines how frequently the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval, by editing the _crontab_ file.  You may use any text editor you wish to edit the file, but editing it requires that it be done using _super user_ (root-level) permission.
+The interval specified in the _crontab_ file determines how frequently the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval, by editing the _crontab_ file.  You may use any text editor you wish to edit the file, but editing it requires that it be done using _superuser_ (root-level) permission.
 
 One way of editing this _crontab_ file is by using the following command to open the file in an editor named _nano_:
 
-    $ sudo nano ./src/etc-cron.d-tab-for-phpfpm.txt # need sudo or other super user power
+    $ sudo nano ./src/etc-cron.d-tab-for-phpfpm.txt # need sudo or other superuser power
 
 The default job descriptor is:
 
