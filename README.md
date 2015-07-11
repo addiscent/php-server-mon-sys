@@ -199,7 +199,7 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
 
             root@7587be7d4eed:/#
 
-      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
+      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not running on a true terminal on-boad the container, so screen functionality is limited, but is useful enough for exploration inside the operating container, and troubleshooting.
 
 ## How To Uninstall _Php-Server-Mon-Sys_
 To completely remove the installed _Php-Server-Mon-Sys_:
