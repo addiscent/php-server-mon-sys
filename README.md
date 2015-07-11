@@ -185,7 +185,7 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
 
   - _dbash.sh_ - Executes a BASH shell on a running _Docker_ container. To use it:
 
-      $ docker ps -a  #  shows a list of running containers.  Choose an ID...
+      $ docker ps -a  #  shows a list of running containers.  Note a CONTAINER ID...
 
         result:
 
@@ -193,7 +193,7 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
 
             7587be7d4eed        nginx:1.9.2  ... etc
 
-      $ ./dbash.sh  7587be7d4eed
+      $ ./dbash.sh  7587be7d4eed # execute a BASH shell on CONTAINER ID
 
         result:
 
