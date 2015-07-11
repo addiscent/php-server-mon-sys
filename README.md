@@ -1,8 +1,8 @@
 # Php-Server-Mon-Sys
 #### Why _Php-Server-Mon-Sys_?
-Let's say you manage some websites or other network servers, and you wish to monitor them.  You decide it's time to install and operate a _Server Monitor_ to help with this task.  There are quite a number of _server monitors_ available from which to choose.  At this time you choose a server monitor named _PHP Server Monitor_.
+Let's say you manage some websites or other network servers, and you wish to monitor them.  You decide it's time to install and operate a _Server Monitor_ to help with that task.  There are quite a number of _server monitors_ available from which to choose.  At this time you choose a server monitor named _PHP Server Monitor_:
 
-- http://hpservermonitor.org/
+- http://phpservermonitor.org/
 
 - https://github.com/phpservermon/phpservermon
 
@@ -20,7 +20,7 @@ Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by 
 
 The version of _PHP Server Monitor_ incorporated into this release of _Php-Server-Mon-Sys_ is _PHP Server Monitor v3.1.1_.
 
-This version of _Php-Server-Mon-Sys_, _v0.0.2_, has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, _Php-Server-Mon-Sys_ should work on any host which fully supports _Docker_ tools, but that has not been proven firsthand.
+This version of _Php-Server-Mon-Sys_, _v0.0.3_, has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, _Php-Server-Mon-Sys_ should work on any host which fully supports _Docker_ tools, but that has not been proven firsthand.
 
 ### System Requirements
 Installation and operation of _Php-Server-Mon-Sys_ requires:
@@ -32,9 +32,9 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
   - _Docker_ Compose 1.3.1, pre-installed
 
 ### _Php-Server-Mon-Sys_ Installation Instructions
-1. Download this project ZIP file into a convenient storage location. Unzip, (keep dir structure).
+1. Download the v0.0.3 release tar.gz or .zip file into a newly created convenient location, which will be used as the _Php-Server-Mon-Sys_ "Home" directory. Untar/unzip the release file, (keep dir structure).
 
-  - _http://github.com/addiscent/Php-Server-Mon-Sys_
+  - https://github.com/addiscent/php-server-mon-sys/releases/tag/v0.0.3
 
 2. $ sudo ./run-me-first.sh  # sudo on debian, or superuser permissions on whatever
 
