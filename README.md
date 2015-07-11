@@ -144,9 +144,23 @@ After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ syst
     $ docker-compose up -d
 
 ##### _PHP Server Monitor_ Server Data Update Intervals: Cron
-A cron job is started automatically when the system is started, (_docker-compose up -d_).  The interval of the cron job determines how often the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval by changing the crontab file, _etc-cron.d-tab-for-phpfpm.txt_, located in the home _./src/_ sub-directory.  This cron job is run on-board the PHP-FPM container, but is exposed on the host file system so it may be conveniently edited.  Note that this file requires strict permissions, e.g., _mode 600_, and _owner:group_ must be _root:root_.  Otherwise, the cron job will not run.
+The interval at which monitored server histories are updated is determined by a cron job.  This cron job is run on-board the PHP-FPM container, and is started automatically when the _Php-Server-Mon-Sys_ system is started, (_docker-compose up -d_).
 
-After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
+The file which contains the job descriptor is named _etc-cron.d-tab-for-phpfpm.txt_, and is located in the home _./src/_ sub-directory.  It is known as a crontab, (cron table), file.  Note that this file requires strict permissions attributes, e.g., _mode 600_, and _owner:group_ must be _root:root_.  Do not change these permissions.  If these permissions are changed, the cron job will not run, therefore the server histories will not be updated.
+
+The interval specified in the crontab file determines how often the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval, by editing the crontab file, (_etc-cron.d-tab-for-phpfpm.txt_).  You may use any text editor you wish to edit the file, but editing it requires that it be done using super user (root-level) permission.
+
+One way of editing the crontab file is by using the following command to open the crontab file in an editor named _nano_:
+
+    $ sudo nano ./src/etc-cron.d-tab-for-phpfpm.txt
+
+After opening the file, note that the default crontab job descriptor looks like this:
+
+    - */3 * * * * root /usr/bin/php /var/www/public/phpservermon/cron/status.cron.php
+
+Above, the 3 after the asterisk tells cron to execute the monitored servers' online history update every 3 minutes.  You may change that number to, e.g., 5 or 15, or whatever, (2 through 59).  However, if you want the history updated every minute, do not use */1; instead, use * by itself.
+
+After editing the _etc-cron.d-tab-for-phpfpm.txt_ file, cron will automatically detect the crontab change and use the newly specified interval.
 
 For more information on Cron, see:
 
