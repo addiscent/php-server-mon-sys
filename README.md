@@ -177,9 +177,11 @@ Though unlikely to be necessary, you may make changes to the PHP-FPM server conf
 ##### Miscellaneous Utility Scripts
 Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./reset-config-php.sh_, (note the leading "./").  The scripts are safe to use only from within the _Php-Server-Mon-Sys_ home directory; when using them, be sure the present working directory is the _Php-Server-Mon-Sys_ home sub-directory. If they are invoked outside this sub-directory, they will at best fail, or at worst possibly produce unintended side effects.
 
-  - _delete-database.sh_ - Deletes the MySQL database.  Before deleting the database, stop the _Php-Server-Mon-Sys_ system by using _docker-compose stop_.
+  - _delete-database.sh_ - Deletes the MySQL database.  Before deleting the database, stop the _Php-Server-Mon-Sys_ system by using:
 
-  - _reset-config-php.sh_ - Modifies the _PHP Server Monitor_ configuration file, (_config.php_).  It is modified in such a way as to cause the installation procedure to run again the next time the _PHP Server Monitor_ home page is visited via the browser.
+      $ docker-compose stop
+
+  - _reset-config-php.sh_ - Modifies the _PHP Server Monitor_ configuration file, (_config.php_).  After its modification, when _PHP Server Monitor_ home page is re-visited via the browser, its "new installation" initialization procedure will be invoked.  See the section above, "_PHP Server Monitor_ Initialization".
 
   - _dbash.sh_ - Executes a BASH shell on a running _Docker_ container. To use it:
 
