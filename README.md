@@ -156,9 +156,9 @@ One way of editing this _crontab_ file is by using the following command to open
 
 The default job descriptor is as this:
 
-    - */3 * * * * root /usr/bin/php /var/www/public/phpservermon/cron/status.cron.php
+    */3 * * * * root /usr/bin/php /var/www/public/phpservermon/cron/status.cron.php
 
-Above, the "/3" after the asterisk tells _Cron_ to execute the monitored servers' online history update every 3 minutes.  You may change that number to, e.g., "/5" or "/15", or some other number of minutes, 2 through 59.  If you want the history updated every minute, do not use "*/1"; instead, use "*" by itself, that is, simply delete the "/3".
+Above, the "/3" after the asterisk tells _Cron_ to execute the monitored servers' online history update every 3 minutes.  You may change that number to, e.g., "/5" or "/15", or some other number of minutes, 2 through 59.  If you want the history updated every minute, do not use "/1"; instead, use asterisk (*) by itself, that is, simply delete the "/3".
 
 After editing the _etc-cron.d-tab-for-phpfpm.txt_ file, _Cron_ will automatically detect the _crontab_ file change, and use the newly specified interval.
 
