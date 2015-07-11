@@ -32,7 +32,7 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
   - _Docker_ Compose 1.3.1, pre-installed
 
 ### _Php-Server-Mon-Sys_ Installation Instructions
-1. Download the v0.0.3 release tar.gz or .zip file into a newly created convenient location, which will be used as the _Php-Server-Mon-Sys_ "Home" directory. Untar/unzip the release file, (keep dir structure).
+1. Download the v0.0.3 release tar.gz or .zip file into a convenient newly created directory, which will be used as the _Php-Server-Mon-Sys_ "Home" directory. Untar/unzip the release file, (keep dir structure).
 
   - https://github.com/addiscent/php-server-mon-sys/releases/tag/v0.0.3
 
@@ -123,7 +123,15 @@ The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers),
 
   - In order to prevent risk to the _PHP Server Monitor_ database, the _Php-Server-Mon-Sys_ _Docker_ service containers must be created/stopped/destroyed using _Docker_ commands, (_docker-compose stop_, _docker stop_..., etc).
 
-It is possible that database corruption could occur if a container is hard-killed during mid-operation, e.g., if the OS shuts down during a _PHP Server Monitor_ database write.  To prevent database risk, don't shutdown the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using _docker-compose stop_.  After re-booting the OS, restart the _Php-Server-Mon-Sys_ system by making the _Php-Server-Mon-Sys_ home directory the present working directory, then enter the command _docker-compose up -d_.  After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
+It is possible that database corruption could occur if a container is hard-killed during mid-operation, e.g., if the OS shuts down during a _PHP Server Monitor_ database write.  To prevent database risk, don't shutdown the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using:
+
+    $ docker-compose stop
+
+After re-booting the OS, restart the _Php-Server-Mon-Sys_ system by making the _Php-Server-Mon-Sys_ home directory the present working directory, then enter the command:
+
+    $ docker-compose up -d
+
+After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
 
 #### _Php-Server-Mon-Sys_ Configuration Changes
 ##### The _PHP Server Monitor_ Time Zone
@@ -136,7 +144,7 @@ After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ syst
     $ docker-compose up -d
 
 ##### _PHP Server Monitor_ Server Data Update Intervals: Cron
-A cron job is started automatically when the system is started, (_docker-compose up -d_).  The interval of the cron job determines how often the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval by changing the crontab file, _etc-cron.d-tab-for-phpfpm.txt_, located in the home _./src/_ sub-directory.  This cron job is run on the PHP-FPM container, but is exposed on the host file system so it may be conveniently edited.  Note that this file requires strict permissions, e.g., mode 600, and owner:group must be root:root.  Otherwise, the cron job will not run.
+A cron job is started automatically when the system is started, (_docker-compose up -d_).  The interval of the cron job determines how often the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval by changing the crontab file, _etc-cron.d-tab-for-phpfpm.txt_, located in the home _./src/_ sub-directory.  This cron job is run on-board the PHP-FPM container, but is exposed on the host file system so it may be conveniently edited.  Note that this file requires strict permissions, e.g., _mode 600_, and _owner:group_ must be _root:root_.  Otherwise, the cron job will not run.
 
 After editing the _php.ini_ file, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
 
@@ -153,23 +161,27 @@ Though unlikely to be necessary, you may make changes to the PHP-FPM server conf
 ##### Miscellaneous Utility Scripts
 Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./reset-config-php.sh_, (note the leading "./").  The scripts are safe to use only from within the _Php-Server-Mon-Sys_ home directory; when using them, be sure the present working directory is the _Php-Server-Mon-Sys_ home sub-directory. If they are invoked outside this sub-directory, they will at best fail, or at worst possibly produce unintended side effects.
 
-  - _delete-database.sh_ - Deletes the MySQL database.  Before deleting the database, stop the _Php-Server-Mon-Sys_ system first by using _docker-compose stop_.
+  - _delete-database.sh_ - Deletes the MySQL database.  Before deleting the database, stop the _Php-Server-Mon-Sys_ system by using _docker-compose stop_.
 
-  - _reset-config-php.sh_ - Modifies the _PHP Server Monitor_ configuration file, (_config.php_).  It is modified in a manner which will cause the installation procedure to run again the next time the _PHP Server Monitor_ home page is visited in the browser.
+  - _reset-config-php.sh_ - Modifies the _PHP Server Monitor_ configuration file, (_config.php_).  It is modified in such a way as to cause the installation procedure to run again the next time the _PHP Server Monitor_ home page is visited via the browser.
 
   - _dbash.sh_ - Executes a BASH shell on a running _Docker_ container. To use it:
 
-      $ _Docker_ ps -a  #  shows a list of running containers.  Choose an ID...
+      $ docker ps -a  #  shows a list of running containers.  Choose an ID...
 
-        CONTAINER ID        IMAGE        ... etc
+        result:
 
-        7587be7d4eed        nginx:1.9.2  ... etc
+            CONTAINER ID        IMAGE        ... etc
+
+            7587be7d4eed        nginx:1.9.2  ... etc
 
       $ ./dbash.sh  7587be7d4eed
 
-        root@7587be7d4eed:/#
+        result:
 
-        Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
+            root@7587be7d4eed:/#
+
+      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not on a terminal, so screen functionality is limited, but usually useful enough for troubleshooting, by exploration of the operating container.
 
 ## How To Uninstall _Php-Server-Mon-Sys_
 To completely remove the installed _Php-Server-Mon-Sys_:
@@ -182,21 +194,23 @@ To completely remove the installed _Php-Server-Mon-Sys_:
 
   - After deleting the home directory, remove the unnecessary _Docker_ images from the local _Docker_ image repository:
 
-    - Discover the _Docker_ images using the command:
+    - Discover the local _Docker_ images using the command:
 
-      $ _Docker_ images
+      $ docker images
 
       Their names are _mysql_, _nginx_, and _nmcteam/php56_.  Note their _IMAGE IDs_.
 
     - One by one, remove the images from the _Docker_ image repository using the command:
 
-      $ _Docker_ rmi IMAGE ID.
+      $ docker rmi IMAGE ID.
 
 If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _docker-compose rm_ command, you may manually "clean up" the orphaned _Docker_ containers by using other _Docker_ commands.  See the _Docker_ documentation for details; in a nutshell:
 
   - Discover the orphaned _Docker_ containers by using the command _docker ps -a_, and note the _CONTAINER ID_
 
-  - Remove the _Docker_ containers by using the command _docker rm -f CONTAINER ID_
+  - Remove the _Docker_ containers by using the command:
+
+      $ docker rm -f CONTAINER ID
 
 ## Etc
 Licensed under Apache 2.0 License.
