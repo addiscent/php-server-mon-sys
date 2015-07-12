@@ -12,7 +12,7 @@ echo "This will take a short while..."
 # on this host
 docker pull nginx:1.9.2 && \
 #docker pull addiscent/phpfpm && \
-#docker pull nmcteam/php56:1.0 && \
+docker pull nmcteam/php56:1.0 && \
 docker pull mysql:5.7.7 && \
 
 # unzip the PHP Server Monitor sub-directory tree
@@ -22,7 +22,6 @@ echo && \
 echo "Still working, almost done..." && \
 
 mv ./src/public/phpservermon-3.1.1 ./src/public/phpservermon && \
-chown -R ckt:admins ./src/public/phpservermon && \
 chmod -R 755 ./src/public && \
 
 # file permissions fiddling is necessary to for a legit crontab
