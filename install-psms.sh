@@ -1,14 +1,18 @@
 #!/bin/bash
-
+# Intall PSMS
 # you must have super user permissions to execute this file,
 # (use sudo or otherwise become super user)
 
 echo "This will take a short while..."
 
+# running the following script makes re-installation using run-me-first.sh idempotent
+./clean-psms.sh && \
+
 # docker will skip downloading these files if they already exist
 # on this host
 docker pull nginx:1.9.2 && \
-docker pull nmcteam/php56:1.0 && \
+#docker pull addiscent/phpfpm && \
+#docker pull nmcteam/php56:1.0 && \
 docker pull mysql:5.7.7 && \
 
 # unzip the PHP Server Monitor sub-directory tree
@@ -18,11 +22,12 @@ echo && \
 echo "Still working, almost done..." && \
 
 mv ./src/public/phpservermon-3.1.1 ./src/public/phpservermon && \
+chown -R ckt:admins ./src/public/phpservermon && \
 chmod -R 755 ./src/public && \
 
 # file permissions fiddling is necessary to for a legit crontab
-chmod 600 ./src/etc-cron.d-tab-for-phpfpm.txt && \
 chown root:root ./src/etc-cron.d-tab-for-phpfpm.txt && \
+chmod 600 ./src/etc-cron.d-tab-for-phpfpm.txt && \
 
 # config.php must be writable, but must not be executable
 touch ./src/public/phpservermon/config.php && \

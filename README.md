@@ -4,6 +4,8 @@ Let's say you manage some websites or other network servers, and you wish to mon
 
 - http://phpservermonitor.org/
 
+- http://www.phpservermonitor.org/support/
+
 - https://github.com/phpservermon/phpservermon
 
 However, you _may_ now have a significant problem, a problem common to many _server monitors_.  The problem is, _PHP Server Monitor_ installation may be very complicated and time consuming.  _Php-Server-Mon-Sys_ solves this problem.  In many cases, _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
@@ -36,9 +38,11 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
   - https://github.com/addiscent/php-server-mon-sys/releases/tag/v0.0.3
 
-2. $ sudo ./run-me-first.sh  # sudo on debian, or superuser permissions on whatever
+2. $ sudo ./install-psms.sh  # sudo on debian, or superuser permissions on whatever
 
-3. $ docker-compose up -d  # wait one minute for mysql to finish initializing database
+3. $ docker-compose up -d  # wait two minutes for mysql to finish initializing database
+
+IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, you will receive errors during the _PHP Server Monitor_ Initialization process, and you will need to restart installation from step 2 above.
 
 ### _PHP Server Monitor_ Initialization
 - Use a web browser, visit:
@@ -98,7 +102,7 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
 ## Managing _Php-Server-Mon-Sys_
 #### The _Php-Server-Mon-Sys_ Home Directory
-The _PHP Server Monitor_ application code, along with numerous _Php-Server-Mon-Sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _Php-Server-Mon-Sys_ project is unzipped and from which its _run-me-first.sh_ installation script is executed is its installation "Home" directory.  All sub-directories described below are relative to the _Php-Server-Mon-Sys_ home directory.
+The _PHP Server Monitor_ application code, along with numerous _Php-Server-Mon-Sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _Php-Server-Mon-Sys_ project is unzipped and from which its _install-psms.sh_ installation script is executed is its installation "Home" directory.  All sub-directories described below are relative to the _Php-Server-Mon-Sys_ home directory.
 
 Except in situations where you are exploring and doing typical, well understood GNU-utils commands, (ls, cd, etc), _Php-Server-Mon-Sys_ specific management commands, such as the _.sh_ BASH scripts, and "docker-compose...", _should always be executed with the Php-Server-Mon-Sys Home directory as the present working directory, (pwd)_.
 
