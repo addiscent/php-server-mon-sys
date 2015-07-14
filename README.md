@@ -22,21 +22,21 @@ Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by 
 
 The version of _PHP Server Monitor_ incorporated into this release of _Php-Server-Mon-Sys_ is _PHP Server Monitor v3.1.1_.
 
-This version of _Php-Server-Mon-Sys_, _v0.0.4_, has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, _Php-Server-Mon-Sys_ should work on any host which fully supports _Docker_ tools, but that has not been proven firsthand.
+This version of _Php-Server-Mon-Sys_, _v0.0.5_, has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, _Php-Server-Mon-Sys_ should work on any host which fully supports _Docker_ tools, but that has not been proven firsthand.
 
 ### System Requirements
 Installation and operation of _Php-Server-Mon-Sys_ requires:
 
   - 500MB available memory
-  - 1.25GB available storage
+  - 1GB available storage, (plus server history data accumulated in database)
   - Internet connection/service
-  - _Docker_ Engine 1.7, pre-installed
-  - _Docker_ Compose 1.3.1, pre-installed
+  - Docker Engine 1.7, pre-installed
+  - Docker Compose 1.3.1, pre-installed
 
 ### _Php-Server-Mon-Sys_ Installation Instructions
-1. Download the v0.0.4 release tar.gz or .zip file into a convenient newly created directory, which will be used as the _Php-Server-Mon-Sys_ "Home" directory. Untar/unzip the release file, (keep dir structure).
+1. Download the v0.0.5 release tar.gz or .zip file into a convenient newly created directory, which will be used as the _Php-Server-Mon-Sys_ "Home" directory. Untar/unzip the release file, (keep dir structure).
 
-  - https://github.com/addiscent/php-server-mon-sys/releases/tag/v0.0.4
+  - https://github.com/addiscent/php-server-mon-sys/releases/tag/v0.0.5
 
 2. $ sudo ./install-psms.sh  # sudo on debian, or superuser permissions on whatever
 

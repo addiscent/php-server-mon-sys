@@ -1,6 +1,6 @@
 #!/bin/bash
 # Clean up home dir for install/re-install, (or before commit of project files)
-# This script must be executed with sudo/super user permissions
+# This script must be executed with sudo/superuser permissions
 
 if [ -d "./mysql-db" ]
 then
@@ -14,6 +14,5 @@ fi
 
 if [ -d "./src/etc-cron.d-tab-for-phpfpm.txt" ]
 then
-  chown ckt:admins ./src/etc-cron.d-tab-for-phpfpm.txt
   chmod 666 ./src/etc-cron.d-tab-for-phpfpm.txt
 fi

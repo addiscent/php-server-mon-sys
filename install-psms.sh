@@ -5,14 +5,13 @@
 
 echo "This will take a short while..."
 
-# running the following script makes re-installation using run-me-first.sh idempotent
+# the following script makes re-installation using install-psms.sh idempotent
 ./clean-psms.sh && \
 
 # docker will skip downloading these files if they already exist
 # on this host
 docker pull nginx:1.9.2 && \
-#docker pull addiscent/phpfpm && \
-docker pull nmcteam/php56:1.0 && \
+docker pull raddiscentis/php-fpm:0.0.1 && \
 docker pull mysql:5.7.7 && \
 
 # unzip the PHP Server Monitor sub-directory tree
@@ -33,10 +32,9 @@ touch ./src/public/phpservermon/config.php && \
 chmod 666 ./src/public/phpservermon/config.php && \
 
 # this is where the PHP Server Monitor mysql database lives
-if [ ! -d "mysql-db" ]
+if [ ! -d "./mysql-db" ]
 then
   mkdir ./mysql-db
 fi
 
 echo "Installation complete"
-echo

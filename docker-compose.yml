@@ -9,9 +9,10 @@ web:
       - php
 
 php:
-  image: nmcteam/php56:1.0
+  image: raddiscentis/php-fpm:0.0.1
   volumes:
     - ./src/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
+    - ./src/www.conf:/etc/php5/fpm/conf.d/www.conf
     - ./src/php.ini:/etc/php5/fpm/php.ini
     - ./src/public:/var/www/public
     - ./src/etc-cron.d-tab-for-phpfpm.txt:/etc/cron.d/phpservermon
