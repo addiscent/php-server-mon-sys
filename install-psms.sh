@@ -1,40 +1,16 @@
 #!/bin/bash
-# Intall PSMS
-# you must have super user permissions to execute this file,
-# (use sudo or otherwise become super user)
+# Pull required images, install PSM3.1.1 files, and build php-fpm docker image
 
-echo "This will take a short while..."
-
-# the following script makes re-installation using install-psms.sh idempotent
-./clean-psms.sh && \
-
-# docker will skip downloading these files if they already exist
-# on this host
+# docker will skip downloading these images if they already exist
+# in the local repository on this host
 docker pull nginx:1.9.2 && \
-docker pull raddiscentis/php-fpm:0.0.1 && \
 docker pull mysql:5.7.7 && \
 
-# unzip the PHP Server Monitor sub-directory tree
-tar -zxvf phpservermon-3.1.1.tar.gz -C ./src/public/ && \
+# unzip the PHP Server Monitor sub-directory tree.  This tree is
+# copied into the PHP-FPM container during docker build
+tar -zxvf phpservermon-3.1.1.tar.gz && \
 
-echo && \
-echo "Still working, almost done..." && \
-
-mv ./src/public/phpservermon-3.1.1 ./src/public/phpservermon && \
-chmod -R 755 ./src/public && \
-
-# file permissions fiddling is necessary to for a legit crontab
-chown root:root ./src/etc-cron.d-tab-for-phpfpm.txt && \
-chmod 600 ./src/etc-cron.d-tab-for-phpfpm.txt && \
-
-# config.php must be writable, but must not be executable
-touch ./src/public/phpservermon/config.php && \
-chmod 666 ./src/public/phpservermon/config.php && \
-
-# this is where the PHP Server Monitor mysql database lives
-if [ ! -d "./mysql-db" ]
-then
-  mkdir ./mysql-db
-fi
+# build the PHP Server Monitor PHP-FPM docker image
+docker build -t temp/php-fpm-psm:0.0.0 .
 
 echo "Installation complete"

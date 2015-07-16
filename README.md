@@ -47,7 +47,7 @@ IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initi
 ### _PHP Server Monitor_ Initialization
 - Use a web browser, visit:
 
-    * http://localhost:8080/phpservermon/
+    * http://localhost:28684/phpservermon/
 
 - Read and follow the directions on the first page, then choose _LET'S GO_.
 

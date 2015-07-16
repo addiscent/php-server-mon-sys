@@ -1,21 +1,16 @@
 web:
     image: nginx:1.9.2
     ports:
-      - "8080:80"
+      - "28684:80"
     volumes:
-      - ./src/public:/var/www/public
-      - ./src/vhost.conf:/etc/nginx/conf.d/default.conf
+      - ./conf/vhost.conf:/etc/nginx/conf.d/default.conf
+    volumes_from:
+      - php
     links:
       - php
 
 php:
-  image: raddiscentis/php-fpm:0.0.1
-  volumes:
-    - ./src/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
-    - ./src/www.conf:/etc/php5/fpm/conf.d/www.conf
-    - ./src/php.ini:/etc/php5/fpm/php.ini
-    - ./src/public:/var/www/public
-    - ./src/etc-cron.d-tab-for-phpfpm.txt:/etc/cron.d/phpservermon
+  image: temp/php-fpm-psm:0.0.0
   links:
     - db:mysqlpsm
 
