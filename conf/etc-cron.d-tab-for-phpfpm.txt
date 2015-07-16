@@ -1,1 +1,0 @@
-*/3 * * * * root /usr/bin/php /var/www/public/cron/status.cron.php

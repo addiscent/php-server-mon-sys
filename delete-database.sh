@@ -1,2 +1,2 @@
 #!/bin/bash
-rm -rf ./mysql-db
+rm -rf ./mysql/mysql-db
