@@ -46,7 +46,7 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
 4. $ docker-compose up -d  # wait two minutes for mysql to finish initializing database
 
-IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, you will receive errors during the _PHP Server Monitor_ Initialization process.  If you receive an error stating that a database connection cannot be made, wait a few minutes, and retry _PHP Server Monitor_ Initialization.
+IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, you will be shown errors during the _PHP Server Monitor_ Initialization process.  If an error is shown stating, "Unable to connect to MySQL. Please check your information", then wait a few minutes, and retry _PHP Server Monitor_ Initialization.
 
 ### _PHP Server Monitor_ Initialization
 - Use a web browser, visit:
@@ -151,8 +151,18 @@ Forewarned is forearmed.  To change the _PHP Server Monitor_ _Time Zone_, search
 
   - http://www.php.net/manual/en/timezones.php
 
+##### _PHP Server Monitor_ Application Service Port number
+The default application service port number is 28684.  You may change this port number by editing the _./docker-compose.yml_ file.  Find the section which appears as follows:
+
+    ports:
+      - "28684:80"
+
+  Change the port number 28684 to any valid port number which does not conflict with other ports in use on the host.  After editing this file, for any changes to take effect, _Php-Server-Mon-Sys_ must be restarted, using the command:
+
+    $ docker-compose up -d
+
 ##### _PHP Server Monitor_ Server History Data Update Intervals: Cron
-The interval at which monitored server histories are updated is determined by a PHP script which is executed periodically.  The service which executes the script is _Cron_, which is responsible for executing programs on a schedule.  This task of executing a program periodically is known as a _cron job_.  _Cron_ jobs are specified by creating a file which contains one or more job descriptors.  This file is known as a _crontab_, (_Cron_ table), file.
+The interval at which monitored server histories are updated is determined by a PHP script which is executed periodically.  The service which executes the script is _Cron_, an ubiquitous Linux service which is responsible for executing programs on a schedule.  This task of executing a program periodically is known as a _cron job_.  _Cron_ jobs are specified by creating a file which contains one or more job descriptors.  This file is known as a _crontab_, (_Cron_ table), file.
 
 In _Php-Server-Mon-Sys_, a _cron job_ which updates server histories data is run on-board the _PHP-FPM_ container.  This _cron job_ is started automatically when the _Php-Server-Mon-Sys_ system is started, (using _docker-compose up -d_).  The _crontab_ file which contains the job descriptor needed by _Cron_ is named _etc-cron.d-tab-for-phpfpm.txt_, (located in the home _./conf/_ sub-directory).
 
@@ -166,9 +176,9 @@ The default job descriptor is:
 
 Above, the "/3" after the asterisk tells _Cron_ to execute the monitored servers' online history update every 3 minutes.  You may change that number to, e.g., "/5" or "/15", or some other number of minutes, 2 through 59.  If you want the history updated every minute, do not use "/1"; instead, use asterisk (*) by itself, that is, simply delete the "/3".
 
-After editing the _etc-cron.d-tab-for-phpfpm.txt_ file, the PHP-FPM Docker container image must be rebuilt, and then the _Php-Server-Mon-Sys_ restarted.  Do so using the following commands:
+After editing the _etc-cron.d-tab-for-phpfpm.txt_ file, the PHP-FPM Docker container image must be rebuilt, and then _Php-Server-Mon-Sys_ restarted.  Do so using the following commands:
 
-    $ ./build-php-fpm.sh   # rebuild the php-fpm docker container
+    $ sudo ./build-php-fpm.sh   # must use sudo or otherwise have superuser power
 
     $ docker-compose up -d  # restarts the Php-Server-Mon-Sys system
 
@@ -185,7 +195,7 @@ Though unlikely to be necessary, you may make changes to the NGINX server config
 Though unlikely to be necessary, you may make changes to the PHP-FPM server configuration by editing the _php-fpm.conf_ and _php.ini_ files, located in the home _./conf/_ sub-directory.  After editing these files, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
 
 ##### Miscellaneous Utility Scripts
-Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./reset-config-php.sh_, (note the leading "./").  The scripts are safe to use only from within the _Php-Server-Mon-Sys_ home directory; when using them, be sure the present working directory is the _Php-Server-Mon-Sys_ home sub-directory. If they are invoked outside this sub-directory, they will at best fail, or at worst possibly produce unintended side effects.
+Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./install-psms.sh_, (note the leading "./").  The scripts are safe to use only from within the _Php-Server-Mon-Sys_ home directory; when using them, be sure the present working directory is the _Php-Server-Mon-Sys_ home sub-directory. If they are invoked outside this sub-directory, they will at best fail, or at worst possibly produce unintended side effects.
 
   - _delete-database.sh_ - Deletes the MySQL database.  Before deleting the database, stop the _Php-Server-Mon-Sys_ system by using:
 
