@@ -170,7 +170,7 @@ After editing the _etc-cron.d-tab-for-phpfpm.txt_ file, the PHP-FPM Docker conta
 
     $ ./build-php-fpm.sh   # rebuild the php-fpm docker container
 
-    $ docker-compose up -d  # restarts the _Php-Server-Mon-Sys_ system
+    $ docker-compose up -d  # restarts the Php-Server-Mon-Sys system
 
 For more information about _Cron_, see:
 
