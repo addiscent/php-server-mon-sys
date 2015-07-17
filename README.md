@@ -38,21 +38,21 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
   - Docker Compose 1.3.1, pre-installed
 
 ### _Php-Server-Mon-Sys_ Installation Instructions
-- The following commands will download the _Php-Server-Mon-Sys_ release ZIP file, and unzip the contents into a newly created directory.  Before entering the following commands, change the present working directory to where you want the _Php-Server-Mon-Sys_ Home directory to be created.  Then, enter the following commands:
+- The following commands download the _Php-Server-Mon-Sys_ release ZIP file, and unzip the contents into a newly created directory.  Before entering the following commands, change the present working directory to where you want the _Php-Server-Mon-Sys_ Home directory to be created.  Then, enter the following commands:
 
-    $ curl -L -O https://github.com/addiscent/php-server-mon-sys/archive/master.zip
+    - $ curl -L -O https://github.com/addiscent/php-server-mon-sys/archive/master.zip
 
-    $ unzip master.zip  # create a new directory containing Php-Server-Mon-Sys
+    - $ unzip master.zip  # create a new directory containing Php-Server-Mon-Sys
 
-    The name of the new directory is _php-server-mon-sys-master_.  The new directory is the _Home_ directory for _Php-Server-Mon-Sys_.  You may rename the _Php-Server-Mon-Sys_ Home directory any time you wish.  The _master.zip_ file may be deleted now, or later.
+    The name of the new directory is _php-server-mon-sys-master_.  The new directory is the _Home_ directory for _Php-Server-Mon-Sys_.  If you wish to rename the _Php-Server-Mon-Sys_ Home directory, you may do so at any time.  The _master.zip_ file may be deleted now, or later.
 
-- The following commands will build Docker containers and start _Php-Server-Mon-Sys_ operation:
+- The following commands build Docker containers, and start _Php-Server-Mon-Sys_ operation:
 
-    $ cd php-server-mon-sys-master  # or to whatever you rename the directory
+    - $ cd php-server-mon-sys-master  # or to whatever you rename the directory
 
-    $ ./build-psms.sh  # execute this BASH script only in the "Home" directory
+    - $ ./build-psms.sh  # execute this BASH script only in the "Home" directory
 
-    $ docker-compose up -d  # start Php-Server-Mon-Sys operation
+    - $ docker-compose up -d  # start Php-Server-Mon-Sys operation
 
     IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait a few minutes, and retry _PHP Server Monitor_ Initialization.
 
@@ -116,8 +116,6 @@ The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, 
 
 ## Managing _Php-Server-Mon-Sys_
 #### The _Php-Server-Mon-Sys_ Home Directory
-The _PHP Server Monitor_ application code, along with numerous _Php-Server-Mon-Sys_ configuration files, is stored in a sub-directory tree on the host computer.  The sub-directory where the _Php-Server-Mon-Sys_ project is unzipped and from which its _build-psms.sh_ installation script is executed is its installation "Home" directory.  All sub-directories described below are relative to the _Php-Server-Mon-Sys_ Home directory.
-
 _Php-Server-Mon-Sys_-specific management commands, such as the _.sh_ BASH scripts, and "docker-compose...", _should always be executed with the Php-Server-Mon-Sys Home directory as the present working directory, (pwd)_.
 
 #### _Docker_ Commands
