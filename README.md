@@ -8,17 +8,14 @@ Let's say you manage some websites or other network servers, and you wish to mon
 
 - https://github.com/phpservermon/phpservermon
 
-However, you _may_ now have an unanticipated problem, a problem common to many _server monitors_.  The problem is, because _PHP Server Monitor_ depends upon several services which may not already be installed on your host computer, installation may be very complicated and time consuming.
+_PHP Server Monitor_ may be installed on a shared host or a VPS.  If your shared host or VPS is already configured to serve websites, all of the services _PHP Server Monitor_ requires are often already installed.  If the services it needs are already installed, you do not need to use _Php-Server-Mon-Sys_; the default method of installing _PHP Server Monitor_ is probably required on a shared host, and is probably preferred on a VPS.
 
-_Php-Server-Mon-Sys_ solves this problem.  In many cases, _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler.
+However, if your host does not already have the required services installed, you now have a problem.  The problem is, installation of the required services may be complicated and time consuming.
 
-#### What is complicated about _PHP Server Monitor_ installation?
-_PHP Server Monitor_ installation itself is not very complicated.  But, _PHP Server Monitor_ depends upon the services of an HTTP server, a MySQL server, and a PHP-FPM server.  What if those services are not already installed?  Unless installation of _PHP Server Monitor_ is performed by a qualified system administrator, installing those services is often time consuming and error-prone.
+_Php-Server-Mon-Sys_ solves this problem.  In many cases, _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler on hosts which do not already have the required services installed.
 
 #### _Php-Server-Mon-Sys_ Is A _Turnkey_ System
-_Php-Server-Mon-Sys_ significantly reduces the complexity of _PHP Server Monitor_ installation, on host computers which do not already have the required support services installed.
-
-In addition to installing _PHP Server Monitor_, _Php-Server-Mon-Sys_ installs NGINX, MySQL, and PHP-FPM.  These are "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  The services are deployed using _Docker_ containers, which means these services may be very easily and cleanly installed and un-installed along with the _PHP Server Monitor_ application software.  Backing up and restoring are also quick and uncomplicated.
+In addition to installing _PHP Server Monitor_, _Php-Server-Mon-Sys_ installs the required services.  _Php-Server-Mon-Sys_ includes NGINX, MySQL, and PHP-FPM.  These are "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  These services are deployed using _Docker_ containers.  Using Docker containers means these services may be very easily and cleanly installed and un-installed along with the _PHP Server Monitor_ application software.  Backing up and restoring are also quick and uncomplicated.
 
 When you no longer need the _PHP Server Monitor_ software in your system, you may very easily remove it.  When it is removed, _PHP Server Monitor's_ supporting services are removed as well.  There is no need to individually remove each of the other services no longer needed.
 
@@ -31,11 +28,15 @@ This version of _Php-Server-Mon-Sys_ has been tested only on a host using _Ubunt
 ### System Requirements
 Installation and operation of _Php-Server-Mon-Sys_ requires:
 
+  - Superuser access to a private host or VPS
   - 200MB available memory
   - 1.1GB available storage, (plus server history data accumulated in database)
   - Internet connection/service
   - Docker Engine 1.7, pre-installed
   - Docker Compose 1.3.1, pre-installed
+  - Curl 7.35.0, pre-installed, (alternate equivalent may be substituted)
+  - UnZip 6.00, pre-installed, (alternate equivalent may be substituted)
+  - Tar (GNU tar) 1.27.1, pre-installed, (alternate equivalent may be substituted)
 
 ### _Php-Server-Mon-Sys_ Installation Instructions
 - The following commands download the _Php-Server-Mon-Sys_ release ZIP file, and unzip the contents into a newly created directory.  Before entering the following commands, change the present working directory to where you want the _Php-Server-Mon-Sys_ Home directory to be created.  Then, enter the following commands:
@@ -44,7 +45,7 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
     - $ unzip master.zip  # create a new directory containing Php-Server-Mon-Sys
 
-    The name of the new directory is _php-server-mon-sys-master_.  The new directory is the _Home_ directory for _Php-Server-Mon-Sys_.  If you wish to rename the _Php-Server-Mon-Sys_ Home directory, you may do so at any time.  The _master.zip_ file may be deleted now, or later.
+    The name of the new directory is _php-server-mon-sys-master_.  The new directory is the _Home_ directory for _Php-Server-Mon-Sys_.  If you wish to rename the _Php-Server-Mon-Sys_ Home directory, you may do so at any time.  You may delete the _master.zip_ now, or later.
 
 - The following commands build Docker containers, and start _Php-Server-Mon-Sys_ operation:
 
