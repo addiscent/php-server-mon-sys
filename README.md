@@ -40,20 +40,20 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 ### _Php-Server-Mon-Sys_ Installation Instructions
 - Download the release tar.gz or .zip file into a convenient newly created directory, which will be used as the _Php-Server-Mon-Sys_ "Home" directory. Untar/unzip the release file, (keep the directory structure).
 
-  - https://github.com/addiscent/php-server-mon-sys/archive/master.zip
+    https://github.com/addiscent/php-server-mon-sys/archive/master.zip
 
 - Execute the following commands:
 
-  - $ ./build-psms.sh  # execute this BASH script from the "Home" directory
+    $ ./build-psms.sh  # execute this BASH script from the "Home" directory
 
-  - $ docker-compose up -d  # wait two minutes for mysql to finish initializing database
+    $ docker-compose up -d  # wait two minutes for mysql to finish initializing database
 
   IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, you will be shown errors during the _PHP Server Monitor_ Initialization process.  If an error is shown stating, "Unable to connect to MySQL. Please check your information", then wait a few minutes, and retry _PHP Server Monitor_ Initialization.
 
 The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, because you will probably discard the first database created during _PHP Server Monitor_ Initialization.  However, before later creating the database you plan to use "in production", read the section below titled, "The _PHP Server Monitor_ Time Zone".
 
 ### _PHP Server Monitor_ Initialization
-- After completing the Intallation instructions above, use a web browser to visit:
+- After completing the Installation instructions above, use a web browser to visit:
 
     * http://localhost:28684
 
@@ -104,9 +104,9 @@ The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, 
 
 - See the _PHP Server Monitor_ website and GitHub repository for documentation:
 
-    - http://www.phpservermonitor.org/
+    http://www.phpservermonitor.org/
 
-    - https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
+    https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
 ## Managing _Php-Server-Mon-Sys_
 #### The _Php-Server-Mon-Sys_ Home Directory
@@ -128,14 +128,14 @@ Note that _docker-compose rm_ is seldom used, typically only when completely uni
 
 See the _Docker_ web site for related documentation:
 
-  - https://docs.docker.com/
+  https://docs.docker.com/
 
 #### About The _PHP Server Monitor_ Database
 The _PHP Server Monitor_ database "persists" on the host file system, it is not _ephemeral_ as are the _Php-Server-Mon-Sys_ _Docker_ service containers.
 
 The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers), may be started, stopped, restarted, destroyed, and recreated without danger to the _PHP Server Monitor_ database, with one _important caveat_:
 
-  - In order to prevent risk to the _PHP Server Monitor_ database, the _Php-Server-Mon-Sys_ _Docker_ service containers must be created/stopped/destroyed using _Docker_ commands, (_docker-compose stop_, _docker stop_..., etc).  Don't shutdown the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using:
+  - In order to prevent risk to the _PHP Server Monitor_ database, the _Php-Server-Mon-Sys_ _Docker_ service containers must be created/stopped/destroyed using _Docker_ commands, (_docker-compose up_, _docker-compose stop_, etc).  Don't shutdown the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using:
 
         $ docker-compose stop
 
@@ -149,11 +149,11 @@ The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers),
 ##### The _PHP Server Monitor_ Time Zone
 The default _PHP Server Monitor_ time zone is _UTC_.  You may change the time zone by editing the _php.ini_ file, located in the _./php-fpm/_ sub-directory.
 
-Note that the _PHP Server Monitor_ _Time Zone_ must only be changed _BEFORE_ creating the _PHP Server Monitor_ database.  The _PHP Server Monitor_ database is created during the process described above, (_PHP Server Monitor_ _Initialization_).  If the _PHP Server Monitor_ _Time Zone_ setting after _PHP Server Monitor_ _Initialization_, the timestamps on the data collected in the database will be out of sync with the displayed charts, rendering the collected data useless for charting in _PHP Server Monitor_.
+Note that the _PHP Server Monitor_ _Time Zone_ must only be changed _BEFORE_ creating the _PHP Server Monitor_ database.  The _PHP Server Monitor_ database is created during the process described above, in the section titled, _PHP Server Monitor_ _Initialization_.  If the _PHP Server Monitor_ _Time Zone_ setting after _PHP Server Monitor_ _Initialization_, the timestamps on the data collected in the database will be out of sync with the displayed charts, rendering the collected data useless for charting in _PHP Server Monitor_.
 
 To change the _PHP Server Monitor_ _Time Zone_, search the _./php-fpm/php.ini_ file for the term _date.timezone_.  Change the default value, _UTC_, to your time zone, e.g., _America/Los_Angeles_.  For valid time zone codes, see:
 
-  - http://www.php.net/manual/en/timezones.php
+  http://www.php.net/manual/en/timezones.php
 
 ##### _PHP Server Monitor_ Application Service Port number
 The default application service port number is _28684_.  You may change this port number by editing the _docker-compose.yml_ file.  Find the section which appears as follows:
@@ -161,7 +161,7 @@ The default application service port number is _28684_.  You may change this por
     ports:
       - "28684:80"
 
-  Change the port number _28684_ to any valid port number which does not conflict with other ports in use on the host.  After editing this file, for any changes to take effect, _Php-Server-Mon-Sys_ must be restarted, using the command:
+Change the port number _28684_ to any valid port number which does not conflict with other ports in use on the host.  After editing this file, for any changes to take effect, _Php-Server-Mon-Sys_ must be restarted, using the command:
 
     $ docker-compose up -d
 
@@ -188,7 +188,7 @@ After editing the _etc-cron.d-tab-for-phpfpm.txt_ file, the PHP-FPM Docker conta
 
 For more information about _Cron_, see:
 
-  - https://en.wikipedia.org/wiki/Cron
+    https://en.wikipedia.org/wiki/Cron
 
 ##### NGINX Server Configuration
 Though unlikely to be necessary, you may make changes to the NGINX server configuration by editing the _vhost.conf_ file, located in the home _./nginx/_ sub-directory.  After editing this file, for any changes to take effect, _Php-Server-Mon-Sys_ must be restarted, using the command:
@@ -201,9 +201,9 @@ Though unlikely to be necessary, you may make changes to the PHP-FPM server conf
 ##### Miscellaneous Utility Scripts
 Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./build-psms.sh_, (note the leading "./").  The scripts are safe to use only from within the _Php-Server-Mon-Sys_ Home directory; when using them, be sure the present working directory is the _Php-Server-Mon-Sys_ home sub-directory. If they are invoked outside this sub-directory, they will at best fail, or at worst possibly produce undesirable side effects.
 
-  - _delete-database.sh_ - Deletes the MySQL database.  Before deleting the database, stop the _Php-Server-Mon-Sys_ system by using:
+  - _delete-database.sh_ - Deletes the MySQL database. Requires the use of _sudo_ or for the user to otherwise have superuser powers, e.g.:
 
-      $ docker-compose stop
+      $ sudo delete-database.sh
 
   - _dbash.sh_ - Executes a BASH shell on a running _Docker_ container. To use it:
 
