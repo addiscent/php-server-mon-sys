@@ -2,11 +2,11 @@
 #### Why _Php-Server-Mon-Sys_?
 Let's say you manage some websites or other network servers, and you wish to monitor them.  You decide it's time to install and operate a _Server Monitor_ to help with that task.  There are quite a number of _server monitors_ available from which to choose.  At this time you choose a basic, easy-to-use server monitor named _PHP Server Monitor_:
 
-- http://phpservermonitor.org/
+  - http://phpservermonitor.org/
 
-- http://www.phpservermonitor.org/support/
+  - http://www.phpservermonitor.org/support/
 
-- https://github.com/phpservermon/phpservermon
+  - https://github.com/phpservermon/phpservermon
 
 _PHP Server Monitor_ may be installed on a shared host or a VPS.  If your shared host or VPS is already configured to serve websites, all of the services _PHP Server Monitor_ requires are often already installed.  If the services it needs are already installed, you do not need to use _Php-Server-Mon-Sys_; the default method of installing _PHP Server Monitor_ is probably required on a shared host, and is probably preferred on a VPS.
 
@@ -41,17 +41,17 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 ### _Php-Server-Mon-Sys_ Installation Instructions
 - The following commands download the _Php-Server-Mon-Sys_ release ZIP file, and unzip the contents into a newly created directory.  Before entering the following commands, change the present working directory to where you want the _Php-Server-Mon-Sys_ Home directory to be created.  Then, enter the following commands:
 
-    - $ curl -L -O https://github.com/addiscent/php-server-mon-sys/archive/master.zip
+      $ curl -L -O https://github.com/addiscent/php-server-mon-sys/archive/master.zip
 
-    - $ unzip master.zip  # create a new directory containing Php-Server-Mon-Sys
+      $ unzip master.zip  # create a new directory containing Php-Server-Mon-Sys
 
     The name of the new directory is _php-server-mon-sys-master_.  The new directory is the _Home_ directory for _Php-Server-Mon-Sys_.  If you wish to rename the _Php-Server-Mon-Sys_ Home directory, you may do so at any time.  You may delete the _master.zip_ now, or later.
 
 - The following commands build Docker containers, and start _Php-Server-Mon-Sys_ operation:
 
-    - $ cd php-server-mon-sys-master  # or to whatever you rename the directory
+      $ cd php-server-mon-sys-master  # or to whatever you rename the directory
 
-    - $ ./build-psms.sh  # execute this BASH script only in the "Home" directory
+      $ ./build-psms.sh  # execute this BASH script only in the "Home" directory
 
     IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait a few minutes, and retry _PHP Server Monitor_ Initialization.
 
@@ -113,9 +113,11 @@ The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, 
 
 - See the _PHP Server Monitor_ website and GitHub repository for documentation:
 
-    http://www.phpservermonitor.org/
+  - http://www.phpservermonitor.org/
 
-    https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
+  - http://www.phpservermonitor.org/support/
+
+  - https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
 ## Managing _Php-Server-Mon-Sys_
 #### Transitioning From Evaluation To Production
@@ -125,7 +127,7 @@ Keep in mind that deleting the database deletes all data previously created duri
 
 To delete the existing database, enter the following commands:
 
-    $ sudo ./delete-database.sh  # sudo or other superuser power required
+      $ sudo ./delete-database.sh  # sudo or other superuser power required
 
 After the database is deleted, a new database will be automatically created.  This will take several minutes, so wait a few.  Then, use a web browser to visit your _PHP Server Monitor_ page per usual, (default, localhost:28684).  If you see an error message which says "can't connect to database", wait a little longer and retry.  Follow the prompts and begin using as normal.
 
@@ -181,7 +183,7 @@ The default application service port number is _28684_.  You may change this por
 
 Change the port number _28684_ to any valid port number which does not conflict with other ports in use on the host.  After editing this file, for any changes to take effect, _Php-Server-Mon-Sys_ must be restarted, using the command:
 
-    $ docker-compose up -d
+      $ docker-compose up -d
 
 ##### _PHP Server Monitor_ Server History Data Update Intervals: Cron
 The interval at which monitored server histories are updated is determined by a PHP script which is executed periodically.  The service which executes the script is _Cron_, an ubiquitous Linux service which is responsible for executing programs on a schedule.  This task of executing a program periodically is known as a _cron job_.  _Cron_ jobs are specified by creating a file which contains one or more job descriptors.  This type of file is known as a _crontab_, (_Cron_ table), file.
@@ -190,7 +192,7 @@ In _Php-Server-Mon-Sys_, a _cron job_ which updates server histories data is run
 
 The interval specified in the _crontab_ file determines how frequently the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval, by editing the _crontab_ file.  One way of editing the _crontab_ file is by using the following command to open the file in an editor named _nano_:
 
-    $ nano ./php-fpm/etc-cron.d-tab-for-phpfpm.txt
+      $ nano ./php-fpm/etc-cron.d-tab-for-phpfpm.txt
 
 The default job descriptor is:
 
@@ -200,9 +202,9 @@ Above, the "/3" after the asterisk tells _Cron_ to execute the monitored servers
 
 After editing the _etc-cron.d-tab-for-phpfpm.txt_ file, the PHP-FPM Docker container image must be rebuilt, and then _Php-Server-Mon-Sys_ restarted.  Do so using the following commands:
 
-    $ ./build-php-fpm.sh   # execute this from the PSMS Home directory
+      $ ./build-php-fpm.sh   # execute this from the PSMS Home directory
 
-    $ docker-compose up -d  # restarts the Php-Server-Mon-Sys system
+      $ docker-compose up -d  # restarts the Php-Server-Mon-Sys system
 
 For more information about _Cron_, see:
 
@@ -211,7 +213,7 @@ For more information about _Cron_, see:
 ##### NGINX Server Configuration
 Though unlikely to be necessary, you may make changes to the NGINX server configuration by editing the _vhost.conf_ file, located in the home _./nginx/_ sub-directory.  After editing this file, for any changes to take effect, _Php-Server-Mon-Sys_ must be restarted, using the command:
 
-    $ docker-compose up -d
+      $ docker-compose up -d
 
 ##### PHP-FPM Server Configuration
 Though unlikely to be necessary, you may make changes to the PHP-FPM server configuration by editing the _php-fpm.conf_ and _php.ini_ files, located in the _./php-fpm/_ sub-directory.  After editing these files, you must restart the _Php-Server-Mon-Sys_ system as described above for any changes to take effect.
@@ -244,11 +246,11 @@ The entire _Php-Server-Mon-Sys_ Home directory, including the MySQL database, is
 
 To back up _Php-Server-Mon-Sys_, use the provided BASH script command:
 
-    $ sudo ./backup-psms.sh  # sudo or equivalent superpower is required
+      $ sudo ./backup-psms.sh  # sudo or equivalent superpower is required
 
 The backup script temporarily stops the operation of _Php-Server-Mon-Sys_, but operation is re-started automatically at the end of the backup operation.  If a re-start is not desired, stop it manually using:
 
-    $ docker-compose stop
+      $ docker-compose stop
 
 The backup file has a name similar to the following.  The date and time of backup are added to filename during backup:
 
@@ -257,13 +259,13 @@ The backup file has a name similar to the following.  The date and time of backu
 ## Restoring _Php-Server-Mon-Sys_ From A Backup file
 - Create a directory to be _Php-Server-Mon-Sys_ Home.  The name may be any you choose.  As an example:
 
-    $ mkdir php-server-mon-sys  # same as it ever was
+      $ mkdir php-server-mon-sys  # same as it ever was
 
-    $ cd php-server-mon-sys
+      $ cd php-server-mon-sys
 
 - Place the backup _.tar.gz_ file here in the present working directory, (which is the new _Php-Server-Mon-Sys_ Home).  Use the following command to restore _Php-Server-Mon-Sys_, e.g.:
 
-    $ sudo tar -zxvf ./php-server-mon-sys.2015.0716.2256.tar.gz
+      $ sudo tar -zxvf ./php-server-mon-sys.2015.0716.2256.tar.gz
 
   When _tar_ execution is complete, the _Php-Server-Mon-Sys_ Home directory contents is similar to:
 
@@ -276,9 +278,9 @@ The backup file has a name similar to the following.  The date and time of backu
 
 - To start _Php-Server-Mon-Sys_ operation, enter the following commands:
 
-    $ ./build-psms.sh   # build Docker container images
+      $ ./build-psms.sh   # build Docker container images
 
-    $ docker-compose up -d  # start operation
+      $ docker-compose up -d  # start operation
 
 At this point, resuming use of _Php-Server-Mon-Sys_ is very similar to the procedure described in the section above titled, _PHP Server Monitor_ _Initialization_.  Refer to that section.  At one point a page is displayed which displays:
 
@@ -303,7 +305,7 @@ To completely remove the installed _Php-Server-Mon-Sys_:
 
         $ docker images
 
-      Their names are _mysql_, _nginx_, _phusion/baseimage_, and _temp/php-fpm-psm_.  Note their _IMAGE IDs_.
+      Their names are _mysql_, _nginx_, _phusion/baseimage_, _raddiscentis/php-fpm_, and _temp/php-fpm-psm_.  Note their _IMAGE IDs_.
 
     - One by one, remove the images from the _Docker_ image repository using the command:
 
@@ -313,11 +315,11 @@ If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _doc
 
   - Discover the orphaned _Docker_ containers by using the command:
 
-      $ docker ps -a  # note the _CONTAINER IDs_
+        $ docker ps -a  # note the _CONTAINER IDs_
 
   - Remove the _Docker_ containers by using the command:
 
-      $ docker rm -f CONTAINER ID
+        $ docker rm -f CONTAINER ID
 
   See the _Docker_ documentation for details.
 
