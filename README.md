@@ -57,9 +57,9 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
 The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, because, initially, you are merely evaluating the software, so you will probably decide to discard the first database created during _PHP Server Monitor_ Initialization.  However, before later creating the database you plan to use "in production", read the two sections below titled:
 
-    - _The_ _PHP Server Monitor_ _Time Zone_
+  - _The_ _PHP Server Monitor_ _Time Zone_
 
-    - _Transitioning From Evaluation To Production_
+  - _Transitioning From Evaluation To Production_
 
 ### _PHP Server Monitor_ Initialization
 - After completing the Installation instructions above, use a web browser to visit:
