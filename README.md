@@ -53,11 +53,13 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
     - $ ./build-psms.sh  # execute this BASH script only in the "Home" directory
 
-    - $ docker-compose up -d  # start Php-Server-Mon-Sys operation
-
     IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait a few minutes, and retry _PHP Server Monitor_ Initialization.
 
-The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, because you will probably discard the first database created during _PHP Server Monitor_ Initialization.  However, before later creating the database you plan to use "in production", read the section below titled, "The _PHP Server Monitor_ Time Zone".
+The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, because, initially, you are merely evaluating the software, so you will probably decide to discard the first database created during _PHP Server Monitor_ Initialization.  However, before later creating the database you plan to use "in production", read the two sections below titled:
+
+    - _The_ _PHP Server Monitor_ _Time Zone_
+
+    - _Transitioning From Evaluation To Production_
 
 ### _PHP Server Monitor_ Initialization
 - After completing the Installation instructions above, use a web browser to visit:
@@ -116,6 +118,17 @@ The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, 
     https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
 ## Managing _Php-Server-Mon-Sys_
+#### Transitioning From Evaluation To Production
+When you have finished learning what _Php-Server-Mon-Sys_ is all about, you will probably eventually wish to discard the data accumulated during evaluation.  The easiest and fastest way to do so is to delete the _PHP Server Monitor_ database.  Deleting the database causes _Php-Server-Mon-Sys_ to automatically create a new one.
+
+Keep in mind that deleting the database deletes all data previously created during _PHP Server Monitor_ Initialization.  In addition to all server history data, the list of servers and any user and admin accounts are deleted.
+
+To delete the existing database, enter the following commands:
+
+    $ sudo ./delete-database.sh  # sudo or other superuser power required
+
+After the database is deleted, a new database will be automatically created.  This will take several minutes, so wait a few.  Then, use a web browser to visit your _PHP Server Monitor_ page per usual, (default, localhost:28684).  If you see an error message which says "can't connect to database", wait a little longer and retry.  Follow the prompts and begin using as normal.
+
 #### The _Php-Server-Mon-Sys_ Home Directory
 _Php-Server-Mon-Sys_-specific management commands, such as the _.sh_ BASH scripts, and "docker-compose...", _should always be executed with the Php-Server-Mon-Sys Home directory as the present working directory, (pwd)_.
 
@@ -201,14 +214,10 @@ Though unlikely to be necessary, you may make changes to the NGINX server config
     $ docker-compose up -d
 
 ##### PHP-FPM Server Configuration
-Though unlikely to be necessary, you may make changes to the PHP-FPM server configuration by editing the _php-fpm.conf_ and _php.ini_ files, located in the _./php-fpm/_ sub-directory.  After editing these files, you must restart the _Php-Server-Mon-Sys_ system, as described above, for any changes to take effect.
+Though unlikely to be necessary, you may make changes to the PHP-FPM server configuration by editing the _php-fpm.conf_ and _php.ini_ files, located in the _./php-fpm/_ sub-directory.  After editing these files, you must restart the _Php-Server-Mon-Sys_ system as described above for any changes to take effect.
 
 ##### Miscellaneous Utility Scripts
 Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./build-psms.sh_, (note the leading "./").  The scripts are safe to use only from within the _Php-Server-Mon-Sys_ Home directory; when using them, be sure the present working directory is the _Php-Server-Mon-Sys_ home sub-directory. If they are invoked outside this sub-directory, they will at best fail, or at worst possibly produce undesirable side effects.
-
-  - _delete-database.sh_ - Deletes the MySQL database. Requires the use of _sudo_ or otherwise superuser powers, e.g.:
-
-      $ sudo delete-database.sh
 
   - _dbash.sh_ - Executes a BASH shell on a running _Docker_ container. To use it:
 
@@ -226,7 +235,9 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
 
             root@7587be7d4eed:/#
 
-      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not running on a true terminal on-boad the container, so program screen output functionality is limited.  However, it is useful enough for exploration inside the operating container, and troubleshooting.
+      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not running on a true terminal on-boad the container, so program screen output functionality is limited.  However, it is useful enough for exploration inside the operating container, and troubleshooting if necessary.
+
+  - _build-php-fpm.sh_ - very seldom used. Prevents having to remember arcanum
 
 ## Backing Up _Php-Server-Mon-Sys_
 The entire _Php-Server-Mon-Sys_ Home directory, including the MySQL database, is backed-up into a single _.tar.gz_ file.
