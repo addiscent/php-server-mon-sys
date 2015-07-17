@@ -26,7 +26,7 @@ Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by 
 
 The version of _PHP Server Monitor_ incorporated into this release of _Php-Server-Mon-Sys_ is _PHP Server Monitor v3.1.1_.
 
-This version of _Php-Server-Mon-Sys_, _v0.0.7_, has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, _Php-Server-Mon-Sys_ should work on any host which fully supports _Docker_ tools, but that has not yet been tested.
+This version of _Php-Server-Mon-Sys_ has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, _Php-Server-Mon-Sys_ should work on any host which fully supports _Docker_ tools, but that has not yet been tested.
 
 ### System Requirements
 Installation and operation of _Php-Server-Mon-Sys_ requires:
@@ -38,9 +38,9 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
   - Docker Compose 1.3.1, pre-installed
 
 ### _Php-Server-Mon-Sys_ Installation Instructions
-- Download the _v0.0.7_ release tar.gz or .zip file into a convenient newly created directory, which will be used as the _Php-Server-Mon-Sys_ "Home" directory. Untar/unzip the release file, (keep the directory structure).
+- Download the release tar.gz or .zip file into a convenient newly created directory, which will be used as the _Php-Server-Mon-Sys_ "Home" directory. Untar/unzip the release file, (keep the directory structure).
 
-  - https://github.com/addiscent/php-server-mon-sys/releases/tag/v0.0.7
+  - https://github.com/addiscent/php-server-mon-sys/archive/master.zip
 
 - Execute the following commands:
 
