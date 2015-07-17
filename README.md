@@ -38,17 +38,23 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
   - Docker Compose 1.3.1, pre-installed
 
 ### _Php-Server-Mon-Sys_ Installation Instructions
-- Download the release tar.gz or .zip file into a convenient newly created directory, which will be used as the _Php-Server-Mon-Sys_ "Home" directory. Untar/unzip the release file, (keep the directory structure).
+- The following commands will download the _Php-Server-Mon-Sys_ release ZIP file, and unzip the contents into a newly created directory.  Before entering the following commands, change the present working directory to where you want the _Php-Server-Mon-Sys_ Home directory to be created.  Then, enter the following commands:
 
-    https://github.com/addiscent/php-server-mon-sys/archive/master.zip
+    $ curl -L -O https://github.com/addiscent/php-server-mon-sys/archive/master.zip
 
-- Execute the following commands:
+    $ unzip master.zip  # create a new directory containing Php-Server-Mon-Sys
 
-    $ ./build-psms.sh  # execute this BASH script from the "Home" directory
+    The name of the new directory is _php-server-mon-sys-master_.  The new directory is the _Home_ directory for _Php-Server-Mon-Sys_.  You may rename the _Php-Server-Mon-Sys_ Home directory any time you wish.  The _master.zip_ file may be deleted now, or later.
 
-    $ docker-compose up -d  # wait two minutes for mysql to finish initializing database
+- The following commands will build Docker containers and start _Php-Server-Mon-Sys_ operation:
 
-  IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, you will be shown errors during the _PHP Server Monitor_ Initialization process.  If an error is shown stating, "Unable to connect to MySQL. Please check your information", then wait a few minutes, and retry _PHP Server Monitor_ Initialization.
+    $ cd php-server-mon-sys-master  # or to whatever you rename the directory
+
+    $ ./build-psms.sh  # execute this BASH script only in the "Home" directory
+
+    $ docker-compose up -d  # start Php-Server-Mon-Sys operation
+
+    IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait a few minutes, and retry _PHP Server Monitor_ Initialization.
 
 The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, because you will probably discard the first database created during _PHP Server Monitor_ Initialization.  However, before later creating the database you plan to use "in production", read the section below titled, "The _PHP Server Monitor_ Time Zone".
 
@@ -201,7 +207,7 @@ Though unlikely to be necessary, you may make changes to the PHP-FPM server conf
 ##### Miscellaneous Utility Scripts
 Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ home sub-directory.  When using them, ensure they are invoked as BASH shell scripts typically are, e.g., _./build-psms.sh_, (note the leading "./").  The scripts are safe to use only from within the _Php-Server-Mon-Sys_ Home directory; when using them, be sure the present working directory is the _Php-Server-Mon-Sys_ home sub-directory. If they are invoked outside this sub-directory, they will at best fail, or at worst possibly produce undesirable side effects.
 
-  - _delete-database.sh_ - Deletes the MySQL database. Requires the use of _sudo_ or for the user to otherwise have superuser powers, e.g.:
+  - _delete-database.sh_ - Deletes the MySQL database. Requires the use of _sudo_ or otherwise superuser powers, e.g.:
 
       $ sudo delete-database.sh
 
@@ -222,6 +228,53 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
             root@7587be7d4eed:/#
 
       Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not running on a true terminal on-boad the container, so program screen output functionality is limited.  However, it is useful enough for exploration inside the operating container, and troubleshooting.
+
+## Backing Up _Php-Server-Mon-Sys_
+The entire _Php-Server-Mon-Sys_ Home directory, including the MySQL database, is backed-up into a single _.tar.gz_ file.
+
+To back up _Php-Server-Mon-Sys_, use the provided BASH script command:
+
+    $ sudo ./backup-psms.sh  # sudo or equivalent superpower is required
+
+The backup script temporarily stops the operation of _Php-Server-Mon-Sys_, but operation is re-started automatically at the end of the backup operation.  If a re-start is not desired, stop it manually using:
+
+    $ docker-compose stop
+
+The backup file has a name similar to the following.  The date and time of backup are added to filename during backup:
+
+    php-server-mon-sys.2015.0716.2256.tar.gz
+
+## Restoring _Php-Server-Mon-Sys_ From A Backup file
+- Create a directory to be _Php-Server-Mon-Sys_ Home.  The name may be any you choose.  As an example:
+
+    $ mkdir php-server-mon-sys  # same as it ever was
+
+    $ cd php-server-mon-sys
+
+- Place the backup _.tar.gz_ file here in the present working directory, (which is the new _Php-Server-Mon-Sys_ Home).  Use the following command to restore _Php-Server-Mon-Sys_, e.g.:
+
+    $ sudo tar -zxvf ./php-server-mon-sys.2015.0716.2256.tar.gz
+
+  When _tar_ execution is complete, the _Php-Server-Mon-Sys_ Home directory contents is similar to:
+
+      drwxrwx--- 3 user  group    4.0K Jul 16 13:26 mysql
+      drwxrwx--- 2 user  group    4.0K Jul 16 13:21 nginx
+                            .
+                            .
+      -rw-rw-r-- 1 user  group     12K Jul  4 01:24 LICENSE
+      -rw-rw-r-- 1 user  group     19K Jul 16 22:32 README.md
+
+- To start _Php-Server-Mon-Sys_ operation, enter the following commands:
+
+    $ ./build-psms.sh   # build Docker container images
+
+    $ docker-compose up -d  # start operation
+
+At this point, resuming use of _Php-Server-Mon-Sys_ is very similar to the procedure described in the section above titled, _PHP Server Monitor_ _Initialization_.  Refer to that section.  At one point a page is displayed which displays:
+
+    "We have discovered a previous version.  In the next step we will upgrade your database to the latest version".
+
+This is normal for a restored _Php-Server-Mon-Sys_ system.  Choose _UPGRADE TO 3.1.1_.  Continue and _LOG IN_.  The _Php-Server-Mon-Sys_ continues normal operation per its configuration as when backed up.
 
 ## How To Uninstall _Php-Server-Mon-Sys_
 To completely remove the installed _Php-Server-Mon-Sys_:
@@ -246,7 +299,7 @@ To completely remove the installed _Php-Server-Mon-Sys_:
 
         $ docker rmi IMAGE ID.
 
-If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _docker-compose rm_ command, you may manually "clean up" the orphaned _Docker_ containers by using _Docker_ commands.  See the _Docker_ documentation for details; in a nutshell:
+If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _docker-compose rm_ command, you may manually "clean up" the orphaned _Docker_ containers by using _Docker_ commands:
 
   - Discover the orphaned _Docker_ containers by using the command:
 
@@ -255,6 +308,8 @@ If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _doc
   - Remove the _Docker_ containers by using the command:
 
       $ docker rm -f CONTAINER ID
+
+  See the _Docker_ documentation for details.
 
 ## Etc
 Licensed under Apache 2.0 License.

@@ -5,6 +5,7 @@
 
 # docker will skip downloading these images if they already exist
 # in the local repository on this host
+docker pull raddiscentis/php-fpm:0.0.1 && \
 docker pull nginx:1.9.2 && \
 docker pull mysql:5.7.7 && \
 

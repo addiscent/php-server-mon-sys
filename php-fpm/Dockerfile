@@ -1,11 +1,7 @@
-FROM phusion/baseimage:0.9.16
+FROM raddiscentis/php-fpm:0.0.1
 MAINTAINER Rex Addiscentis <raddiscentis@addiscent.com>
 
 CMD ["/sbin/my_init"]
-
-RUN apt-get update && apt-get install -y php5-fpm php5-cli php5-curl php5-mysqlnd
-
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p /var/www/public
 COPY ./phpinfo.php /var/www/public/phpinfo.php
