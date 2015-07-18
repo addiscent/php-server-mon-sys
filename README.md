@@ -45,7 +45,7 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
       $ unzip master.zip  # create a new directory containing Php-Server-Mon-Sys
 
-    The name of the new directory is _php-server-mon-sys-master_.  The new directory is the _Home_ directory for _Php-Server-Mon-Sys_.  If you wish to rename the _Php-Server-Mon-Sys_ Home directory, you may do so at any time.  You may delete the _master.zip_ now, or later.
+    The name of the new directory is _php-server-mon-sys-master_.  The new directory is the _Home_ directory for _Php-Server-Mon-Sys_.  If you wish to rename the _Php-Server-Mon-Sys_ Home directory, you may do so at any time.  You may delete the _master.zip_ file now, or later.
 
 - The following commands build Docker containers, and start _Php-Server-Mon-Sys_ operation:
 
@@ -55,11 +55,13 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
     IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait a few minutes, and retry _PHP Server Monitor_ Initialization.
 
-The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, because, initially, you are merely evaluating the software, so you will probably decide to discard the first database created during _PHP Server Monitor_ Initialization.  However, before later creating the database you plan to use "in production", read the two sections below titled:
-
-  - _The_ _PHP Server Monitor_ _Time Zone_
+Initially, you are evaluating the software.  After you become familiar with it, you will probably decide to discard the first database created during _PHP Server Monitor_ Initialization.  However, before creating the database you plan to use "in production", read the three sections below titled:
 
   - _Transitioning From Evaluation To Production_
+
+  - _The_ _PHP Server Monitor_ _Database Passwords_
+
+  - _The_ _PHP Server Monitor_ _Time Zone_
 
 ### _PHP Server Monitor_ Initialization
 - After completing the Installation instructions above, use a web browser to visit:
@@ -67,22 +69,6 @@ The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, 
     * http://localhost:28684
 
 - Read and follow the directions on the first page, then choose _LET'S GO_.
-
-- For each field, enter these values:
-
-    * _Database host_ : _mysqlpsm_
-
-    * _Database name_ : _phpservermon_
-
-    * _Database user_ : _phpservermon_
-
-    * _Database password_ : _phpservermon_
-
-    * _Table prefix_ : psm_
-
-    * Choose _SAVE CONFIGURATION_
-
-    * Choose _SAVE CONFIGURATION_, (a second time, for confirmation)
 
 - Set your user, password, and email to whatever you wish, then choose _INSTALL_.
 
@@ -120,17 +106,6 @@ The default _PHP Server Monitor_ _Time Zone_ is _UTC_.  Leave it as is for now, 
   - https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
 ## Managing _Php-Server-Mon-Sys_
-#### Transitioning From Evaluation To Production
-When you have finished learning what _Php-Server-Mon-Sys_ is all about, you will probably eventually wish to discard the data accumulated during evaluation.  The easiest and fastest way to do so is to delete the _PHP Server Monitor_ database.  Deleting the database causes _Php-Server-Mon-Sys_ to automatically create a new one.
-
-Keep in mind that deleting the database deletes all data previously created during _PHP Server Monitor_ Initialization.  In addition to all server history data, the list of servers and any user and admin accounts are deleted.
-
-To delete the existing database, enter the following commands:
-
-      $ sudo ./delete-database.sh  # sudo or other superuser power required
-
-After the database is deleted, a new database will be automatically created.  This will take several minutes, so wait a few.  Then, use a web browser to visit your _PHP Server Monitor_ page per usual, (default, localhost:28684).  If you see an error message which says "can't connect to database", wait a little longer and retry.  Follow the prompts and begin using as normal.
-
 #### The _Php-Server-Mon-Sys_ Home Directory
 _Php-Server-Mon-Sys_-specific management commands, such as the _.sh_ BASH scripts, and "docker-compose...", _should always be executed with the Php-Server-Mon-Sys Home directory as the present working directory, (pwd)_.
 
@@ -166,6 +141,46 @@ The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers),
     After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
 
 #### _Php-Server-Mon-Sys_ Configuration Changes
+#### Transitioning From Evaluation To Production
+When you have finished learning what _Php-Server-Mon-Sys_ is all about, you will probably eventually wish to discard the data accumulated during evaluation.  It may be very advantageous to perform this procedure at the same time you perform the procedures described in the sections below, _The_ _PHP Server Monitor_ _Database Passwords_ and _The_ _PHP Server Monitor_ _Time Zone_.
+
+Deleting the database causes _Php-Server-Mon-Sys_ to automatically create a new one.  Therefore, the easiest and fastest way to create an empty database, (discard the old data) is to simply delete the old one.  Keep in mind that deleting the database deletes all data previously created during _PHP Server Monitor_ Initialization.  In addition to all server history data, the list of servers and any user and admin accounts are deleted.
+
+To delete the existing database, enter the following commands:
+
+      $ sudo ./delete-database.sh  # sudo or other superuser power required
+
+      $ docker-compose up -d # delete-database stops Php-Server-Mon-Sys, so re-start it
+
+After the database is deleted, a new database will be automatically created when _Php-Server-Mon-Sys_ is re-started.  This will take several minutes, so wait a few.  Then, use a web browser to visit your _PHP Server Monitor_ page per usual, (default, localhost:28684).  If you see an error message which says "can't connect to database", wait a little longer and retry.  Follow the prompts and begin using as normal.
+
+##### _The_ _PHP Server Monitor_ Database Passwords
+When _Php-Server-Mon-Sys_ is installed, it automatically creates the database, (remember having to wait for two minutes?).  The the database passwords are set to defaults at that time.  If you wish to tighten up the security of your database, you may change the database passwords.
+
+The database passwords cannot be changed by _Php-Server-Mon-Sys_ after a database has been created; the passwords must be decided upon prior to creation of the database.  A good time to do this is after you have finished evaluation of _Php-Server-Mon-Sys_ and are ready to "go into production".  At that time, you are most likely to decide you wish to abandon the first database and create a new one.
+
+When you are ready to create a new database using new passwords, follow these steps:
+
+  - Set new passwords into the appropriate configuration files by entering the following command:
+
+      $ ./set-passwords.sh _root_password_ _user_password_ # replace these passwords with your own
+
+  - Re-build the PHP-FPM Docker container using the following command:
+
+      $ ./build-php-fpm.sh
+
+  - Delete the database.  The following commands stop _Php-Server-Mon-Sys_, delete the files containing the database, and then re-start _Php-Server-Mon-Sys_:
+
+      $ sudo ./delete-database.sh
+
+      $ docker-compose rm   # obsolete PHP-FMP container must be unloaded
+
+      $ docker-compose up -d  # re-start Php-Server-Mon-Sys. Loads re-built PHP-FPM container
+
+It is necessary again to wait for the database to finish initialization, (approximately two minutes).
+
+For more information about re-starting after database deletion, see the section titled _Transitioning From Evaluation To Production_.
+
 ##### The _PHP Server Monitor_ Time Zone
 The default _PHP Server Monitor_ time zone is _UTC_.  You may change the time zone by editing the _php.ini_ file, located in the _./php-fpm/_ sub-directory.
 
@@ -319,7 +334,7 @@ If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _doc
 
   - Remove the _Docker_ containers by using the command:
 
-        $ docker rm -f CONTAINER ID
+        $ docker rm -f <CONTAINER ID>
 
   See the _Docker_ documentation for details.
 

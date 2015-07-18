@@ -8,7 +8,8 @@ COPY ./phpinfo.php /var/www/public/phpinfo.php
 COPY ./phpservermon-3.1.1.tar.gz /
 RUN tar -zxvf ./phpservermon-3.1.1.tar.gz -C /var/www/public/ --strip-components=2
 RUN rm ./phpservermon-3.1.1.tar.gz
-RUN touch /var/www/public/config.php
+#RUN touch /var/www/public/config.php
+COPY ./psm_config.php /var/www/public/config.php
 RUN chown -R www-data:www-data /var/www/public
 RUN chmod -R 755 /var/www/public
 
