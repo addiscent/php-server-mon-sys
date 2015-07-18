@@ -140,7 +140,6 @@ The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers),
 
     After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
 
-#### _Php-Server-Mon-Sys_ Configuration Changes
 #### Transitioning From Evaluation To Production
 When you have finished learning what _Php-Server-Mon-Sys_ is all about, you will probably eventually wish to discard the data accumulated during evaluation.  It may be very advantageous to perform this procedure at the same time you perform the procedures described in the sections below, _The_ _PHP Server Monitor_ _Database Passwords_ and _The_ _PHP Server Monitor_ _Time Zone_.
 
