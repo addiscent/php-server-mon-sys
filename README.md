@@ -225,31 +225,29 @@ For more information about _Cron_, see:
     https://en.wikipedia.org/wiki/Cron
 
 ##### Managing The _PHP Server Monitor_ Database
-The _PHP Server Monitor_ database is a MySQL database.  As such, it can be managed by using the appropriate MySQL-compatible software tools, such as a _mysql client_ program, or _phpMyAdmin_.
+The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be managed by using the appropriate MySQL-compatible software tools, such as a _mysql client_ program, or _phpMyAdmin_.  Though the _PHP Server Monitor_ _MySQL_ _Docker_ container is local to the host, connections to the datbase server are made as if it is remote.  Connections to remote MySQL servers are established using the server's IP address and a port number.  The default port address is _3306_.  To discover the IP address of the server, use the following commands:
 
-Connections to remote MySQL servers are established using the server's IP address and a port number.  The default port address is _3306_.  To discover the IP address of the server, use the following commands:
+  $ docker ps -a
 
-      $ docker ps -a
+    result is similar to:
 
-        result is similar to:
+      CONTAINER ID        IMAGE           ...etc
+      522b45f3c84f        mysql:5.7.7     ...etc
 
-          CONTAINER ID        IMAGE           ...etc
-          522b45f3c84f        mysql:5.7.7     ...etc
+  Inspect the resulting list for a container whose IMAGE name is "mysql:...", and take note of its CONTAINER ID.  To discover the IP address of that container, use the following command:
 
-      Inspect the resulting list for a container whose IMAGE name is "mysql:...", and take note of its CONTAINER ID.  To discover the IP address of that container, use the following command:
+  $ docker inspect -f "{{ .NetworkSettings.IPAddress }}" 522b45f3c84f # use your CONTAINER ID
 
-      $ docker inspect -f "{{ .NetworkSettings.IPAddress }}" 522b45f3c84f # use your CONTAINER ID
+    result is similar to:
 
-        result is similar to:
-
-          172.17.2.109
+      172.17.2.109
 
 See instructions below for example client connections, using _MySQL Client Program_ and _phpMyAdmin_.
 
-###### Using MySQL Client Program With _PHP Server Monitor_ Database
+###### Using A MySQL Client Program With _PHP Server Monitor_ Database
 The command below pulls and temporarily loads a _mysql_ Docker container for use as a _MySQL client_.  After exiting the _mysql> prompt_, the container is automatically discarded.
 
-Enter the following command, (substitute the IP address value for your _MySQL_ server _Docker_ container IP address):
+Enter the following command, (substitute the _MySQL_ server _Docker_ container IP address as the IP address value):
 
       $ docker run -it --rm mysql sh -c 'exec mysql -h"172.17.2.109" -P"3306" -uroot -p"mysecretpassword"'
 
@@ -301,7 +299,7 @@ The text _"mysql>"_ is a command prompt, waiting for you to enter MySQL commands
           +------------------------+
           8 rows in set (0.00 sec)
 
-For more information on using the MySQL command line program, see:
+For more information about using the MySQL command line program, see:
 
     http://dev.mysql.com/doc/refman/5.6/en/mysql.html
 
@@ -310,7 +308,9 @@ When ready to exit the mysql client, enter:
     mysql> exit;
 
 ###### Using _phpMyAdmin_ With _PHP Server Monitor_ Database
-To connect _phpMyAdmin_ to the _PHP Server Monitor_ database server, the _phpMyAdmin_ _config.inc.php_ file must be edited, as follows.  Open the _phpMyAdmin_ _config.inc.php_ file in an text editor.  Find the list of servers, which have entries similar to that given below, and add the following server code for the MySQL server.  Before inserting the code fragment given below, change the IP address from _172.17.2.109_ to the address of the _MySQL_ server _Docker_ container discovered using the method described above.  If you have previously changed your user or password for this database, also change those values in the code fragment below:
+To connect _phpMyAdmin_ to the _PHP Server Monitor_ database server, the _phpMyAdmin_ _config.inc.php_ file must be revised, as follows.
+
+Open the _phpMyAdmin_ _config.inc.php_ file in a text editor.  Find the list of servers, which have entries similar to that given below, and add the following server code for the _Php-Server-Mon-Sys_ _MySQL_ server.  Before inserting the code fragment given below, change the IP address from _172.17.2.109_ to the address of the _MySQL_ server _Docker_ container discovered using the method described above.  If you have previously changed your user or password for this database, also change those values in the code fragment below:
 
     $i++;
 
@@ -323,7 +323,7 @@ To connect _phpMyAdmin_ to the _PHP Server Monitor_ database server, the _phpMyA
     $cfg['Servers'][$i]['user'] = 'phpservermon';
     $cfg['Servers'][$i]['password'] = 'phpservermon';
 
-IMPORTANT:  Unfortunately, it is not uncommon for there to be more than one _phpMyAdmin_ _config.inc.php_ file on the host.  If you edit one and it seems to have no affect, you may inadvertently be editing a copy of the file which is not the specific file used by _phpMyAdmin_.  You may discover where all copies are located using the following command:
+IMPORTANT:  Unfortunately, it is not uncommon for there to be more than one _phpMyAdmin_ _config.inc.php_ file on the host.  If you edit one and it seems to have no affect, you may inadvertently be editing a copy of the file which is not the specific file used by _phpMyAdmin_.  You may discover where copies are located using the following command:
 
       $ sudo find / -maxdepth 4 -name config.inc.php
 
