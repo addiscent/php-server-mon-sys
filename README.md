@@ -244,7 +244,7 @@ The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be man
 
 See instructions below for example client connections, using _MySQL Client Program_ and _phpMyAdmin_.
 
-###### Using A MySQL Client Program With _PHP Server Monitor_ Database
+##### Using A MySQL Client Program With _PHP Server Monitor_ Database
 The command below pulls and temporarily loads a _mysql_ Docker container for use as a _MySQL client_.  After exiting the _mysql> prompt_, the container is automatically discarded.
 
 Enter the following command, (substitute the _MySQL_ server _Docker_ container IP address as the IP address value):
@@ -307,7 +307,7 @@ When ready to exit the mysql client, enter:
 
     mysql> exit;
 
-###### Using _phpMyAdmin_ With _PHP Server Monitor_ Database
+##### Using _phpMyAdmin_ With _PHP Server Monitor_ Database
 To connect _phpMyAdmin_ to the _PHP Server Monitor_ database server, the _phpMyAdmin_ _config.inc.php_ file must be revised, as follows.
 
 Open the _phpMyAdmin_ _config.inc.php_ file in a text editor.  Find the list of servers, which have entries similar to that given below, and add the following server code for the _Php-Server-Mon-Sys_ _MySQL_ server.  Before inserting the code fragment given below, change the IP address from _172.17.2.109_ to the address of the _MySQL_ server _Docker_ container discovered using the method described above.  If you have previously changed your user or password for this database, also change those values in the code fragment below:
