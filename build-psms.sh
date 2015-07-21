@@ -15,8 +15,8 @@ docker pull mysql:5.7.7 && \
 echo "Docker container images installation complete" && \
 
 # start PSMS
-echo "Starting Php-Server-Mon-Sys..."
+echo "Starting Php-Server-Mon-Sys..." && \
 docker-compose up -d && \
 
-echo
+echo  && \
 echo "Wait two minutes, then use a web broswer to visit http://localhost:28684"

@@ -15,11 +15,11 @@ However, if your host does not already have the required services installed, you
 _Php-Server-Mon-Sys_ solves this problem.  In many cases, _Php-Server-Mon-Sys_ makes installation of _PHP Server Monitor_ much faster and simpler on hosts which do not already have the required services installed.
 
 #### _Php-Server-Mon-Sys_ Is A _Turnkey_ System
-In addition to installing _PHP Server Monitor_, _Php-Server-Mon-Sys_ installs the required services.  _Php-Server-Mon-Sys_ includes NGINX, MySQL, PHP-FPM, and SSMTP.  These are "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  These services are deployed using _Docker_ containers.  Using Docker containers means these services may be very easily and cleanly installed and un-installed along with the _PHP Server Monitor_ application software.  Backing up and restoring are also quick and uncomplicated.
+In addition to installing _PHP Server Monitor_, _Php-Server-Mon-Sys_ installs the required services.  _Php-Server-Mon-Sys_ includes NGINX, MySQL, and PHP-FPM.  These are "private" services which are available only to _PHP Server Monitor_.  These services are not installed directly into the host operating system per usual.  These services are deployed using _Docker_ containers.  Using Docker containers means these services may be very easily and cleanly installed and un-installed along with the _PHP Server Monitor_ application software.  Backing up and restoring are also quick and uncomplicated.
 
 When you no longer need the _PHP Server Monitor_ software in your system, you may very easily remove it.  When it is removed, _PHP Server Monitor's_ supporting services are removed as well.  There is no need to individually remove each of the other services no longer needed.
 
-Keep in mind that the NGINX, MySQL, PHP-FPM, and SSMTP services which are installed by _Php-Server-Mon-Sys_ are available only to _PHP Server Monitor_; they are not intended to be available to other application software on the host system.  The services are _ephemeral_; they come and go along with the installation, operation, and un-installation of _Php-Server-Mon-Sys_.
+Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by _Php-Server-Mon-Sys_ are available only to _PHP Server Monitor_; they are not intended to be available to other application software on the host system.  The services are _ephemeral_; they come and go along with the installation, operation, and un-installation of _Php-Server-Mon-Sys_.
 
 The version of _PHP Server Monitor_ incorporated into this release of _Php-Server-Mon-Sys_ is _PHP Server Monitor v3.1.1_.
 
@@ -139,55 +139,6 @@ The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers),
         $ docker-compose up -d
 
     After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
-
-#### Email Notification Of Monitored Server Status Changes
-In order to receive email notifications of server status changes, you must set your email account credentials and mail-host information.  The following information is required:
-
-  - Email address
-
-  - Email password
-
-  - Mail-host specification, (IPaddress or mail-server name and port number)
-
-  _Php-Server-Mon-Sys_ uses a Mail Submission Agent, (MSA) named SSMTP.  Your credentials must be set in SSMTP's configration file, named _psm_ssmtp.conf_, (which, _after creation by you_, is located in the _./php-fpm_ sub-directory).  The overall procedure is:
-
-    - Use a text editor to create the _./php-fpm/psm_ssmtp.conf_ file
-
-    - Re-build the _PHP-FPM_ Docker container
-
-    - Re-start _Php-Server-Mon-Sys_
-
-To perform this procedure, follow the steps below.
-
-  - Copy the file named _./php-fpm/psm_ssmtp.conf.sample_ to the file named _./php-fpm/psm_ssmtp.conf_, (_./php-fpm/psm_ssmtp.conf_ already exists, but is empty on a fresh installation).  Open the file _./php-fpm/psm_ssmtp.conf_ in a text editor.  Search and replace:
-
-    - Every occurrence of the word _MyEmailAddress@gmail.com_, with your email address.
-
-    - _MyPassword_ with your email password
-
-    - _smtp.gmail.com:587_ with your mail-host _IPaddr:port_ spec.  If you use _Gmail_, you do not need to change this mail-host spec.
-
-    - _rewriteDomain=gmail.com_ with _rewriteDomain=YOUR_MAIL-HOST_DOMAIN_OR_IPADDR_
-
-    When you are finished editing the file, save and close it.  Note that the file now contains your email password in _cleartext_.  It is very poor security practice to save passwords in clear text without strict access permissions, so you must change this file's _owner:group_ and _file mode_ attributes by using the following commands:
-
-      $ sudo chmod 600 ./php-fpm/psm_ssmtp.conf
-
-      $ sudo chown root:root ./php-fpm/psm_ssmtp.conf
-
-  - Re-build the _PHP-FPM_ Docker container using the following command:
-
-    $ ./build-php-fpm.sh
-
-  - Re-start _Php-Server-Mon-Sys_ using the following commands:
-
-      $ docker-compose stop
-
-      $ docker-compose rm
-
-      $ docker-compose up -d
-
-After _Php-Server-Mon-Sys_ has re-started, you will receive notifications of monitored server status changes.  Note that for this feature to operate, you must have the email notification option selected in the _Servers_ setup configuration for each server for which you wish notification.
 
 #### Transitioning From Evaluation To Production
 When you have finished learning what _Php-Server-Mon-Sys_ is all about, you will probably eventually wish to discard the data accumulated during evaluation.  It may be very advantageous to perform this procedure at the same time you perform the procedures described in the sections below, _The_ _PHP Server Monitor_ _Database Passwords_ and _The_ _PHP Server Monitor_ _Time Zone_.
