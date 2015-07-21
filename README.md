@@ -159,7 +159,7 @@ In order to receive email notifications of server status changes, you must set y
 
 To perform this procedure, follow the steps below.
 
-  - Copy the file named _./php-fpm/psm_ssmtp.conf.sample_ to a file named _./php-fpm/psm_ssmtp.conf_.  Open the file _./php-fpm/psm_ssmtp.conf_ in a text editor.  Search and replace:
+  - Copy the file named _./php-fpm/psm_ssmtp.conf.sample_ to the file named _./php-fpm/psm_ssmtp.conf_, (_./php-fpm/psm_ssmtp.conf_ already exists, but is empty on a fresh installation).  Open the file _./php-fpm/psm_ssmtp.conf_ in a text editor.  Search and replace:
 
     - Every occurrence of the word _MyEmailAddress@gmail.com_, with your email address.
 

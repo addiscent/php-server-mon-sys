@@ -12,10 +12,11 @@ docker pull mysql:5.7.7 && \
 # build the PHP Server Monitor PHP-FPM docker container image
 ./build-php-fpm.sh && \
 
-echo "Docker container images installation complete"
+echo "Docker container images installation complete" && \
 
 # start PSMS
 echo "Starting Php-Server-Mon-Sys..."
 docker-compose up -d && \
 
+echo
 echo "Wait two minutes, then use a web broswer to visit http://localhost:28684"
