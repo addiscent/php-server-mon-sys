@@ -178,8 +178,6 @@ When you are ready to create a new database using new passwords, follow these st
 
 It is necessary again to wait for the database to finish initialization, (approximately two minutes).
 
-For more information about re-starting after database deletion, see the section titled _Transitioning From Evaluation To Production_.
-
 ##### The _PHP Server Monitor_ Time Zone
 The default _PHP Server Monitor_ time zone is _UTC_.  You may change the time zone by editing the _php.ini_ file, located in the _./php-fpm/_ sub-directory.
 

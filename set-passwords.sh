@@ -9,7 +9,7 @@ fi
 
 echo "Setting root password to: $1"
 echo "Setting user password to: $2"
-echo "Press [ENTER] to confirm, or CTRC-C to abandon:"
+echo "Press [ENTER] to confirm, or CTRL-C to abandon:"
 read
 sed -i "s/MYSQL_ROOT_PASSWORD=mysecretpassword/MYSQL_ROOT_PASSWORD=$1/g" ./docker-compose.yml && \
 sed -i "s/MYSQL_PASSWORD=phpservermon/MYSQL_PASSWORD=$2/g" ./docker-compose.yml && \
