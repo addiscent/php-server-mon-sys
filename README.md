@@ -153,7 +153,7 @@ To delete the existing database, enter the following commands:
 
 After the database is deleted, a new database will be automatically created when _Php-Server-Mon-Sys_ is re-started.  This will take several minutes, so wait a few.  Then, use a web browser to visit your _PHP Server Monitor_ page per usual, (default, localhost:28684).  If you see an error message which says "can't connect to database", wait a little longer and retry.  Follow the prompts and begin using as normal.
 
-##### _The_ _PHP Server Monitor_ Database Passwords
+##### _PHP Server Monitor_ Database Passwords
 When _Php-Server-Mon-Sys_ is installed, it automatically creates the database, (remember having to wait for two minutes?).  The the database passwords are set to defaults at that time.  If you wish to tighten up the security of your database, you may change the database passwords.
 
 The database passwords cannot be changed by _Php-Server-Mon-Sys_ after a database has been created; the passwords must be decided upon prior to creation of the database.  A good time to do this is after you have finished evaluation of _Php-Server-Mon-Sys_ and are ready to "go into production".  At that time, you are most likely to decide you wish to abandon the first database and create a new one.
@@ -176,9 +176,9 @@ When you are ready to create a new database using new passwords, follow these st
 
       $ docker-compose up -d  # re-start Php-Server-Mon-Sys. Loads re-built PHP-FPM container
 
-It is necessary again to wait for the database to finish initialization, (approximately two minutes).
+It is necessary to wait for the database to finish initialization, (approximately two minutes).
 
-##### The _PHP Server Monitor_ Time Zone
+##### _PHP Server Monitor_ Time Zone
 The default _PHP Server Monitor_ time zone is _UTC_.  You may change the time zone by editing the _php.ini_ file, located in the _./php-fpm/_ sub-directory.
 
 Note that the _PHP Server Monitor_ _Time Zone_ must only be changed _BEFORE_ creating the _PHP Server Monitor_ database.  The _PHP Server Monitor_ database is created during the process described above, in the section titled, _PHP Server Monitor_ _Initialization_.  If the _PHP Server Monitor_ _Time Zone_ setting after _PHP Server Monitor_ _Initialization_, the timestamps on the data collected in the database will be out of sync with the displayed charts, rendering the collected data useless for charting in _PHP Server Monitor_.
@@ -245,7 +245,7 @@ See instructions below for example client connections, using _MySQL Client Progr
 ##### Using A MySQL Client Program With _PHP Server Monitor_ Database
 The command below pulls and temporarily loads a _mysql_ Docker container for use as a _MySQL client_.  After exiting the _mysql> prompt_, the container is automatically discarded.
 
-Enter the following command, (substitute the _MySQL_ server _Docker_ container IP address as the IP address value):
+Enter the following command, (substitute the _MySQL_ server _Docker_ container IP address above as the IP address value):
 
       $ docker run -it --rm mysql sh -c 'exec mysql -h"172.17.2.109" -P"3306" -uroot -p"mysecretpassword"'
 
@@ -362,14 +362,14 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
 
             root@7587be7d4eed:/#
 
-      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not running on a true terminal on-boad the container, so program screen output functionality is limited.  However, it is useful enough for exploration inside the operating container, and troubleshooting if necessary.
+      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not running on a true terminal on-boad the container, so program screen output functionality is limited.  However, it is useful enough for exploration inside the operating container, and troubleshooting if necessary.  In the event you need to use, for example, a text viewer or editor, such as _less_ or _nano_, set the TERM environment variable using the following command, (on the container, using the container's executing shell, not on the host):
+
+          $ export TERM=xterm
 
   - _build-php-fpm.sh_ - very seldom used. Prevents having to remember arcanum
 
 ## Backing Up _Php-Server-Mon-Sys_
-The entire _Php-Server-Mon-Sys_ Home directory, including the MySQL database, is backed-up into a single _.tar.gz_ file.
-
-To back up _Php-Server-Mon-Sys_, use the provided BASH script command:
+The entire _Php-Server-Mon-Sys_ Home directory, including the MySQL database, may be backed-up into a single _.tar.gz_ file.  To do so, use the provided BASH script command:
 
       $ sudo ./backup-psms.sh  # sudo or equivalent superpower is required
 
@@ -382,6 +382,8 @@ The backup file has a name similar to the following.  The date and time of backu
     php-server-mon-sys.2015.0716.2256.tar.gz
 
 ## Restoring _Php-Server-Mon-Sys_ From A Backup file
+To restore _Php-Server-Mon-Sys_ from a back-up file created as described above, perform the following procedure:
+
 - Create a directory to be _Php-Server-Mon-Sys_ Home.  The name may be any you choose.  As an example:
 
       $ mkdir php-server-mon-sys  # same as it ever was
@@ -409,22 +411,22 @@ The backup file has a name similar to the following.  The date and time of backu
 
 At this point, resuming use of _Php-Server-Mon-Sys_ is very similar to the procedure described in the section above titled, _PHP Server Monitor_ _Initialization_.  Refer to that section.  At one point a page is displayed which displays:
 
-    "We have discovered a previous version.  In the next step we will upgrade your database to the latest version".
+  "We have discovered a previous version.  In the next step we will upgrade your database to the latest version".
 
 This is normal for a restored _Php-Server-Mon-Sys_ system.  Choose _UPGRADE TO 3.1.1_.  Continue and _LOG IN_.  The _Php-Server-Mon-Sys_ continues normal operation per its configuration as when backed up.
 
 ## How To Uninstall _Php-Server-Mon-Sys_
-To completely remove the installed _Php-Server-Mon-Sys_:
+To completely remove _Php-Server-Mon-Sys_, perform the following procedure:
 
-  - Delete the _Php-Server-Mon-Sys_ home directory.  Sudo or other superuser permissions are necessary to delete the MySQL database.
-
-    Before doing so, you should remove the running _Docker_ containers:
+  - Remove the running _Docker_ containers:
 
       $ docker-compose stop  # gracefully shut down the Docker containers
 
       $ docker-compose rm  # unload the Docker containers
 
-  - After deleting the home directory, you may remove the unnecessary _Docker_ images from the local _Docker_ image repository:
+  - Delete the _Php-Server-Mon-Sys_ home directory.  Sudo or other superuser permissions are necessary to delete the MySQL database.
+
+  - After deleting the home directory, you may remove the unnecessary _Docker_ images from the local _Docker_ image repository, in order to reclaim the storage space:
 
     - Discover the local _Docker_ images using the command:
 
@@ -449,6 +451,10 @@ If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _doc
   See the _Docker_ documentation for details.
 
 ## Etc
+To report bugs or other issues with _Php-Server-Mon-Sys_, visit the project's GitHub page:
+
+  https://github.com/addiscent/php-server-mon-sys
+
 Licensed under Apache 2.0 License.
 
 Copyright &copy; 2015 Rex Addiscentis, raddiscentis@addiscent.com
