@@ -21,6 +21,10 @@ When you no longer need the _PHP Server Monitor_ software in your system, you ma
 
 Keep in mind that the NGINX, MySQL, and PHP-FPM services which are installed by _Php-Server-Mon-Sys_ are available only to _PHP Server Monitor_; they are not intended to be available to other application software on the host system.  The services are _ephemeral_; they come and go along with the installation, operation, and un-installation of _Php-Server-Mon-Sys_.
 
+The _Php-Server-Mon-Sys_ project is _Open Source_, and its public repository is located at:
+
+  - https://github.com/addiscent/php-server-mon-sys
+
 The version of _PHP Server Monitor_ incorporated into this release of _Php-Server-Mon-Sys_ is _PHP Server Monitor v3.1.1_.
 
 This version of _Php-Server-Mon-Sys_ has been tested only on a host using _Ubuntu 14.04_.  _Php-Server-Mon-Sys_ has not yet been tested on _OS X_ nor _Windows_.  Theoretically, _Php-Server-Mon-Sys_ should work on any host which fully supports _Docker_ tools, but that has not yet been tested.
@@ -459,9 +463,9 @@ For general questions which are _specific to_ _Php-Server-Mon-Sys_, (installatio
 
   - psms.support@addiscent.com
 
-To report bugs or other software issues with _Php-Server-Mon-Sys_, please visit the project's GitHub page:
+To request improved features, report bugs, or submit other software issues with _Php-Server-Mon-Sys_, please visit _Php-Server-Mon-Sys_ project's _Issues_ page on GitHub:
 
-  - https://github.com/addiscent/php-server-mon-sys
+  - https://github.com/addiscent/php-server-mon-sys/issues
 
 ## Etc
 Licensed under Apache 2.0 License.
