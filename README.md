@@ -463,7 +463,7 @@ For general questions which are _specific to_ _Php-Server-Mon-Sys_, (installatio
 
   - psms.support@addiscent.com
 
-To request improved features, report bugs, or submit other software issues with _Php-Server-Mon-Sys_, please visit _Php-Server-Mon-Sys_ project's _Issues_ page on GitHub:
+To request improved features, report bugs, or submit other software issues about _Php-Server-Mon-Sys_, please visit _Php-Server-Mon-Sys_ project's _Issues_ page on GitHub:
 
   - https://github.com/addiscent/php-server-mon-sys/issues
 
