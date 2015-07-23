@@ -450,7 +450,7 @@ If you inadvertently uninstall _Php-Server-Mon-Sys_ without first using the _doc
 
   See the _Docker_ documentation for details.
 
-## Etc
+## Support
 For questions and other support which are _specific to_ _PHP Server Monitor_, please see _PHP Server Monitor_ documentation and forum:
 
   - http://www.phpservermonitor.org/support/
@@ -461,8 +461,9 @@ For general questions which are _specific to_ _Php-Server-Mon-Sys_, (installatio
 
 To report bugs or other software issues with _Php-Server-Mon-Sys_, please visit the project's GitHub page:
 
-  https://github.com/addiscent/php-server-mon-sys
+  - https://github.com/addiscent/php-server-mon-sys
 
+## Etc
 Licensed under Apache 2.0 License.
 
 Copyright &copy; 2015 Rex Addiscentis
