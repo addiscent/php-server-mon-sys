@@ -33,7 +33,7 @@ This version of _Php-Server-Mon-Sys_ has been tested only on a host using _Ubunt
 Installation and operation of _Php-Server-Mon-Sys_ requires:
 
   - Superuser access to a private host or VPS
-  - 200MB available memory
+  - 300MB available memory
   - 1.1GB available storage, (plus server history data accumulated in database)
   - Internet connection/service
   - Docker Engine 1.7, pre-installed
