@@ -158,9 +158,9 @@ To delete the existing database, enter the following commands:
 After the database is deleted, a new database will be automatically created when _Php-Server-Mon-Sys_ is re-started.  This will take several minutes, so wait a few.  Then, use a web browser to visit your _PHP Server Monitor_ page per usual, (default, localhost:28684).  If you see an error message which says "can't connect to database", wait a little longer and retry.  Follow the prompts and begin using as normal.
 
 ##### _PHP Server Monitor_ Database Passwords
-When _Php-Server-Mon-Sys_ is installed, it automatically creates the database, (remember having to wait for two minutes?).  The the database passwords are set to defaults at that time.  If you wish to tighten up the security of your database, you may change the database passwords.
+When _Php-Server-Mon-Sys_ is installed, it automatically creates the database, (remember having to wait for two minutes?).  The database passwords are set to defaults at that time.  If you wish to tighten up the security of your database, you may change the database passwords.
 
-The database passwords cannot be changed by _Php-Server-Mon-Sys_ after a database has been created; the passwords must be decided upon prior to creation of the database.  A good time to do this is after you have finished evaluation of _Php-Server-Mon-Sys_ and are ready to "go into production".  At that time, you are most likely to decide you wish to abandon the first database and create a new one.
+The database passwords cannot be changed by _Php-Server-Mon-Sys_ after a database has been created; the passwords must be decided upon prior to creation of the database.  A good time to do this is after you have finished evaluation of _Php-Server-Mon-Sys_ and you are subsequently ready to "go into production".  At that time, you are most likely to decide you wish to abandon the first database and create a new one.
 
 When you are ready to create a new database using new passwords, follow these steps:
 
@@ -185,7 +185,7 @@ It is necessary to wait for the database to finish initialization, (approximatel
 ##### _PHP Server Monitor_ Time Zone
 The default _PHP Server Monitor_ time zone is _UTC_.  You may change the time zone by editing the _php.ini_ file, located in the _./php-fpm/_ sub-directory.
 
-Note that the _PHP Server Monitor_ _Time Zone_ must only be changed _BEFORE_ creating the _PHP Server Monitor_ database.  The _PHP Server Monitor_ database is created during the process described above, in the section titled, _PHP Server Monitor_ _Initialization_.  If the _PHP Server Monitor_ _Time Zone_ setting after _PHP Server Monitor_ _Initialization_, the timestamps on the data collected in the database will be out of sync with the displayed charts, rendering the collected data useless for charting in _PHP Server Monitor_.
+Note that the _PHP Server Monitor_ _Time Zone_ must only be changed _BEFORE_ creating the _PHP Server Monitor_ database.  The _PHP Server Monitor_ database is created during the process described above, in the section titled, _PHP Server Monitor_ _Initialization_.  If the _PHP Server Monitor_ _Time Zone_ is set after _PHP Server Monitor_ _Initialization_, the timestamps on the data collected in the database will be out of sync with the displayed charts, rendering the collected data useless for charting in _PHP Server Monitor_.
 
 To change the _PHP Server Monitor_ _Time Zone_, search the _./php-fpm/php.ini_ file for the term _date.timezone_.  Change the default value, _UTC_, to your time zone, e.g., _America/Los_Angeles_.  For valid time zone codes, see:
 
@@ -227,7 +227,7 @@ For more information about _Cron_, see:
     https://en.wikipedia.org/wiki/Cron
 
 ##### Managing The _PHP Server Monitor_ Database
-The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be managed by using the appropriate MySQL-compatible software tools, such as a _mysql client_ program, or _phpMyAdmin_.  Though the _PHP Server Monitor_ _MySQL_ _Docker_ container is local to the host, connections to the datbase server are made as if it is remote.  Connections to remote MySQL servers are established using the server's IP address and a port number.  The default port address is _3306_.  To discover the IP address of the server, use the following commands:
+The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be managed by using the appropriate MySQL-compatible software tools, such as a _mysql client_ program, or _phpMyAdmin_.  Though the _PHP Server Monitor_ _MySQL_ _Docker_ container is local to the host, connections to the database server are made as if it is remote.  Connections to remote MySQL servers are established using the server's IP address and a port number.  The default port address is _3306_.  To discover the IP address of the server, use the following commands:
 
   $ docker ps -a
 
@@ -466,6 +466,28 @@ For general questions which are _specific to_ _Php-Server-Mon-Sys_, (installatio
 To request improved features, report bugs, or submit other software issues about _Php-Server-Mon-Sys_, please visit _Php-Server-Mon-Sys_ project's _Issues_ page on GitHub:
 
   - https://github.com/addiscent/php-server-mon-sys/issues
+
+## Contribute To This Project
+Please feel free to submit pull requests for improvements to this project.
+
+On this project, a software user is not only the _PHP Server Monitor_ dashboard user, it is also any Ops admin.  Making the Ops admin's job easier is also one of the project's goals.  Likewise, any developer on this project is another important user; making the developer's job easier and more productive is also one of the goals of this project.  Those goals, among others, means this project is by nature a _DevOps_ project.
+
+When pondering improvements to the codebase which you wish to submit as pull requests, it may help to think of contributions from the following perspective.  A dashboard user simply wants the service available, she does not care if, when, or how often any given piece of the running system is created, runs, or is terminated.  As long as the service is available when needed, the running system's components may change at any time, for any valid necessary reason.  But other users need to be considered as well, such as the Ops admin who needs to do maintenance of a live system, and developers who wish to contribute to the codebase in the future.
+
+Therefore, before submitting pull requests, please familiarize yourself with at least basic _DevOps_ strategies and goals, and especially learn the advantages (and pitfalls) of implementation "the Docker way".  Among others, please learn and take advantage of the following principles and tactics.  These help with long-term goals, and are already a part of this implementation, in one form or another.  Areas where this project does not already comply with these goals are the areas which will be given priority for pull requests:
+
+  * Simplification, in any way, which also satisfies the criterion listed below
+  * Security: make worthwhile continuing attempts to reduce the attack surface of the system
+  * Rugged Design: Fault-tolerant behaviors
+  * Idempotence: declare a desired condition, not an action
+  * RESTful APIs/behavior: stateless
+  * Ephemeral compute instances: complimentary to RESTful
+  * Microservices Architecture: Object Oriented, Domain Driven Design
+
+Simplification also includes those improvements which make the architecture or codebase easier to understand and modify in the future, such as refactoring.
+
+Note that _Php-Server-Mon-Sys_ has been deployed for extended periods of time to several private-hardware servers running _Ubuntu 14.04_, and has also been deployed to _EC2_ instances on _Amazon Web Services_.  That type of deployment portability is an important requirement of this project.
+
 
 ## Etc
 Licensed under Apache 2.0 License.
