@@ -470,7 +470,7 @@ To request improved features, report bugs, or submit other software issues about
 ## Contribute To This Project
 Please feel free to submit pull requests for improvements to this project.
 
-On this project, a software user is not only the _PHP Server Monitor_ dashboard user, it is also any Ops admin.  Making the Ops admin's job easier is also one of the project's goals.  Likewise, any developer on this project is another important user; making the developer's job easier and more productive is also one of the goals of this project.  Those goals, among others, means this project is by nature a _DevOps_ project.
+On this project, a software user is not only the _PHP Server Monitor_ dashboard user, it is also any Ops admin.  Making the Ops admin's job easier is one of the project's goals.  Likewise, any developer on this project is another important user; making the developer's job easier and more productive is also one of the goals of this project.  Those goals, among others, means this project is by nature a _DevOps_ project.
 
 When pondering improvements to the codebase which you wish to submit as pull requests, it may help to think of contributions from the following perspective.  A dashboard user simply wants the service available, she does not care if, when, or how often any given piece of the running system is created, runs, or is terminated.  As long as the service is available when needed, the running system's components may change at any time, for any valid necessary reason.  But other users need to be considered as well, such as the Ops admin who needs to do maintenance of a live system, and developers who wish to contribute to the codebase in the future.
 
