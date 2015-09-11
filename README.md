@@ -57,7 +57,7 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
       $ ./build-psms.sh  # execute this BASH script only in the "Home" directory
 
-    IMPORTANT: You must wait, (approximately two minutes), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait a few minutes, and retry _PHP Server Monitor_ Initialization.
+    IMPORTANT: You must wait, (up to two minutes on slow hosts), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait a few minutes, and retry _PHP Server Monitor_ Initialization.
 
 Initially, you are evaluating the software.  After you become familiar with it, you will probably decide to discard the first database created during _PHP Server Monitor_ Initialization.  However, before creating the database you plan to use "in production", read the three sections below titled:
 
@@ -145,20 +145,20 @@ The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers),
     After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
 
 #### Transitioning From Evaluation To Production
-When you have finished learning what _Php-Server-Mon-Sys_ is all about, you will probably eventually wish to discard the data accumulated during evaluation.  It may be very advantageous to perform this procedure at the same time you perform the procedures described in the sections below, _The_ _PHP Server Monitor_ _Database Passwords_ and _The_ _PHP Server Monitor_ _Time Zone_.
+When you have finished learning what _Php-Server-Mon-Sys_ is all about, it is likely you will wish to discard the data accumulated during evaluation.  It may be very advantageous to perform this procedure at the same time you perform the procedures described in the sections below, _The_ _PHP Server Monitor_ _Database Passwords_ and _The_ _PHP Server Monitor_ _Time Zone_.
 
-Deleting the database causes _Php-Server-Mon-Sys_ to automatically create a new one.  Therefore, the easiest and fastest way to create an empty database, (discard the old data) is to simply delete the old one.  Keep in mind that deleting the database deletes all data previously created during _PHP Server Monitor_ Initialization.  In addition to all server history data, the list of servers and any user and admin accounts are deleted.
+Deleting the database causes _Php-Server-Mon-Sys_ to automatically create a new one.  Therefore, the easiest and fastest way to create an empty database, (discard the old data), is to simply delete the existing _PHP Server Monitor_ database.  Keep in mind that deleting the database deletes all data previously created during _PHP Server Monitor_ Initialization.  In addition to all _PHP Server Monitor_ server history data, the list of _PHP Server Monitor_ servers and any _PHP Server Monitor_ user and admin accounts are deleted.
 
-To delete the existing database, enter the following commands:
+To delete the existing _PHP Server Monitor_ database, enter the following commands:
 
       $ sudo ./delete-database.sh  # sudo or other superuser power required
 
       $ docker-compose up -d # delete-database stops Php-Server-Mon-Sys, so re-start it
 
-After the database is deleted, a new database will be automatically created when _Php-Server-Mon-Sys_ is re-started.  This will take several minutes, so wait a few.  Then, use a web browser to visit your _PHP Server Monitor_ page per usual, (default, localhost:28684).  If you see an error message which says "can't connect to database", wait a little longer and retry.  Follow the prompts and begin using as normal.
+After the database is deleted, a new database will be automatically created when _Php-Server-Mon-Sys_ is re-started.  Depending on the speed of your host, it could take up to two minutes to finish creating the new database.  Then, use a web browser to visit your _PHP Server Monitor_ page per usual, (default, localhost:28684).  If you see an error message which says "can't connect to database", wait a little longer and retry.  Follow the prompts and begin using as normal.
 
 ##### _PHP Server Monitor_ Database Passwords
-When _Php-Server-Mon-Sys_ is installed, it automatically creates the database, (remember having to wait for two minutes?).  The database passwords are set to defaults at that time.  If you wish to tighten up the security of your database, you may change the database passwords.
+When _Php-Server-Mon-Sys_ is installed, it automatically creates the database.  The database passwords are set to defaults at that time.  If you wish to tighten up the security of your database, you may change the database passwords.
 
 The database passwords cannot be changed by _Php-Server-Mon-Sys_ after a database has been created; the passwords must be decided upon prior to creation of the database.  A good time to do this is after you have finished evaluation of _Php-Server-Mon-Sys_ and you are subsequently ready to "go into production".  At that time, you are most likely to decide you wish to abandon the first database and create a new one.
 
@@ -180,7 +180,7 @@ When you are ready to create a new database using new passwords, follow these st
 
       $ docker-compose up -d  # re-start Php-Server-Mon-Sys. Loads re-built PHP-FPM container
 
-It is necessary to wait for the database to finish initialization, (approximately two minutes).
+It is necessary to wait for the database to finish initialization, (up to two minutes on a slow host).
 
 ##### _PHP Server Monitor_ Time Zone
 The default _PHP Server Monitor_ time zone is _UTC_.  You may change the time zone by editing the _php.ini_ file, located in the _./php-fpm/_ sub-directory.
@@ -227,7 +227,7 @@ For more information about _Cron_, see:
     https://en.wikipedia.org/wiki/Cron
 
 ##### Managing The _PHP Server Monitor_ Database
-The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be managed by using the appropriate MySQL-compatible software tools, such as a _mysql client_ program, or _phpMyAdmin_.  Though the _PHP Server Monitor_ _MySQL_ _Docker_ container is local to the host, connections to the database server are made as if it is remote.  Connections to remote MySQL servers are established using the server's IP address and a port number.  The default port address is _3306_.  To discover the IP address of the server, use the following commands:
+The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be managed by using the appropriate _MySQL-compatible_ software tools, such as a _mysql client_ program, or _phpMyAdmin_.  Though the _PHP Server Monitor_ _MySQL_ _Docker_ container is local to the host, connections to the database server are made as if it is remote.  Connections to remote _MySQL_ servers are established using the _MySQL_ server _Docker container's_ IP address and a port number.  The default port address is _3306_.  To discover the IP address of the server, use the following commands:
 
   $ docker ps -a
 
@@ -246,8 +246,10 @@ The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be man
 
 See instructions below for example client connections, using _MySQL Client Program_ and _phpMyAdmin_.
 
-##### Using A MySQL Client Program With _PHP Server Monitor_ Database
-The command below pulls and temporarily loads a _mysql_ Docker container for use as a _MySQL client_.  After exiting the _mysql> prompt_, the container is automatically discarded.
+##### Using A _MySQL_ Client Program With _PHP Server Monitor_ Database
+The following instructions assume you are already familiar with _MySQL_ command and operation procedures.
+
+The command below pulls and temporarily loads a _mysql_ Docker container for use as a _MySQL client_.  After exiting the _mysql> prompt_, the temporary _MySQL client_ container is automatically discarded.
 
 Enter the following command, (substitute the _MySQL_ server _Docker_ container IP address above as the IP address value):
 
@@ -310,6 +312,8 @@ When ready to exit the mysql client, enter:
     mysql> exit;
 
 ##### Using _phpMyAdmin_ With _PHP Server Monitor_ Database
+The following instructions assume _phpMyAdmin_ is already installed on your host, and you are already familiar with _phpMyAdmin_ configuration and operation procedures.
+
 To connect _phpMyAdmin_ to the _PHP Server Monitor_ database server, the _phpMyAdmin_ _config.inc.php_ file must be revised, as follows.
 
 Open the _phpMyAdmin_ _config.inc.php_ file in a text editor.  Find the list of servers, which have entries similar to that given below, and add the following server code for the _Php-Server-Mon-Sys_ _MySQL_ server.  Before inserting the code fragment given below, change the IP address from _172.17.2.109_ to the address of the _MySQL_ server _Docker_ container discovered using the method described above.  If you have previously changed your user or password for this database, also change those values in the code fragment below:
@@ -428,7 +432,7 @@ To completely remove _Php-Server-Mon-Sys_, perform the following procedure:
 
       $ docker-compose rm  # unload the Docker containers
 
-  - Delete the _Php-Server-Mon-Sys_ home directory.  Sudo or other superuser permissions are necessary to delete the MySQL database.
+  - Delete the _Php-Server-Mon-Sys_ _Home_ directory.  It is necessary to use _sudo_ or otherwise have superuser permissions in order to delete the _MySQL_ database.
 
   - After deleting the home directory, you may remove the unnecessary _Docker_ images from the local _Docker_ image repository, in order to reclaim the storage space:
 
@@ -468,24 +472,28 @@ To request improved features, report bugs, or submit other software issues about
   - https://github.com/addiscent/php-server-mon-sys/issues
 
 ## Contribute To This Project
-Please feel free to submit pull requests for improvements to this project.
+Please feel free to submit pull requests for improvements to this project.  The following comments are to potential contributors.
 
-On this project, a dashboard user is not the only intended user of _Php-Server-Mon-Sys_. Any Ops admin is also an important "user".  Making the Ops admin's job easier is one of the project's goals.  Likewise, any developer on this project is another important "user"; making the developer's job easier and more productive is also one of the goals of this project.  Those goals make this project a _DevOps_-oriented project.
+There are a number of project goals and requirements to be considered.
 
-When pondering improvements to the codebase which you wish to submit as pull requests, it may be helpful to think from the following perspective.  A dashboard user simply wants the service available, she does not care if, when, or how often any given piece of the running system is created, runs, or is terminated.  As long as the service is available when needed, the running system's components may change at any time, for any valid necessary reason.  But other users need to be considered as well, such as the Ops admin who needs to do maintenance of a live system, and developers who wish to contribute to the codebase in the future.
+##### The Several Types And Needs Of _Users_
+The dashboard _User_ is not the only intended user of _Php-Server-Mon-Sys_.  Any service (Ops) _Admin_ is also an important _User_.  Making the admin's job easier is one of the project's goals.  Likewise, any _Developer_ on this project is another important _User_; making the developer's job easier and more productive is also one of the goals of this project.  Those goals make this project a _DevOps_-oriented project.
 
-Therefore, before submitting pull requests, please familiarize yourself with at least basic _DevOps_ goals and strategies, and especially learn the advantages (and pitfalls) of implementation "the Docker way".  Among others, please learn and take advantage of the following principles and tactics.  These help with long-term goals, and are already a part of this implementation, in one form or another.  Areas where this project does not already comply with these goals are the areas which will be given priority for pull requests:
+##### Technical Design and Implementation Considerations
+Before submitting pull requests, please familiarize yourself with at least basic _DevOps_ goals and strategies, and especially learn the advantages (and pitfalls) of implementation "the Docker way".
+
+Among others, please learn and take advantage of the following principles and tactics.  These help with long-term goals, and are already a part of this project's implementation, in one form or another.  Areas where this project does not already comply with these goals are the areas which will be given priority for pull requests:
 
   * Simplification, in any way, which also satisfies the criterion listed below
   * Security: make worthwhile continuing attempts to reduce the attack surface of the system
   * Rugged Design: Fault-tolerant behaviors
-  * Idempotence: declare a desired condition, as opposed to an action to be performed
-  * RESTful APIs/Behavior: stateless. A different sense of Idempotence also applies here
-  * Ephemeral compute instances: complimentary to RESTful
+  * RESTful APIs/Behavior: stateless. A sense of Idempotence applies here
+  * Ephemeral compute instances: complimentary or coincident to RESTful
   * Microservices Architecture: Object Oriented, Domain Driven Design
 
 Desirable Simplification also includes those improvements which make the architecture or codebase easier to understand and modify in the future, such as refactoring.
 
+##### Other Requirements
 Note that _Php-Server-Mon-Sys_ has been deployed to several private-hardware hosts running _Ubuntu 14.04_.  It has also been deployed to _EC2_ instances on _Amazon Web Services_, and to a _Droplet_ on _Digital Ocean_.  That type of deployment portability is an important requirement of this project.
 
 
