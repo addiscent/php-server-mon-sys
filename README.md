@@ -470,23 +470,23 @@ To request improved features, report bugs, or submit other software issues about
 ## Contribute To This Project
 Please feel free to submit pull requests for improvements to this project.
 
-On this project, a software user is not only the _PHP Server Monitor_ dashboard user, it is also any Ops admin.  Making the Ops admin's job easier is one of the project's goals.  Likewise, any developer on this project is another important user; making the developer's job easier and more productive is also one of the goals of this project.  Those goals, among others, means this project is by nature a _DevOps_ project.
+On this project, a dashboard user is not the only intended user of _Php-Server-Mon-Sys_. Any Ops admin is also an important "user".  Making the Ops admin's job easier is one of the project's goals.  Likewise, any developer on this project is another important "user"; making the developer's job easier and more productive is also one of the goals of this project.  Those goals make this project a _DevOps_-oriented project.
 
-When pondering improvements to the codebase which you wish to submit as pull requests, it may help to think of contributions from the following perspective.  A dashboard user simply wants the service available, she does not care if, when, or how often any given piece of the running system is created, runs, or is terminated.  As long as the service is available when needed, the running system's components may change at any time, for any valid necessary reason.  But other users need to be considered as well, such as the Ops admin who needs to do maintenance of a live system, and developers who wish to contribute to the codebase in the future.
+When pondering improvements to the codebase which you wish to submit as pull requests, it may be helpful to think from the following perspective.  A dashboard user simply wants the service available, she does not care if, when, or how often any given piece of the running system is created, runs, or is terminated.  As long as the service is available when needed, the running system's components may change at any time, for any valid necessary reason.  But other users need to be considered as well, such as the Ops admin who needs to do maintenance of a live system, and developers who wish to contribute to the codebase in the future.
 
-Therefore, before submitting pull requests, please familiarize yourself with at least basic _DevOps_ strategies and goals, and especially learn the advantages (and pitfalls) of implementation "the Docker way".  Among others, please learn and take advantage of the following principles and tactics.  These help with long-term goals, and are already a part of this implementation, in one form or another.  Areas where this project does not already comply with these goals are the areas which will be given priority for pull requests:
+Therefore, before submitting pull requests, please familiarize yourself with at least basic _DevOps_ goals and strategies, and especially learn the advantages (and pitfalls) of implementation "the Docker way".  Among others, please learn and take advantage of the following principles and tactics.  These help with long-term goals, and are already a part of this implementation, in one form or another.  Areas where this project does not already comply with these goals are the areas which will be given priority for pull requests:
 
   * Simplification, in any way, which also satisfies the criterion listed below
   * Security: make worthwhile continuing attempts to reduce the attack surface of the system
   * Rugged Design: Fault-tolerant behaviors
-  * Idempotence: declare a desired condition, not an action
-  * RESTful APIs/behavior: stateless
+  * Idempotence: declare a desired condition, as opposed to an action to be performed
+  * RESTful APIs/Behavior: stateless. A different sense of Idempotence also applies here
   * Ephemeral compute instances: complimentary to RESTful
   * Microservices Architecture: Object Oriented, Domain Driven Design
 
-Simplification also includes those improvements which make the architecture or codebase easier to understand and modify in the future, such as refactoring.
+Desirable Simplification also includes those improvements which make the architecture or codebase easier to understand and modify in the future, such as refactoring.
 
-Note that _Php-Server-Mon-Sys_ has been deployed for extended periods of time to several private-hardware servers running _Ubuntu 14.04_, and has also been deployed to _EC2_ instances on _Amazon Web Services_.  That type of deployment portability is an important requirement of this project.
+Note that _Php-Server-Mon-Sys_ has been deployed to several private-hardware hosts running _Ubuntu 14.04_.  It has also been deployed to _EC2_ instances on _Amazon Web Services_, and to a _Droplet_ on _Digital Ocean_.  That type of deployment portability is an important requirement of this project.
 
 
 ## Etc
