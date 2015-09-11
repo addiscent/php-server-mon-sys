@@ -247,7 +247,7 @@ The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be man
 See instructions below for example client connections, using _MySQL Client Program_ and _phpMyAdmin_.
 
 ##### Using A _MySQL_ Client Program With _PHP Server Monitor_ Database
-The following instructions assume you are already familiar with _MySQL_ command and operation procedures.
+The following instructions assume you are already familiar with _MySQL_ commands and operation procedures.
 
 The command below pulls and temporarily loads a _mysql_ Docker container for use as a _MySQL client_.  After exiting the _mysql> prompt_, the temporary _MySQL client_ container is automatically discarded.
 
@@ -329,7 +329,7 @@ Open the _phpMyAdmin_ _config.inc.php_ file in a text editor.  Find the list of 
     $cfg['Servers'][$i]['user'] = 'phpservermon';
     $cfg['Servers'][$i]['password'] = 'phpservermon';
 
-IMPORTANT:  Unfortunately, it is not uncommon for there to be more than one _phpMyAdmin_ _config.inc.php_ file on the host.  If you edit one and it seems to have no affect, you may inadvertently be editing a copy of the file which is not the specific file used by _phpMyAdmin_.  You may discover where copies are located using the following command:
+IMPORTANT:  Unfortunately, it is not uncommon to discover that more than one _phpMyAdmin_ _config.inc.php_ file already exists on a host, (placed there by the _phpMyAdmin_ installation process).  If you edit one and it seems to have no affect, you may inadvertently be editing a copy of the file which is not the specific file used by _phpMyAdmin_.  To search for the correct instance, you may discover where copies are located using the following command:
 
       $ sudo find / -maxdepth 4 -name config.inc.php
 
@@ -339,7 +339,7 @@ IMPORTANT:  Unfortunately, it is not uncommon for there to be more than one _php
           /var/lib/phpmyadmin/config.inc.php
           /etc/phpmyadmin/config.inc.php
 
-For more information on editing the _phpMyAdmin_ _config.inc.php_ file, see:
+For more information about editing the _phpMyAdmin_ _config.inc.php_ file, see:
 
     http://docs.phpmyadmin.net/en/latest/config.html
 
