@@ -439,7 +439,7 @@ To completely remove _Php-Server-Mon-Sys_, perform the following procedure:
 
         $ docker images
 
-      Their names are _mysql_, _nginx_, _raddiscentis/php-fpm_, and _temp/php-fpm-psm_.  Note their _IMAGE IDs_.
+      Their names are _mysql_, _nginx_, and _temp/php-fpm-psm_.  Note their _IMAGE IDs_.
 
     - One by one, remove the images from the _Docker_ image repository using the command:
 
