@@ -36,8 +36,8 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
   - 300MB available memory
   - 1.1GB available storage, (plus server history data accumulated in database)
   - Internet connection/service
-  - Docker Engine 1.7, pre-installed
-  - Docker Compose 1.3.1, pre-installed
+  - Docker Engine 1.11, pre-installed
+  - Docker Compose 1.7, pre-installed
   - Curl 7.35.0, pre-installed, (alternate equivalent may be substituted)
   - UnZip 6.00, pre-installed, (alternate equivalent may be substituted)
   - Tar (GNU tar) 1.27.1, pre-installed, (alternate equivalent may be substituted)
@@ -229,16 +229,15 @@ For more information about _Cron_, see:
 ##### Managing The _PHP Server Monitor_ Database
 The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be managed by using the appropriate _MySQL-compatible_ software tools, such as a _mysql client_ program, or _phpMyAdmin_.  Though the _PHP Server Monitor_ _MySQL_ _Docker_ container is local to the host, connections to the database server are made as if it is remote.  Connections to remote _MySQL_ servers are established using the _MySQL_ server _Docker container's_ IP address and a port number.  The default port address is _3306_.  To discover the IP address of the server, use the following commands:
 
-  $ docker ps -a
+  $ docker ps -a | grep mysql
 
     result is similar to:
 
-      CONTAINER ID        IMAGE           ...etc
-      522b45f3c84f        mysql:5.7.7     ...etc
+      203942ceb32d    mysql:5.7.7    "/entrypoint.sh mysql"   ...   phpservermonsysmaster_db_1
 
   Inspect the resulting list for a container whose IMAGE name is "mysql:...", and take note of its CONTAINER ID.  To discover the IP address of that container, use the following command:
 
-  $ docker inspect -f "{{ .NetworkSettings.IPAddress }}" 522b45f3c84f # use your CONTAINER ID
+  $ docker inspect -f "{{ .NetworkSettings.IPAddress }}" 203942ceb32d # use your CONTAINER ID
 
     result is similar to:
 
@@ -440,7 +439,7 @@ To completely remove _Php-Server-Mon-Sys_, perform the following procedure:
 
         $ docker images
 
-      Their names are _mysql_, _nginx_, _phusion/baseimage_, _raddiscentis/php-fpm_, and _temp/php-fpm-psm_.  Note their _IMAGE IDs_.
+      Their names are _mysql_, _nginx_, _phusion/baseimage_, _raddiscentis/php-fpm_, and _temp/php-fpm-psm_.  Note their _IMAGE IDs_. (Note the name "<none>" may appear instead of "phusion/baseimage" in list of Docker IMAGES).
 
     - One by one, remove the images from the _Docker_ image repository using the command:
 
@@ -465,7 +464,7 @@ For questions and other support which are _specific to_ _PHP Server Monitor_, pl
 
 For general questions which are _specific to_ _Php-Server-Mon-Sys_, (installation, configuration, container use/management, etc), you may send email to:
 
-  - psms.support@addiscent.com
+  - psms-support@addiscent.com
 
 To request improved features, report bugs, or submit other software issues about _Php-Server-Mon-Sys_, please visit _Php-Server-Mon-Sys_ project's _Issues_ page on GitHub:
 
@@ -500,4 +499,4 @@ Note that _Php-Server-Mon-Sys_ has been deployed to several private-hardware hos
 ## Etc
 Licensed under Apache 2.0 License.
 
-Copyright &copy; 2015 Rex Addiscentis
+Copyright &copy; 2016 Rex Addiscentis
