@@ -40,7 +40,6 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
   - Docker Compose 1.7, pre-installed
   - Curl 7.35.0, pre-installed, (alternate equivalent may be substituted)
   - UnZip 6.00, pre-installed, (alternate equivalent may be substituted)
-  - Tar (GNU tar) 1.27.1, pre-installed, (alternate equivalent may be substituted)
 
 ### _Php-Server-Mon-Sys_ Installation Instructions
 - The following commands download the _Php-Server-Mon-Sys_ release ZIP file, and unzip the contents into a newly created directory.  Before entering the following commands, change the present working directory to where you want the _Php-Server-Mon-Sys_ Home directory to be created.  Then, enter the following commands:
@@ -55,17 +54,17 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
       $ cd php-server-mon-sys-master  # or to whatever you rename the directory
 
-      $ ./build-psms.sh  # execute this BASH script only in the "Home" directory
+      $ ./build-psms.sh  # execute this BASH script only in the php-server-mon-sys-master directory
 
-    IMPORTANT: You must wait, (up to two minutes on slow hosts), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait a few minutes, and retry _PHP Server Monitor_ Initialization.
+    IMPORTANT: You must wait a bit, (up to two minutes on very slow hosts), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait a few minutes, and retry _PHP Server Monitor_ Initialization.
 
 Initially, you are evaluating the software.  After you become familiar with it, you will probably decide to discard the first database created during _PHP Server Monitor_ Initialization.  However, before creating the database you plan to use "in production", read the three sections below titled:
 
   - _Transitioning From Evaluation To Production_
 
-  - _The_ _PHP Server Monitor_ _Database Passwords_
+  - _PHP Server Monitor_ _Database Passwords_
 
-  - _The_ _PHP Server Monitor_ _Time Zone_
+  - _PHP Server Monitor_ _Time Zone_
 
 ### _PHP Server Monitor_ Initialization
 - After completing the Installation instructions above, use a web browser to visit:
@@ -101,7 +100,7 @@ Initially, you are evaluating the software.  After you become familiar with it, 
 
     * After ten or fifteen minutes have passed, mouse-click on the green box containing your server's name, and notice the chart now contains at least several data points of access history for your server, at the appropriate time interval.
 
-- See the _PHP Server Monitor_ website and GitHub repository for documentation:
+- See the _PHP Server Monitor_ website and GitHub repository for full official documentation:
 
   - http://www.phpservermonitor.org/
 
@@ -110,7 +109,7 @@ Initially, you are evaluating the software.  After you become familiar with it, 
   - https://github.com/phpservermon/phpservermon/blob/develop/docs/faq.rst
 
 ## Managing _Php-Server-Mon-Sys_
-#### The _Php-Server-Mon-Sys_ Home Directory
+#### _Php-Server-Mon-Sys_ Home Directory
 _Php-Server-Mon-Sys_-specific management commands, such as the _.sh_ BASH scripts, and "docker-compose...", _should always be executed with the Php-Server-Mon-Sys Home directory as the present working directory, (pwd)_.
 
 #### _Docker_ Commands
@@ -145,7 +144,7 @@ The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers),
     After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
 
 #### Transitioning From Evaluation To Production
-When you have finished learning what _Php-Server-Mon-Sys_ is all about, it is likely you will wish to discard the data accumulated during evaluation.  It may be very advantageous to perform this procedure at the same time you perform the procedures described in the sections below, _The_ _PHP Server Monitor_ _Database Passwords_ and _The_ _PHP Server Monitor_ _Time Zone_.
+When you have finished learning what _Php-Server-Mon-Sys_ is all about, it is likely you will wish to discard the data accumulated during evaluation.  It may be very advantageous to perform this procedure at the same time you perform the procedures described in the sections below, _PHP Server Monitor_ _Database Passwords_ and _PHP Server Monitor_ _Time Zone_.
 
 Deleting the database causes _Php-Server-Mon-Sys_ to automatically create a new one.  Therefore, the easiest and fastest way to create an empty database, (discard the old data), is to simply delete the existing _PHP Server Monitor_ database.  Keep in mind that deleting the database deletes all data previously created during _PHP Server Monitor_ Initialization.  In addition to all _PHP Server Monitor_ server history data, the list of _PHP Server Monitor_ servers and any _PHP Server Monitor_ user and admin accounts are deleted.
 
