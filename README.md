@@ -128,31 +128,38 @@ See the _Docker_ web site for related documentation:
 
   https://docs.docker.com/
 
-#### Reducing Risk To The _PHP Server Monitor_ Database
-The _PHP Server Monitor_ database "persists" on the host file system, it is not _ephemeral_ as are the _Php-Server-Mon-Sys_ _Docker_ service containers.
 
-The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers), may be started, stopped, restarted, destroyed, and recreated without danger to the integrity of the _PHP Server Monitor_ database, with one _important caveat_:
-
-  - In order to prevent risk to the _PHP Server Monitor_ database, the _Php-Server-Mon-Sys_ _Docker_ service containers must be created/stopped/destroyed using _Docker_ commands, (_docker-compose up_, _docker-compose stop_, etc).  Don't shutdown the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using the command:
-
-        $ docker-compose stop
-
-    After re-booting the host OS, restart the _Php-Server-Mon-Sys_ system by making the _Php-Server-Mon-Sys_ home directory the present working directory, then enter the command:
+#### Starting _Php-Server-Mon-Sys_ After A Reboot
+The _Php-Server-Mon-Sys_ installation process does not add _Php-Server-Mon-Sys_ to the init, (startup system), of the host machine.  This means that _Php-Server-Mon-Sys_ must be started manually each time the host is rebooted.  You may choose to add _Php-Server-Mon-Sys_ startup commands to the init of the host system, but how to do that is dependent on the distribution of the OS on which it is installed, and is beyond the scope of this document.
+ 
+After re-booting the host OS, restart the _Php-Server-Mon-Sys_ system by making the _Php-Server-Mon-Sys_ home directory the present working directory, then enter the command:
 
         $ docker-compose up -d
 
-    After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing data in the  _PHP Server Monitor_ database.
+After that command has reloaded the service containers, _PHP Server Monitor_ will continue its job of monitoring services, and collecting and storing server history data into the _PHP Server Monitor_ database.
+
+
+#### Reducing Risk To The _PHP Server Monitor_ Database
+The _PHP Server Monitor_ database "persists" on the host file system.  The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers), may be started, stopped, restarted, destroyed, and recreated without danger to the contents or integrity of the _PHP Server Monitor_ database.  However, as with any other software executing on the host, there is one _important caveat_:
+
+  - In order to prevent risk to the _PHP Server Monitor_ database, the _Php-Server-Mon-Sys_ _Docker_ service containers must be created/stopped/destroyed using _Docker_ commands, (_docker-compose up_, _docker-compose stop_, etc).  Do not "cut power" or do a "hardware reset" of the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using the command:
+
+        $ docker-compose stop
+
+This is necessary only if the host must be "reset", (not allowed to do an orderly shutdown).  It is not necessary to manually shutdown _Php-Server-Mon-Sys_ if the host does an orderly shutdown, (i.e., _shutdown -r now_), because an OS doing an orderly shutdown will send SIG signals to the Docker containers notifying them they should terminate, and should give them time to end gracefully.  The service containers will ensure data integrity, as long as they are allowed to finish their graceful shutdown before the system OS exits.
+
+After re-booting the host OS, follow the procedure described above, in the section titled _Starting Php-Server-Mon-Sys After A Reboot_.
 
 #### Transitioning From Evaluation To Production
-When you have finished learning what _Php-Server-Mon-Sys_ is all about, it is likely you will wish to discard the data accumulated during evaluation.  It may be very advantageous to perform this procedure at the same time you perform the procedures described in the sections below, _PHP Server Monitor_ _Database Passwords_ and _PHP Server Monitor_ _Time Zone_.
+When you have finished learning what _Php-Server-Mon-Sys_ is all about, it is likely you will wish to discard the data accumulated initially, during evaluation.  It may be advantageous to follow the procedure described in this section while also performing the procedures described in the other sections below, _PHP Server Monitor_ _Database Passwords_ and _PHP Server Monitor_ _Time Zone_.  You may wish to read those sections before following the procedure described here.
 
-Deleting the database causes _Php-Server-Mon-Sys_ to automatically create a new one.  Therefore, the easiest and fastest way to create an empty database, (discard the old data), is to simply delete the existing _PHP Server Monitor_ database.  Keep in mind that deleting the database deletes all data previously created during _PHP Server Monitor_ Initialization.  In addition to all _PHP Server Monitor_ server history data, the list of _PHP Server Monitor_ servers and any _PHP Server Monitor_ user and admin accounts are deleted.
+Deleting the _PHP Server Monitor_ database causes _Php-Server-Mon-Sys_ to automatically create a new one.  Therefore, the easiest and fastest way to create an empty database, (discard the old data), is to simply delete the existing _PHP Server Monitor_ database.  Keep in mind that deleting the database deletes all data previously created during _PHP Server Monitor_ Initialization.  In addition to all _PHP Server Monitor_ server history data, the list of _PHP Server Monitor_ servers and any _PHP Server Monitor_ user and admin accounts are deleted.
 
 To delete the existing _PHP Server Monitor_ database, enter the following commands:
 
       $ sudo ./delete-database.sh  # sudo or other superuser power required
 
-      $ docker-compose up -d # delete-database stops Php-Server-Mon-Sys, so re-start it
+      $ docker-compose up -d # delete-database.sh stops Php-Server-Mon-Sys, so it must be restarted
 
 After the database is deleted, a new database will be automatically created when _Php-Server-Mon-Sys_ is re-started.  Depending on the speed of your host, it could take up to two minutes to finish creating the new database.  Then, use a web browser to visit your _PHP Server Monitor_ page per usual, (default, localhost:28684).  If you see an error message which says "can't connect to database", wait a little longer and retry.  Follow the prompts and begin using as normal.
 
@@ -179,19 +186,19 @@ When you are ready to create a new database using new passwords, follow these st
 
       $ docker-compose up -d  # re-start Php-Server-Mon-Sys. Loads re-built PHP-FPM container
 
-It is necessary to wait for the database to finish initialization, (up to two minutes on a slow host).
+It is necessary to wait for the database to finish initialization, (up to two minutes on a very slow host).
 
 ##### _PHP Server Monitor_ Time Zone
 The default _PHP Server Monitor_ time zone is _UTC_.  You may change the time zone by editing the _php.ini_ file, located in the _./php-fpm/_ sub-directory.
 
-Note that the _PHP Server Monitor_ _Time Zone_ must only be changed _BEFORE_ creating the _PHP Server Monitor_ database.  The _PHP Server Monitor_ database is created during the process described above, in the section titled, _PHP Server Monitor_ _Initialization_.  If the _PHP Server Monitor_ _Time Zone_ is set after _PHP Server Monitor_ _Initialization_, the timestamps on the data collected in the database will be out of sync with the displayed charts, rendering the collected data useless for charting in _PHP Server Monitor_.
+Note that the _PHP Server Monitor_ _Time Zone_ must only be changed _BEFORE_ creating the _PHP Server Monitor_ database.  The _PHP Server Monitor_ database is created during the process described above, in the section titled, _PHP Server Monitor_ _Initialization_.  If the _PHP Server Monitor_ _Time Zone_ is set after _PHP Server Monitor_ _Initialization_, the timestamps on the server history data collected into the database will be out of sync with the displayed charts, rendering the collected data useless for charting in _PHP Server Monitor_.
 
 To change the _PHP Server Monitor_ _Time Zone_, search the _./php-fpm/php.ini_ file for the term _date.timezone_.  Change the default value, _UTC_, to your time zone, e.g., _America/Los_Angeles_.  For valid time zone codes, see:
 
   http://www.php.net/manual/en/timezones.php
 
 ##### _PHP Server Monitor_ Application Service Port number
-The default application service port number is _28684_.  You may change this port number by editing the _docker-compose.yml_ file.  Find the section which appears as follows:
+The default application, (HTTP), service port number is _28684_.  You may change this port number by editing the _docker-compose.yml_ file.  Find the section which appears as follows:
 
     ports:
       - "28684:80"
@@ -203,7 +210,7 @@ Change the port number _28684_ to any valid port number which does not conflict 
 ##### _PHP Server Monitor_ Server History Data Update Intervals: Cron
 The interval at which monitored server histories are updated is determined by a PHP script which is executed periodically.  The service which executes the script is _Cron_, an ubiquitous Linux service which is responsible for executing programs on a schedule.  This task of executing a program periodically is known as a _cron job_.  _Cron_ jobs are specified by creating a file which contains one or more job descriptors.  This type of file is known as a _crontab_, (_Cron_ table), file.
 
-In _Php-Server-Mon-Sys_, a _cron job_ which updates server histories data is run on-board the _PHP-FPM_ container.  This _cron job_ is started automatically when the _Php-Server-Mon-Sys_ system is started, (using _docker-compose up -d_).  The _crontab_ file which contains the job descriptor needed by _Cron_ is named _etc-cron.d-tab-for-phpfpm.txt_, (located in the home _./php-fpm/_ sub-directory).
+In _Php-Server-Mon-Sys_, a _cron job_ which updates server histories data is run inside the _PHP-FPM_ container.  This _cron job_ is started automatically when the _Php-Server-Mon-Sys_ system is started, (using _docker-compose up -d_).  The _crontab_ file which contains the job descriptor needed by _Cron_ is named _etc-cron.d-tab-for-phpfpm.txt_, (located in the home _./php-fpm/_ sub-directory).
 
 The interval specified in the _crontab_ file determines how frequently the monitored servers are probed.  The default interval is every 3 minutes.  You may change the interval, by editing the _crontab_ file.  One way of editing the _crontab_ file is by using the following command to open the file in an editor named _nano_:
 
@@ -213,13 +220,13 @@ The default job descriptor is:
 
     */3 * * * * root /usr/bin/php /var/www/public/cron/status.cron.php
 
-Above, the "/3" after the asterisk tells _Cron_ to execute the monitored servers' online history update every 3 minutes.  You may change that number to, e.g., "/5" or "/15", or some other number of minutes, 2 through 59.  If you want the history updated every minute, do not use "/1"; instead, use asterisk (*) by itself, that is, simply delete the "/3".
+Above, the "/3" after the asterisk tells _Cron_ to execute, (every 3 minutes), the PHP code which monitors servers.  You may change that number to, e.g., "/5" or "/15", or some other number of minutes, 2 through 59.  If you want the history updated every minute, do not use "/1"; instead, use asterisk (*) by itself, that is, simply delete the "/3".
 
 After editing the _etc-cron.d-tab-for-phpfpm.txt_ file, the PHP-FPM Docker container image must be rebuilt, and then _Php-Server-Mon-Sys_ restarted.  Do so using the following commands:
 
       $ ./build-php-fpm.sh   # execute this from the PSMS Home directory
 
-      $ docker-compose up -d  # restarts the Php-Server-Mon-Sys system
+      $ docker-compose up -d  # restart the Php-Server-Mon-Sys system
 
 For more information about _Cron_, see:
 
@@ -234,7 +241,7 @@ The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be man
 
       203942ceb32d    mysql:5.7.7    "/entrypoint.sh mysql"   ...   phpservermonsysmaster_db_1
 
-  Inspect the resulting list for a container whose IMAGE name is "mysql:...", and take note of its CONTAINER ID.  To discover the IP address of that container, use the following command:
+  Note the CONTAINER ID.  To discover the IP address of that container, use the following command:
 
   $ docker inspect -f "{{ .NetworkSettings.IPAddress }}" 203942ceb32d # use your CONTAINER ID
 
@@ -249,7 +256,7 @@ The following instructions assume you are already familiar with _MySQL_ commands
 
 The command below pulls and temporarily loads a _mysql_ Docker container for use as a _MySQL client_.  After exiting the _mysql> prompt_, the temporary _MySQL client_ container is automatically discarded.
 
-Enter the following command, (substitute the _MySQL_ server _Docker_ container IP address above as the IP address value):
+Enter the following command, (substitute the _MySQL_ server _Docker_ container IP address which you discovered above as the IP address value):
 
       $ docker run -it --rm mysql sh -c 'exec mysql -h"172.17.2.109" -P"3306" -uroot -p"mysecretpassword"'
 
