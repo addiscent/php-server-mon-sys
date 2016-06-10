@@ -40,7 +40,8 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
   - Docker Compose 1.7, pre-installed
   - Curl 7.35.0, pre-installed, (alternate equivalent may be substituted)
   - UnZip 6.00, pre-installed, (alternate equivalent may be substituted)
-
+  - Tar (GNU tar) 1.27.1, pre-installed, (alternate equivalent may be substituted)
+  
 ### _Php-Server-Mon-Sys_ Installation Instructions
 - The following commands download the _Php-Server-Mon-Sys_ release ZIP file, and unzip the contents into a newly created directory.  Before entering the following commands, change the present working directory to where you want the _Php-Server-Mon-Sys_ Home directory to be created.  Then, enter the following commands:
 
@@ -142,11 +143,11 @@ After that command has reloaded the service containers, _PHP Server Monitor_ wil
 #### Reducing Risk To The _PHP Server Monitor_ Database
 The _PHP Server Monitor_ database "persists" on the host file system.  The _Php-Server-Mon-Sys_ system, (technically, its _Docker_ service containers), may be started, stopped, restarted, destroyed, and recreated without danger to the contents or integrity of the _PHP Server Monitor_ database.  However, as with any other software executing on the host, there is one _important caveat_:
 
-  - In order to prevent risk to the _PHP Server Monitor_ database, the _Php-Server-Mon-Sys_ _Docker_ service containers must be created/stopped/destroyed using _Docker_ commands, (_docker-compose up_, _docker-compose stop_, etc).  Do not "cut power" or do a "hardware reset" of the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using the command:
+  - In order to prevent risk to the _PHP Server Monitor_ database, the _Php-Server-Mon-Sys_ _Docker_ service containers must be stopped using a _Docker_ command, _docker-compose stop_.  Do not "cut power" or do a "hardware reset" of the host OS without first gracefully shutting down the _Php-Server-Mon-Sys_ system, using the command:
 
         $ docker-compose stop
 
-This is necessary only if the host must be "reset", (not allowed to do an orderly shutdown).  It is not necessary to manually shutdown _Php-Server-Mon-Sys_ if the host does an orderly shutdown, (i.e., _shutdown -r now_), because an OS doing an orderly shutdown will send SIG signals to the Docker containers notifying them they should terminate, and should give them time to end gracefully.  The service containers will ensure data integrity, as long as they are allowed to finish their graceful shutdown before the system OS exits.
+This is necessary only if the host must be "hard reset", (not allowed to do an orderly shutdown).  It is not necessary to manually shutdown _Php-Server-Mon-Sys_ if the host does an orderly shutdown, (i.e., _shutdown -r now_), because an OS doing an orderly shutdown will send SIG signals to the Docker containers notifying them they should terminate, and should give them time to end gracefully.  The service containers will ensure data integrity, as long as they are allowed to finish their graceful shutdown before the system OS exits.
 
 After re-booting the host OS, follow the procedure described above, in the section titled _Starting Php-Server-Mon-Sys After A Reboot_.
 
@@ -396,7 +397,7 @@ Several simple utility BASH scripts are available in the _Php-Server-Mon-Sys_ ho
 
             root@7587be7d4eed:/#
 
-      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not running on a true terminal on-boad the container, so program screen output functionality is limited.  However, it is useful enough for exploration inside the operating container, and troubleshooting if necessary.  In the event you need to use, for example, a text viewer or editor, such as _less_ or _nano_, set the TERM environment variable using the following command, (on the container, using the container's executing shell, not on the host):
+      Where "_root@7587be7d4eed:/#_" indicates a prompt from within the running _Docker_ container.  The prompt is not running on a true terminal in the container, so program screen output functionality is limited.  However, it is useful enough for exploration inside the operating container, and troubleshooting if necessary.  In the event you need to use, for example, a text viewer or editor, such as _less_ or _nano_, set the TERM environment variable using the following command, (on the container, using the container's executing shell, not on the host):
 
           $ export TERM=xterm
 
