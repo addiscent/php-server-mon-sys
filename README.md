@@ -1,3 +1,16 @@
+##### News About Possible PHP Server Monitor 3.1.1 CSRF Exploit
+Today, June 20, 2016, I learned of an exploit to which _PHP Server Monitor_ _3.1.1_ may be vulnerable.  I have not confirmed _PHP Server Monitor_ _3.1.1_ is in fact vulnerable to this type of exploit, but I will attempt to confirm it myself, soon.
+
+The claimed exploit is of a type known as a Cross Site Request Forgery, (CSRF), which possibly allows scripts on an arbitrary website to gain admin access to _PHP Server Monitor_.  In order to be successful in its attempt to gain _PHP Server Monitor_ admin access, the exploit requires that a user be logged in as a _PHP Server Monitor_ _admin_, then subsequently visit a website which contains scripts designed specificially to perform unauthorized management of a PHP Server Monitor.  This means the CSRF script could possibly perform any tasks a _PHP Server Monitor_ _Admin_ could, such as create new users or admins, create new servers to monitor, change settings used for monitoring any server, (such as the domain-names/IP-addresses/ports/email-addrs), and _delete_ servers, (which deletes their history data).
+
+The gist is, _IF_ you are logged into _PHP Server Monitor_ as an _ADMIN_, _and_ you subsequently visit a website which has a CSRF script _specifically designed to "attack" a PHP Server Monitor_, _and_ you click on a link on that website which allows execution of the "attack" script, _then_ a malicious script can possibly vandalize the _PHP Server Monitor database_.
+
+It does _not_ mean the author of those scripts can use this exploit to "root" the _PHP Server Monitor_ _host computer_.
+
+It does mean that you should take seriously the responsibility of periodically backing up your _PHP Server Monitor_ database.
+
+I will update this notice as I find out more information.
+
 # Php-Server-Mon-Sys
 #### Why _Php-Server-Mon-Sys_?
 Let's say you manage some websites or other network servers, and you wish to monitor them.  You decide it's time to install and operate a _Server Monitor_ to help with that task.  There are quite a number of _server monitors_ available from which to choose.  At this time you choose a basic, easy-to-use server monitor named _PHP Server Monitor_:
