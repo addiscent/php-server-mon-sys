@@ -3,7 +3,7 @@ Today, June 20, 2016, I learned of an exploit to which _PHP Server Monitor_ _3.1
 
 The claimed exploit is of a type known as a Cross Site Request Forgery, (CSRF), which possibly allows scripts on an arbitrary website to gain admin access to _PHP Server Monitor_.  In order to be successful in its attempt to gain _PHP Server Monitor_ admin access, the exploit requires that a user be logged in as a _PHP Server Monitor_ _admin_, then subsequently visit a website which contains scripts designed specificially to perform unauthorized management of a PHP Server Monitor.  This means the CSRF script could possibly perform any tasks a _PHP Server Monitor_ _Admin_ could, such as create new users or admins, create new servers to monitor, change settings used for monitoring any server, (such as the domain-names/IP-addresses/ports/email-addrs), and _delete_ servers, (which deletes their history data).
 
-The gist is, _IF_ you are logged into _PHP Server Monitor_ as an _ADMIN_, _and_ you subsequently visit a website which has a CSRF script _specifically designed to "attack" a PHP Server Monitor_, _and_ you click on a link on that website which allows execution of the "attack" script, _then_ a malicious script can possibly vandalize the _PHP Server Monitor database_.
+The gist is, _IF_ you are logged into _PHP Server Monitor_ as an _ADMIN_, _AND_ you subsequently visit a website which has a CSRF script _specifically designed to "attack" a PHP Server Monitor_, _AND_ you click on a link on that website which allows execution of the "attack" script, _THEN_ a malicious script can possibly vandalize the _PHP Server Monitor database_.
 
 It does _not_ mean the author of those scripts can use this exploit to "root" the _PHP Server Monitor_ _host computer_.
 
