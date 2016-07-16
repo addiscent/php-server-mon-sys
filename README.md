@@ -268,11 +268,11 @@ For more information about _Cron_, see:
     https://en.wikipedia.org/wiki/Cron
 
 ##### Managing The _PHP Server Monitor_ Database
-The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it may be managed by using the appropriate _MySQL-compatible_ software tools, such as the _mysql_ client program.  However, there is an important caveat to keep in mind;  _Php-Server-Mon-Sys_ _Docker_ containers are configured such that they communicate over their own private IP network.  The _Php-Server-Mon-Sys_ _Docker_ container which provides the _MySQL_ database service accepts connections only from the _Docker_ container group's private IP network.
+The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it may be managed by using the appropriate _MySQL-compatible_ software tools, such as the _mysql_ client program.  However, there is an important caveat to keep in mind;  _Php-Server-Mon-Sys_ _Docker_ containers are configured to communicate with each other over their own private IP network.  The _Php-Server-Mon-Sys_ _Docker_ container which provides the _MySQL_ database service accepts connections only from clients on the _Docker_ container group's private IP network.
 
 The example commands below which use the the _mysql_ client work because the _mysql_ client is running in a _Docker_ container, on the same host as the _PHP Server Mon Sys_ containers.  When it starts, that container becomes a member of the _Docker_ container group's private IP network.
 
-For the _mysql_ client to access the _MySQL_ server, the _MySQL_ database container's private IP address must be discovered.  The default port address is _3306_.  To discover the IP address of the _MySQL_ database server, use the following commands:
+In order to use the _mysql_ client to access the _MySQL_ server, you must first discover the _MySQL_ database container's private IP address.  To discover it, use the following commands:
 
   $ docker ps -a | grep mysql
 
@@ -288,14 +288,11 @@ For the _mysql_ client to access the _MySQL_ server, the _MySQL_ database contai
 
       172.17.2.109
 
-See instructions below for example client connections, using _MySQL Client Program_.
-
-##### Using A _MySQL_ Client Program With _PHP Server Monitor_ Database
-The following instructions assume you are already familiar with _MySQL_ commands and operation procedures.
-
 The command below pulls and temporarily loads a _mysql_ _Docker_ container for use as a _MySQL client_.  After exiting the _mysql> prompt_, the temporary _MySQL client_ container is automatically discarded.
 
-Enter the following command, (substitute the _MySQL_ server _Docker_ container IP address which you discovered above as the IP address value):
+The following instructions assume you are already familiar with _MySQL_ commands and operation procedures.
+
+Enter the following command.  Substitute the _MySQL_ server _Docker_ container IP address which you discovered above as the IP address value. The default port address is _3306_ :
 
       $ docker run -it --rm mysql sh -c 'exec mysql -h"172.17.2.109" -P"3306" -uroot -p"mysecretpassword"'
 
