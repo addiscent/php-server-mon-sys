@@ -268,7 +268,11 @@ For more information about _Cron_, see:
     https://en.wikipedia.org/wiki/Cron
 
 ##### Managing The _PHP Server Monitor_ Database
-The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be managed by using the appropriate _MySQL-compatible_ software tools, such as a _mysql client_ program, or _phpMyAdmin_.  Though the _PHP Server Monitor_ _MySQL_ _Docker_ container is local to the host, connections to the database server are made as if it is remote.  Connections to remote _MySQL_ servers are established using the _MySQL_ server _Docker container's_ IP address and a port number.  The default port address is _3306_.  To discover the IP address of the server, use the following commands:
+The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it may be managed by using the appropriate _MySQL-compatible_ software tools, such as the _mysql_ client program.  However, there is an important caveat to keep in mind;  _Php-Server-Mon-Sys_ _Docker_ containers are configured such that they communicate over their own private IP network.  The _Php-Server-Mon-Sys_ _Docker_ container which provides the _MySQL_ database service accepts connections only from the _Docker_ container group's private IP network.
+
+The example commands below which use the the _mysql_ client work because the _mysql_ client is running in a _Docker_ container, on the same host as the _PHP Server Mon Sys_ containers.  When it starts, that container becomes a member of the _Docker_ container group's private IP network.
+
+For the _mysql_ client to access the _MySQL_ server, the _MySQL_ database container's private IP address must be discovered.  The default port address is _3306_.  To discover the IP address of the _MySQL_ database server, use the following commands:
 
   $ docker ps -a | grep mysql
 
@@ -284,12 +288,12 @@ The _PHP Server Monitor_ database is a _MySQL_ database.  As such, it can be man
 
       172.17.2.109
 
-See instructions below for example client connections, using _MySQL Client Program_ and _phpMyAdmin_.
+See instructions below for example client connections, using _MySQL Client Program_.
 
 ##### Using A _MySQL_ Client Program With _PHP Server Monitor_ Database
 The following instructions assume you are already familiar with _MySQL_ commands and operation procedures.
 
-The command below pulls and temporarily loads a _mysql_ Docker container for use as a _MySQL client_.  After exiting the _mysql> prompt_, the temporary _MySQL client_ container is automatically discarded.
+The command below pulls and temporarily loads a _mysql_ _Docker_ container for use as a _MySQL client_.  After exiting the _mysql> prompt_, the temporary _MySQL client_ container is automatically discarded.
 
 Enter the following command, (substitute the _MySQL_ server _Docker_ container IP address which you discovered above as the IP address value):
 
@@ -350,38 +354,6 @@ For more information about using the MySQL command line program, see:
 When ready to exit the mysql client, enter:
 
     mysql> exit;
-
-##### Using _phpMyAdmin_ With _PHP Server Monitor_ Database
-The following instructions assume _phpMyAdmin_ is already installed on your host, and you are already familiar with _phpMyAdmin_ configuration and operation procedures.
-
-To connect _phpMyAdmin_ to the _PHP Server Monitor_ database server, the _phpMyAdmin_ _config.inc.php_ file must be revised, as follows.
-
-Open the _phpMyAdmin_ _config.inc.php_ file in a text editor.  Find the list of servers, which have entries similar to that given below, and add the following server code for the _Php-Server-Mon-Sys_ _MySQL_ server.  Before inserting the code fragment given below, change the IP address from _172.17.2.109_ to the address of the _MySQL_ server _Docker_ container discovered using the method described above.  If you have previously changed your user or password for this database, also change those values in the code fragment below:
-
-    $i++;
-
-    $cfg['Servers'][$i]['verbose'] = 'Php-Server-Mon-Sys';
-    $cfg['Servers'][$i]['host'] = '172.17.2.109';
-    $cfg['Servers'][$i]['port'] = '3306';
-    $cfg['Servers'][$i]['socket'] = '';
-    $cfg['Servers'][$i]['connect_type'] = 'tcp';
-    $cfg['Servers'][$i]['auth_type'] = 'config';
-    $cfg['Servers'][$i]['user'] = 'phpservermon';
-    $cfg['Servers'][$i]['password'] = 'phpservermon';
-
-IMPORTANT:  Unfortunately, it is not uncommon to discover that more than one _phpMyAdmin_ _config.inc.php_ file already exists on a host, (placed there by the _phpMyAdmin_ installation process).  If you edit one and it seems to have no affect, you may inadvertently be editing a copy of the file which is not the specific file used by _phpMyAdmin_.  To search for the correct instance, you may discover where copies are located using the following command:
-
-      $ sudo find / -maxdepth 4 -name config.inc.php
-
-        result, similar to this:
-
-          /usr/share/phpmyadmin/config.inc.php
-          /var/lib/phpmyadmin/config.inc.php
-          /etc/phpmyadmin/config.inc.php
-
-For more information about editing the _phpMyAdmin_ _config.inc.php_ file, see:
-
-    http://docs.phpmyadmin.net/en/latest/config.html
 
 ##### NGINX Server Configuration
 Though unlikely to be necessary, you may make changes to the NGINX server configuration by editing the _vhost.conf_ file, located in the home _./nginx/_ sub-directory.  After editing this file, for any changes to take effect, _Php-Server-Mon-Sys_ must be restarted, using the command:
