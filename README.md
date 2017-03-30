@@ -1,17 +1,5 @@
-##### News About Possible PHP Server Monitor 3.1.1 CSRF Exploit
-Today, June 20, 2016, I learned of an exploit to which _PHP Server Monitor_ _3.1.1_ may be vulnerable.  I have not confirmed _PHP Server Monitor_ _3.1.1_ is in fact vulnerable to this type of exploit, but I will attempt to confirm it myself, soon.
-
-The claimed exploit is of a type known as a Cross Site Request Forgery, (CSRF), which possibly allows scripts on an arbitrary website to gain admin access to _PHP Server Monitor_.  In order to be successful in its attempt to gain _PHP Server Monitor_ admin access, the exploit requires that a user be logged in as a _PHP Server Monitor_ _admin_, then subsequently visit a website which contains scripts designed specificially to perform unauthorized management of a PHP Server Monitor.  This means the CSRF script could possibly perform any tasks a _PHP Server Monitor_ _Admin_ could, such as create new users or admins, create new servers to monitor, change settings used for monitoring any server, (such as the domain-names/IP-addresses/ports/email-addrs), and _delete_ server names from the list of servers to monitor, (which deletes their history data).
-
-The gist is, _IF_ you are logged into _PHP Server Monitor_ as an _ADMIN_, _AND_ you subsequently visit a website which has a CSRF script _specifically designed to "attack" a PHP Server Monitor_, _AND_ you click on a link on that website which allows execution of the "attack" script, _THEN_ a malicious script can possibly vandalize the _PHP Server Monitor database_.
-
-It does _not_ mean the author of those scripts can use this exploit to "root" the _PHP Server Monitor_ _host computer_.
-
-It does mean that you should take seriously the responsibility of periodically backing up your _PHP Server Monitor_ database.
-
-I will update this notice as I find out more information.
-
-Update _March 30, 2017_ :  I have no new information about the subject above.
+##### Low Threat Security Alert
+See the "Low-Threat Security Alert" section at the end of this README for news about a possible _PHP Server Monitor 3.1.1_ CSRF Exploit
 
 # Php-Server-Mon-Sys
 #### Why _Php-Server-Mon-Sys_?
@@ -505,6 +493,21 @@ Desirable Simplification also includes those improvements which make the archite
 
 ##### Other Requirements
 Note that _Php-Server-Mon-Sys_ has been deployed to several private-hardware hosts running _Ubuntu 14.04_.  It has also been deployed to _EC2_ instances on _Amazon Web Services_, and to a _Droplet_ on _Digital Ocean_.  That type of deployment portability is an important requirement of this project.
+
+#### Low-Threat Security Alert
+Today, June 20, 2016, I learned of an exploit to which _PHP Server Monitor_ _3.1.1_ may be vulnerable.  I have not confirmed _PHP Server Monitor_ _3.1.1_ is in fact vulnerable to this type of exploit, but I will attempt to confirm it myself, soon.
+
+The claimed exploit is of a type known as a Cross Site Request Forgery, (CSRF), which possibly allows scripts on an arbitrary website to gain admin access to _PHP Server Monitor_.  In order to be successful in its attempt to gain _PHP Server Monitor_ admin access, the exploit requires that a user be logged in as a _PHP Server Monitor_ _admin_, then subsequently visit a website which contains scripts designed specificially to perform unauthorized management of a PHP Server Monitor.  This means the CSRF script could possibly perform any tasks a _PHP Server Monitor_ _Admin_ could, such as create new users or admins, create new servers to monitor, change settings used for monitoring any server, (such as the domain-names/IP-addresses/ports/email-addrs), and _delete_ server names from the list of servers to monitor, (which deletes their history data).
+
+The gist is, _IF_ you are logged into _PHP Server Monitor_ as an _ADMIN_, _AND_ you subsequently visit a website which has a CSRF script _specifically designed to "attack" a PHP Server Monitor_, _AND_ you click on a link on that website which allows execution of the "attack" script, _THEN_ a malicious script can possibly vandalize the _PHP Server Monitor database_.
+
+It does _not_ mean the author of those scripts can use this exploit to "root" the _PHP Server Monitor_ _host computer_.
+
+It does mean that you should take seriously the responsibility of periodically backing up your _PHP Server Monitor_ database.
+
+I will update this notice as I find out more information.
+
+Update _March 30, 2017_ :  I have no new information about the subject above.
 
 
 ## Etc
