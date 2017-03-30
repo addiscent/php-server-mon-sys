@@ -11,6 +11,8 @@ It does mean that you should take seriously the responsibility of periodically b
 
 I will update this notice as I find out more information.
 
+###### Update March 30, 2017 :  I have no new information about the subject above.
+
 # Php-Server-Mon-Sys
 #### Why _Php-Server-Mon-Sys_?
 Let's say you manage some websites or other network servers, and you wish to monitor them.  You decide it's time to install and operate a _Server Monitor_ to help with that task.  There are quite a number of _server monitors_ available from which to choose.  At this time you choose a basic, easy-to-use server monitor named _PHP Server Monitor_:
@@ -49,16 +51,15 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
   - 300MB available memory
   - 1.1GB available storage, (plus server history data accumulated in database)
   - Internet connection/service
-  - Docker Engine 1.11, pre-installed
-  - Docker Compose 1.7, pre-installed
-  - Curl 7.35.0, pre-installed, (alternate equivalent may be substituted)
+  - Docker Engine 1.11, (or newer), pre-installed
+  - Docker Compose 1.7, (or newer), pre-installed
   - UnZip 6.00, pre-installed, (alternate equivalent may be substituted)
   - Tar (GNU tar) 1.27.1, pre-installed, (alternate equivalent may be substituted)
   
 ### _Php-Server-Mon-Sys_ Installation Instructions
 - The following commands download the _Php-Server-Mon-Sys_ release ZIP file, and unzip the contents into a newly created directory.  Before entering the following commands, change the present working directory to where you want the _Php-Server-Mon-Sys_ Home directory to be created.  Then, enter the following commands:
 
-      $ curl -L -O https://github.com/addiscent/php-server-mon-sys/archive/master.zip
+      $ wget https://github.com/addiscent/php-server-mon-sys/archive/master.zip
 
       $ unzip master.zip  # create a new directory containing Php-Server-Mon-Sys
 
@@ -70,7 +71,7 @@ Installation and operation of _Php-Server-Mon-Sys_ requires:
 
       $ ./build-psms.sh  # execute this BASH script only in the php-server-mon-sys-master directory
 
-    IMPORTANT: You must wait a bit, (up to two minutes on very slow hosts), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait a few minutes, and retry _PHP Server Monitor_ Initialization.
+    IMPORTANT: You must wait a bit, (up to two minutes on very slow hosts), for MySQL to finish initializing its database before continuing with _PHP Server Monitor_ Initialization instructions below.  Otherwise, errors will be displayed during the _PHP Server Monitor_ Initialization process.  At this point, if an error is shown stating, "Unable to connect to MySQL. Please check your information", it is temporary.  Wait one minute, and retry _PHP Server Monitor_ Initialization.
 
 Initially, you are evaluating the software.  After you become familiar with it, you will probably decide to discard the first database created during _PHP Server Monitor_ Initialization.  However, before creating the database you plan to use "in production", read the three sections below titled:
 
@@ -509,4 +510,4 @@ Note that _Php-Server-Mon-Sys_ has been deployed to several private-hardware hos
 ## Etc
 Licensed under Apache 2.0 License.
 
-Copyright &copy; 2016 Rex Addiscentis
+Copyright &copy; 2017 Rex Addiscentis
