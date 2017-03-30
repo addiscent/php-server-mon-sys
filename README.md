@@ -1,4 +1,4 @@
-###### Low Threat Security Alert : See the "Low-Threat Security Alert" section at the end of this README for news about a possible _PHP Server Monitor 3.1.1_ CSRF Exploit
+###### _Low Threat Security Alert_ : See the "Low-Threat Security Alert" section at the end of this README for news about a possible _PHP Server Monitor 3.1.1_ CSRF Exploit
 
 # Php-Server-Mon-Sys
 #### Why _Php-Server-Mon-Sys_?
