@@ -10,7 +10,7 @@ web:
       - php
 
 php:
-  image: temp/php-fpm-psm:0.0.0
+  build: php-fpm
   links:
     - db:mysqlpsm
 
@@ -23,3 +23,5 @@ db:
    - MYSQL_DATABASE=phpservermon
    - MYSQL_USER=phpservermon
    - MYSQL_PASSWORD=phpservermon
+  expose:
+   - 3306
